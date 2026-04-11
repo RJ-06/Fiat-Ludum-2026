@@ -25,4 +25,20 @@ public class ChangeShipVisibility : MonoBehaviour
                  topRenderer.material.color.g, topRenderer.material.color.b, opaqueAlpha);
         }
     }
+
+    private void OnTriggerEnter(Collider other) //IF YOU'RE ON BOTTOM
+    {
+        if (other.GetComponent<PlayerMovement>() != null && viewingTop) 
+        {
+            ToggleVisibility();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PlayerMovement>() != null && !viewingTop)
+        {
+            ToggleVisibility();
+        }
+    }
 }
