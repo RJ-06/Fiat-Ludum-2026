@@ -17,7 +17,7 @@ public struct Resources
 
 public class ResourceManager : MonoBehaviour
 {
-    Resources resources = new(30, 30, 500f);
+    public Resources resources = new(30, 30, 500f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
