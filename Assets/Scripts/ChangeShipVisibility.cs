@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChangeShipVisibility : MonoBehaviour
 {
-    private bool viewingTop = true;
+    public bool viewingTop = true;
     [SerializeField] private GameObject topHalf;
     [SerializeField] private GameObject bottomHalf;
     [SerializeField] private Renderer topRenderer;
