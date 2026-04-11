@@ -5,6 +5,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] ResourceManager resourceManager;
     private bool nearFoodLoot = false, nearMoneyLoot = false, startedLooting = false;
+    private GameObject lootableObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +21,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnInteractPress(InputValue value)
     {
-        if (nearFoodLoot || nearMoneyLoot) startedLooting = true;
+        if ((nearFoodLoot || nearMoneyLoot) && !lootableObject.GetComponent<LootBasket>().GetLooted()) startedLooting = true;
     }
 
     private void OnInteractRelease(InputValue value)
@@ -39,7 +40,10 @@ public class PlayerInteraction : MonoBehaviour
                 int adjustedMoney = (int)Mathf.Round(Mathf.Pow(1.02604f, rawMoneyAmount) + 29f);
                 resourceManager.resources.money += adjustedMoney;
                 Debug.Log("Money is now " + resourceManager.resources.money);
-            }            
+            }
+
+            // Make sure basket can't be looted more than once
+            if (lootableObject != null) lootableObject.GetComponent<LootBasket>().SetLooted(true);
         }
     }
 
@@ -47,6 +51,7 @@ public class PlayerInteraction : MonoBehaviour
         if (other.gameObject.tag[..4] == "Loot")
         {
             Debug.Log("Can collect loot");
+            lootableObject = other.gameObject;
             if (other.gameObject.tag[4..] == "Food") nearFoodLoot = true;
             else if (other.gameObject.tag[4..] == "Money") nearMoneyLoot = true;
         }
@@ -55,6 +60,7 @@ public class PlayerInteraction : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.tag[..4] == "Loot")
         {
+            lootableObject = null;
             nearFoodLoot = false;
             nearMoneyLoot = false;
         }

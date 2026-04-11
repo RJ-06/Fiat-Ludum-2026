@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1215576382391713782}
   - component: {fileID: 6129279381613215875}
   - component: {fileID: 7698390784967204674}
+  - component: {fileID: 4351238060909899914}
   m_Layer: 0
   m_Name: Loot Basket
   m_TagString: Loot
@@ -162,3 +163,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4351238060909899914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982669556495783506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc763606fc4b9b48a8905c173064f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LootBasket
