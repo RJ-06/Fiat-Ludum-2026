@@ -95,5 +95,6 @@ public class AdverseEvent : MonoBehaviour
     void OnFixed()
     {
         Debug.Log("Event fixed!");
+        GameObject.Destroy(gameObject);
     }
 }

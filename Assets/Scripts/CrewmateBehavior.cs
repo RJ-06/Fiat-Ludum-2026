@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,13 +18,16 @@ public class CrewmateBehavior : MonoBehaviour
     private bool navigating = false;
     private bool goingToStairs = false;
 
+    private Action onComplete;
+
     public GameObject target;
+    public AdverseEvent adverseEvent;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
-        NavigateTo(target.transform.position, 1);
+        DoTask(target.transform.position, 1, adverseEvent);
     }
 
     void Update()
@@ -32,13 +37,14 @@ public class CrewmateBehavior : MonoBehaviour
         HandleNavigation();
     }
 
-    public void NavigateTo(Vector3 targetPosition, int deck)
+    public void NavigateTo(Vector3 targetPosition, int deck, Action callback = null)
     {
         finalTarget = targetPosition;
         targetDeck = deck;
 
         navigating = true;
         goingToStairs = false;
+        onComplete = callback;
     }
 
     private void HandleNavigation()
@@ -80,6 +86,7 @@ public class CrewmateBehavior : MonoBehaviour
         if (HasArrived(finalTarget))
         {
             navigating = false;
+            onComplete?.Invoke();
             goingToStairs = false;
         }
     }
@@ -92,5 +99,14 @@ public class CrewmateBehavior : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void DoTask(Vector3 position, int deck, AdverseEvent e)
+    {
+        NavigateTo(target.transform.position, 1, () =>
+        {
+            e.BeginFixing();
+        });
+
     }
 }
