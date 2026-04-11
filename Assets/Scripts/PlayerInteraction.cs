@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] ResourceManager resourceManager;
-    private bool nearLoot = false, startedLooting = false;
+    private bool nearFoodLoot = false, nearMoneyLoot = false, startedLooting = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +20,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnInteractPress(InputValue value)
     {
-        if (nearLoot) startedLooting = true;
+        if (nearFoodLoot || nearMoneyLoot) startedLooting = true;
     }
 
     private void OnInteractRelease(InputValue value)
@@ -28,23 +28,33 @@ public class PlayerInteraction : MonoBehaviour
         if (startedLooting)
         {
             startedLooting = false;
-            ++resourceManager.resources.food;
-            Debug.Log("Food is now " + resourceManager.resources.food);
+            if (nearFoodLoot)
+            {
+                ++resourceManager.resources.food;
+                Debug.Log("Food is now " + resourceManager.resources.food);
+            }
+            else if (nearMoneyLoot)
+            {
+                resourceManager.resources.money += Random.Range(30f, 200f);
+                Debug.Log("Money is now " + resourceManager.resources.money);
+            }            
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Loot"))
+        if (other.gameObject.tag[..4] == "Loot")
         {
             Debug.Log("Can collect loot");
-            nearLoot = true;
+            if (other.gameObject.tag[4..] == "Food") nearFoodLoot = true;
+            else if (other.gameObject.tag[4..] == "Money") nearMoneyLoot = true;
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Loot"))
+        if (other.gameObject.tag[..4] == "Loot")
         {
-            nearLoot = false;
+            nearFoodLoot = false;
+            nearMoneyLoot = false;
         }
     }
 }

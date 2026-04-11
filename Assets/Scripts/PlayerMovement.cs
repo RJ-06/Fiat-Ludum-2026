@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
         }
-        Debug.Log(rb.linearVelocity);
+        //Debug.Log(rb.linearVelocity);
 
     }
 
