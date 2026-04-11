@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &998774
+--- !u!1001 &189425781
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -127,55 +127,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.45198
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.35
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.968
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2982669556495783506, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 3072391312621261303, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_Name
-      value: Loot Basket (Food) (1)
+      value: Loot Basket (Money)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
 --- !u!1 &197972858
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +425,63 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &215220997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5078061003921100265, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_Name
+      value: Loot Basket (Food)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
 --- !u!1 &277264609
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +609,7 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1001 &983629359
+--- !u!1001 &679489896
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -560,112 +617,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 5078061003921100265, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
+      propertyPath: m_Name
+      value: Loot Basket (Food) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.1
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.58
+      value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
+    - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2982669556495783506, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
-      propertyPath: m_Name
-      value: Loot Basket (Food)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 170725fa6a79b9648a41f5f123d7f614, type: 3}
---- !u!1001 &1770400028
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.45555
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2982669556495783506, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
-      propertyPath: m_Name
-      value: Loot Basket (Money) (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
 --- !u!1001 &1869313534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa4b386b64cafec44afe925224828921, type: 3}
---- !u!1001 &2134893968
+--- !u!1001 &1936712628
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -731,49 +731,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.92
+      value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.33
+      value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1501117959198766666, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2982669556495783506, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+    - target: {fileID: 3072391312621261303, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_Name
-      value: Loot Basket (Money)
+      value: Loot Basket (Money) (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -788,7 +788,7 @@ SceneRoots:
   - {fileID: 277264611}
   - {fileID: 1869313534}
   - {fileID: 197972862}
-  - {fileID: 2134893968}
-  - {fileID: 983629359}
-  - {fileID: 1770400028}
-  - {fileID: 998774}
+  - {fileID: 215220997}
+  - {fileID: 679489896}
+  - {fileID: 189425781}
+  - {fileID: 1936712628}
