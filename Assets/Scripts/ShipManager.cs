@@ -3,8 +3,8 @@ using UnityEngine;
 public class ShipManager : MonoBehaviour
 {
     public static ShipManager shipManager;
-    public float crewHungerBar;
-    public float crewThirstBar;
+    public float crewHunger;
+    public float crewThirst;
     public float crewHealth;
     public float shipHealth;
 
@@ -12,10 +12,13 @@ public class ShipManager : MonoBehaviour
     public float thirstDecreaseRate;
     public float healthDecrease;
 
+    public TaskManager taskManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         shipManager = this;
+        taskManager = GetComponent<TaskManager>();
     }
 
     // Update is called once per frame
@@ -26,13 +29,13 @@ public class ShipManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        crewHungerBar -= hungerDecreaseRate;
-        crewThirstBar -= thirstDecreaseRate;
-        if (crewHungerBar <= 0) 
+        crewHunger -= hungerDecreaseRate;
+        crewThirst -= thirstDecreaseRate;
+        if (crewHunger <= 0) 
         {
             crewHealth -= healthDecrease;
         }
-        if (crewThirstBar <= 0) 
+        if (crewThirst <= 0) 
         {
             crewHealth -= healthDecrease;
         }

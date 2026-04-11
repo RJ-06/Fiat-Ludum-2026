@@ -26,4 +26,5 @@ public struct Task
     public float fixTime;
     public float fixRate;
     public float activeTimer;
+    public Vector3 location;
 }
