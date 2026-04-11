@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab98692e84293064fa2e4ddcd113d815, type: 3}
   m_Name: TaskList
   m_EditorClassIdentifier: Assembly-CSharp::TaskList
+  tasks:
+  - name: 
+    description: 
+    fixTime: 0
+    fixRate: 0
+    activeTimer: 0
