@@ -35,7 +35,9 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (nearMoneyLoot)
             {
-                resourceManager.resources.money += Random.Range(30f, 200f);
+                float rawMoneyAmount = Random.Range(30f, 200f);
+                int adjustedMoney = (int)Mathf.Round(Mathf.Pow(1.02604f, rawMoneyAmount) + 29f);
+                resourceManager.resources.money += adjustedMoney;
                 Debug.Log("Money is now " + resourceManager.resources.money);
             }            
         }
