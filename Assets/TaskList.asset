@@ -15,7 +15,7 @@ MonoBehaviour:
   tasks:
   - name: 
     description: 
-    fixTime: 10
+    fixTime: 5
     fixRate: 1
-    activeTimer: 20
+    activeTimer: 5
     location: {x: -2.78, y: 3.612, z: -2.06}

@@ -3,14 +3,13 @@ using UnityEngine.UI;
 
 public class AdverseEvent : MonoBehaviour
 {
-    public float eventDuration;
-    private float timer;
+    private float eventDuration = 20;
+    private float timer = 20;
 
     private float fixRate = 1;
     private float fixTime = 10;
     private float currentFixAmount = 10;
 
-    Vector3 coordinates;
     private bool isRunning = true;
     private bool isFixing = false;
 
@@ -18,9 +17,12 @@ public class AdverseEvent : MonoBehaviour
     public Image timerBar;
     public Image fixBar;
 
-    void Start()
+    public void setFields(float eventDuration, float fixRate, float fixTime)
     {
-        timer = eventDuration;
+        this.eventDuration = eventDuration;
+        this.timer = eventDuration;
+        this.fixRate = fixRate;
+        this.fixTime = fixTime;
     }
 
     void Update()

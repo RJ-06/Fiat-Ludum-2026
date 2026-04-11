@@ -7,6 +7,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private TaskList taskList;
     public List<Task> activeTasks = new List<Task>();
     public ShipUI shipUI;
+    public AdverseEvent adverseEvent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +25,8 @@ public class TaskManager : MonoBehaviour
     {
         int selectedTask = Random.Range(0, taskList.tasks.Count);
         activeTasks.Add(taskList.tasks[selectedTask]);
-        shipUI.updateTasksUI();
+        AdverseEvent obj = Instantiate(adverseEvent, taskList.tasks[selectedTask].location, Quaternion.identity);
+        obj.setFields(taskList.tasks[selectedTask].activeTimer, taskList.tasks[selectedTask].fixRate, taskList.tasks[selectedTask].fixTime);
+        //shipUI.updateTasksUI();
     }
 }
