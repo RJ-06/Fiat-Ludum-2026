@@ -5,9 +5,9 @@ public struct Resources
 {
     public int food;
     public int water;
-    public float money;
+    public int money;
 
-    public Resources(int m_food, int m_water, float m_money)
+    public Resources(int m_food, int m_water, int m_money)
     {
         food = m_food;
         water = m_water;
@@ -17,7 +17,7 @@ public struct Resources
 
 public class ResourceManager : MonoBehaviour
 {
-    public Resources resources = new(30, 30, 500f);
+    public Resources resources = new(30, 30, 500);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +45,7 @@ public class ResourceManager : MonoBehaviour
         return resources.water;
     }
 
-    public float ChangeMoney(float amount)
+    public float ChangeMoney(int amount)
     {
         resources.money += amount;
         if (resources.money <= 0f) Debug.Log("We're in debt chat");
