@@ -61,10 +61,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _depth: 0.8
+    - _depth: 0.6
     - _displacement: 1
-    - _normalStrength: 0.6
-    - _strength: 0.2
+    - _normalStrength: 0.8
+    - _strength: 0.8
     m_Colors:
     - _deepWater: {r: 0.084312215, g: 0.12268898, b: 0.5471698, a: 1}
     - _deepwater: {r: 0.17886944, g: 0.21693893, b: 0.47798735, a: 1}
