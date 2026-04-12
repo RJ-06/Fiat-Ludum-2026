@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -8180290579861764648}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.31307, y: 2.73, z: -0.99252}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5387114956447936973}
@@ -145,8 +145,8 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
+  m_Interpolate: 1
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1170450933864987300
 MonoBehaviour:
@@ -161,12 +161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveDir: {x: 0, y: 0}
-  moveSpeed: 10
-  maxYSpeed: 0
+  moveSpeed: 5
+  maxYSpeed: 2
   groundRaycastPos: {fileID: 5387114956447936973}
   groundRaycastDist: 0.1
   acceleration: 20
-  rotationSpeed: 720
+  rotationSpeed: 180
+  isGrabbing: 0
+  grabPosition: {fileID: 2321218492061725317}
   crewmate: {fileID: 0}
   topDeckPosition: {fileID: 0}
   bottomDeckPosition: {fileID: 0}

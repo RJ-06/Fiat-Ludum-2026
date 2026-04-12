@@ -192,11 +192,13 @@ public class PlayerMovement : MonoBehaviour
             if (currentDeck == 0) 
             {
                 StartCoroutine(MoveToTarget(bottomDeckPosition.position));
+                ChangeShipVisibility.Instance.ToggleVisibility();
                 currentDeck = 1;
             }
             else 
             {
                 StartCoroutine(MoveToTarget(topDeckPosition.position));
+                ChangeShipVisibility.Instance.ToggleVisibility();
                 currentDeck = 0;
             }
         }

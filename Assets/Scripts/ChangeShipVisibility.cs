@@ -11,6 +11,12 @@ public class ChangeShipVisibility : MonoBehaviour
     [SerializeField] private Material transparentMat;
     [SerializeField] private Material opaqueMat;
 
+    public static ChangeShipVisibility Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void ToggleVisibility()
     {
         viewingTop = !viewingTop;
@@ -23,23 +29,6 @@ public class ChangeShipVisibility : MonoBehaviour
         else
         {
             topRenderer.material = transparentMat;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<PlayerMovement>() != null && viewingTop)
-        {
-            Debug.Log("Player entered trigger");
-            ToggleVisibility();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<PlayerMovement>() != null && !viewingTop)
-        {
-            ToggleVisibility();
         }
     }
 }
