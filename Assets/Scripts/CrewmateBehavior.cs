@@ -7,8 +7,8 @@ public class CrewmateBehavior : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    private Vector3 topStairsPosition = new Vector3(0, 5, 0);
-    private Vector3 bottomStairsPosition = new Vector3(0, 0, 0);
+    [SerializeField] Transform topStairsPosition;
+    [SerializeField] Transform bottomStairsPosition;
 
     private int currentDeck = 0;
 
@@ -20,14 +20,9 @@ public class CrewmateBehavior : MonoBehaviour
 
     private Action onComplete;
 
-    public GameObject target;
-    public AdverseEvent adverseEvent;
-
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        DoTask(target.transform.position, 1, adverseEvent);
     }
 
     void Update()
@@ -53,7 +48,7 @@ public class CrewmateBehavior : MonoBehaviour
         if (currentDeck != targetDeck)
         {
             Vector3 stairPos =
-                (currentDeck == 0) ? topStairsPosition : bottomStairsPosition;
+                (currentDeck == 0) ? topStairsPosition.transform.position : bottomStairsPosition.transform.position;
 
             // only set once
             if (!goingToStairs)
@@ -66,7 +61,7 @@ public class CrewmateBehavior : MonoBehaviour
             if (HasArrived(stairPos))
             {
                 currentDeck = targetDeck;
-                agent.Warp((currentDeck == 0) ? topStairsPosition : bottomStairsPosition);
+                agent.Warp((currentDeck == 0) ? topStairsPosition.transform.position : bottomStairsPosition.transform.position);
 
                 goingToStairs = false;
 
@@ -103,7 +98,7 @@ public class CrewmateBehavior : MonoBehaviour
 
     public void DoTask(Vector3 position, int deck, AdverseEvent e)
     {
-        NavigateTo(target.transform.position, 1, () =>
+        NavigateTo(position, deck, () =>
         {
             e.BeginFixing();
         });

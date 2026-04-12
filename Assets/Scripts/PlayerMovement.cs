@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     AdverseEvent currentlyRepairing;
 
+    public CrewmateBehavior crewmate;
+
     [SerializeField] Transform topDeckPosition;
     [SerializeField] Transform bottomDeckPosition;
     [SerializeField] Transform topMastPosition;
@@ -214,6 +216,15 @@ public class PlayerMovement : MonoBehaviour
         if (atCannon) 
         {
             GameplayModeManager.Instance.SetCannonShootingMode(false);
+        }
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<AdverseEvent>() != null)
+            {
+                crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
+                break;
+            }
         }
     }
 
