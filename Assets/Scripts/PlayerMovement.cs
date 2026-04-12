@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool atWheel;
 
+    private bool atKitchen;
+
     private bool atCannon;
     private Cannon currentCannon;
 
@@ -137,6 +139,10 @@ public class PlayerMovement : MonoBehaviour
         {
             objectFoundToGrab = other.gameObject;
         }
+        if (other.CompareTag("Kitchen"))
+        {
+            atKitchen = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -161,6 +167,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Grabbable")) 
         {
             objectFoundToGrab = null;
+        }
+        if (other.CompareTag("Kitchen"))
+        {
+            atKitchen = false;
         }
     }
 
@@ -208,6 +218,12 @@ public class PlayerMovement : MonoBehaviour
         if (atWheel)
         {
             GameplayModeManager.Instance.SetShipSteeringMode(true);
+        }
+
+        if (atKitchen)
+        {
+            GameplayModeManager.Instance.SetCookingMode(true);
+            FindAnyObjectByType<SliceMinigameController>().StartMinigame();
         }
 
         if (atCannon) 
@@ -261,6 +277,10 @@ public class PlayerMovement : MonoBehaviour
         if (atCannon) 
         {
             GameplayModeManager.Instance.SetCannonShootingMode(false);
+        }
+        if (atKitchen)
+        {
+            GameplayModeManager.Instance.SetCookingMode(false);
         }
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)

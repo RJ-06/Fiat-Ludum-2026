@@ -30,6 +30,7 @@ public class ChangeShipVisibility : MonoBehaviour
     {
         if (other.GetComponent<PlayerMovement>() != null && viewingTop)
         {
+            Debug.Log("Player entered trigger");
             ToggleVisibility();
         }
     }

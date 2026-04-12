@@ -9,6 +9,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         PlayerControl,
         ShipSteering,
+        Cooking,
         CannonShooting
     }
 
@@ -31,6 +32,16 @@ public class GameplayModeManager : MonoBehaviour
 
     }
 
+    public void SetCookingMode(bool enabled)
+    {
+        if (!((currentMode == Mode.PlayerControl) ^ enabled))
+        {
+            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+        }
+
+        currentMode = enabled ? Mode.Cooking : Mode.PlayerControl;
+    }
+
     public void SetCannonShootingMode(bool enabled)
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
@@ -40,7 +51,6 @@ public class GameplayModeManager : MonoBehaviour
         }
 
         currentMode = enabled ? Mode.CannonShooting : Mode.PlayerControl;
-
     }
 
     public bool IsSteeringMode()

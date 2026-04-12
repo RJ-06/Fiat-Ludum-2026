@@ -10,6 +10,7 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private Transform wheelPos;
     [SerializeField] private Transform cannonOnePos;
     [SerializeField] private Transform cannonTwoPos;
+    [SerializeField] private Transform cookingTable;
 
     private Quaternion targetRotation;
 
@@ -36,6 +37,10 @@ public class CameraScript : MonoBehaviour
                 (distanceOne <= distanceTwo) ? cannonChoice = cannonOnePos : cannonTwoPos;
 
             AlignToForward(cannonChoice, Vector3.right);
+            return;
+        } else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Cooking)
+        {
+            AlignToForward(cookingTable, Vector3.down);
             return;
         }
 
