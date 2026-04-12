@@ -32,6 +32,7 @@ public class TownspersonEnemy : MonoBehaviour
             chasing = true;
             StopCoroutine("Patrol");
             StartCoroutine("Chase");
+            agent.speed = 6;
             meshRenderer.material = chaseMaterial;
         }
         else if (!patrolling && !CheckForPlayer()) {
@@ -39,6 +40,7 @@ public class TownspersonEnemy : MonoBehaviour
             patrolling = true;
             StopCoroutine("Chase");
             StartCoroutine("Patrol");
+            agent.speed = 4;
             meshRenderer.material = patrolMaterial;
         }
     }

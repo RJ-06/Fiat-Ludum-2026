@@ -126,7 +126,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -152,6 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TownspersonEnemy
   patrolPoints: []
   visionRange: 50
-  visionAngle: 90
+  visionAngle: 150
   patrolMaterial: {fileID: 2100000, guid: d5d037aa7d009e748a99baf7734f9c97, type: 2}
   chaseMaterial: {fileID: 2100000, guid: b8345a36e5f071f4ca69b8b47dfb9762, type: 2}
