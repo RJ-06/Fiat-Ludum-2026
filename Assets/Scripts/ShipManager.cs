@@ -15,11 +15,15 @@ public class ShipManager : MonoBehaviour
     public TaskManager taskManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         shipManager = this;
-        taskManager = GetComponent<TaskManager>();
-        //taskManager.AddTask();
+        
+    }
+
+    void Start()
+    {
+        taskManager = TaskManager.taskManagerSingleton;
     }
 
     // Update is called once per frame

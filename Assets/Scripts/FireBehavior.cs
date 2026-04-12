@@ -10,6 +10,7 @@ public class FireBehavior : MonoBehaviour
     void Start()
     {
         shipManagerInstance = ShipManager.shipManager;
+        StartCoroutine(BurnShip());
     }
 
     IEnumerator BurnShip() 
@@ -17,6 +18,7 @@ public class FireBehavior : MonoBehaviour
         while (true) 
         {
             shipManagerInstance.shipHealth -= damageDealt;
+            yield return new WaitForSeconds(burnRate);
         }
     }
 
@@ -24,8 +26,10 @@ public class FireBehavior : MonoBehaviour
     {
         if (other.GetComponent<GrabbableObject>() != null && 
             other.GetComponent<GrabbableObject>().objectType == GrabbableObject.ObjectType.bucket &&
-            !PlayerMovement.instance.isGrabbing) 
+            !PlayerMovement.instance.isGrabbing &&
+            other.GetComponent<BucketScript>().isFilled) 
         { //check if a bucket has been placed which the player is holding and is filled with water
+            other.GetComponent<BucketScript>().isFilled = false;
             Destroy(gameObject);
         }
     }
