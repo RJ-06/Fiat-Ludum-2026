@@ -8,7 +8,8 @@ public class GameplayModeManager : MonoBehaviour
     public enum Mode
     {
         PlayerControl,
-        ShipSteering
+        ShipSteering,
+        CannonShooting
     }
 
     public Mode currentMode = Mode.PlayerControl;
@@ -30,8 +31,25 @@ public class GameplayModeManager : MonoBehaviour
 
     }
 
+    public void SetCannonShootingMode(bool enabled)
+    {
+        if (!((currentMode == Mode.PlayerControl) ^ enabled))
+        {
+            //changeShipVisibility.ToggleVisibility();
+            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+        }
+
+        currentMode = enabled ? Mode.CannonShooting : Mode.PlayerControl;
+
+    }
+
     public bool IsSteeringMode()
     {
         return currentMode == Mode.ShipSteering;
+    }
+
+    public bool isCannonShootingMode()
+    {
+        return currentMode == Mode.CannonShooting;
     }
 }

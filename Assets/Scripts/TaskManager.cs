@@ -34,6 +34,7 @@ public class TaskManager : MonoBehaviour
         while (true) 
         {
             var selectedTask = tasksList.tasks[Random.Range(0,tasksList.tasks.Count)];
+
             Debug.Log("Spawning task: " + selectedTask.name);
 
             AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);

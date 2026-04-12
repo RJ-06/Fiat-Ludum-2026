@@ -11,6 +11,7 @@ TagManager:
   - Mast
   - Wheel
   - Iceberg
+  - Cannon
   layers:
   - Default
   - TransparentFX

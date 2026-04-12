@@ -5,7 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector2 moveDir;
+    public Vector2 moveDir;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxYSpeed;
     private Rigidbody rb;
@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private int currentMastLevel = 0; // 0 = on deck, 1 = at top
 
     private bool atWheel;
+
+    private bool atCannon;
+    private Cannon currentCannon;
 
     AdverseEvent currentlyRepairing;
 
@@ -107,6 +110,11 @@ public class PlayerMovement : MonoBehaviour
         {
             atWheel = true;
         }
+        if (other.CompareTag("Cannon")) 
+        {
+            atCannon = true;
+            currentCannon = other.gameObject.GetComponent<Cannon>();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -115,15 +123,18 @@ public class PlayerMovement : MonoBehaviour
         {
             atStairs = false;
         }
-
         if (other.CompareTag("Mast"))
         {
             atMast = false;
         }
-
         if (other.CompareTag("Wheel"))
         {
             atWheel = false;
+        }
+        if (other.CompareTag("Cannon")) 
+        {
+            atCannon = false;
+            currentCannon = null;
         }
     }
 
@@ -162,6 +173,12 @@ public class PlayerMovement : MonoBehaviour
             GameplayModeManager.Instance.SetShipSteeringMode(true);
         }
 
+        if (atCannon) 
+        {
+            GameplayModeManager.Instance.SetCannonShootingMode(true);
+            currentCannon.ShootCanonBall(); //note - this doesn't work rn 
+        }
+
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)
@@ -189,6 +206,10 @@ public class PlayerMovement : MonoBehaviour
         if (atWheel)
         {
             GameplayModeManager.Instance.SetShipSteeringMode(false);
+        }
+        if (atCannon) 
+        {
+            GameplayModeManager.Instance.SetCannonShootingMode(false);
         }
     }
 
