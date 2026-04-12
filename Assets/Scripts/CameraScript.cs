@@ -37,7 +37,7 @@ public class CameraScript : MonoBehaviour
             Transform cannonChoice =
                 (distanceOne <= distanceTwo) ? cannonChoice = cannonOnePos : cannonTwoPos;
 
-            AlignToForward(cannonChoice, Vector3.right); //DIRECTION HAS TO BE CHANGED ONCE SWITCHED TO LOWER DECK CANNONSa
+            AlignToForward(cannonChoice, Vector3.left); //DIRECTION HAS TO BE CHANGED ONCE SWITCHED TO LOWER DECK CANNONSa
             return;
         }
         else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Cooking)
