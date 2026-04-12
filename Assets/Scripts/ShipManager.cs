@@ -19,7 +19,7 @@ public class ShipManager : MonoBehaviour
     {
         shipManager = this;
         taskManager = GetComponent<TaskManager>();
-        taskManager.AddTask();
+        //taskManager.AddTask();
     }
 
     // Update is called once per frame

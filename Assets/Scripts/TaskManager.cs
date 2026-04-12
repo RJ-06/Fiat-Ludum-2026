@@ -1,32 +1,33 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
     [SerializeField] private TaskList taskList;
-    public List<Task> activeTasks = new List<Task>();
-    public ShipUI shipUI;
-    public AdverseEvent adverseEvent;
+    [SerializeField] float minTimeForNextTask;
+    [SerializeField] float maxTimeForNextTask;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        shipUI = FindAnyObjectByType<ShipUI>();
-    }
+    public AnimationCurve minTimeCurve;
+    public AnimationCurve maxTimeCurve;
+    private int spawnedCount;
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator CreateTask() 
     {
+        while (true) 
+        {
+            var selectedTask = taskList.tasks[Random.Range(0,taskList.tasks.Count)];
+
+            AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
+            obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
+            spawnedCount++;
+            minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
+            maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
+
+            yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
+        }
         
     }
 
-    public void AddTask() 
-    {
-        int selectedTask = Random.Range(0, taskList.tasks.Count);
-        activeTasks.Add(taskList.tasks[selectedTask]);
-        AdverseEvent obj = Instantiate(adverseEvent, taskList.tasks[selectedTask].location, Quaternion.identity);
-        obj.setFields(taskList.tasks[selectedTask].activeTimer, taskList.tasks[selectedTask].fixRate, taskList.tasks[selectedTask].fixTime);
-        //shipUI.updateTasksUI();
-    }
 }

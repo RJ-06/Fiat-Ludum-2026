@@ -44,10 +44,10 @@ public class ShipUI : MonoBehaviour
     public void updateTasksUI() 
     {
         string s = "";
-        foreach (Task t in taskManager.activeTasks)
-        {
-            s += t.name + "\n";
-        }
+        //foreach (Task t in taskManager.activeTasks)
+        //{
+        //    s += t.name + "\n";
+        //}
         taskListDisplay.text = s;
     }
 }

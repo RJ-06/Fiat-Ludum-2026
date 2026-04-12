@@ -401,7 +401,7 @@ MonoBehaviour:
   player: {fileID: 521556540}
   offset: {x: 0, y: 5, z: -6}
   smoothSpeed: 10
-  ship: {fileID: 393786990}
+  ship: {fileID: 0}
 --- !u!1 &207453056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,9 +2267,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskManager
   taskList: {fileID: 11400000, guid: 88f6d1a1a7d9f5440b2a46d1bde63ac2, type: 2}
-  activeTasks: []
-  shipUI: {fileID: 0}
-  adverseEvent: {fileID: 1688310639}
+  minTimeForNextTask: 1
+  maxTimeForNextTask: 10
+  minTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3
+      inSlope: -0.05
+      outSlope: -0.05
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 0.5
+      inSlope: -0.05
+      outSlope: -0.05
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 10
+      inSlope: -0.14
+      outSlope: -0.14
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 3
+      inSlope: -0.14
+      outSlope: -0.14
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1712533287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2642,11 +2689,11 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1712533288}
   - {fileID: 197746831}
   - {fileID: 1402874026}
   - {fileID: 999829766}
   - {fileID: 1569042478}
-  - {fileID: 1712533288}
   - {fileID: 221617911}
   - {fileID: 1562870975}
   - {fileID: 1688310638}

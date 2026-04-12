@@ -22,9 +22,9 @@ public class TaskList : ScriptableObject
 public struct Task
 {
     public string name;
-    public string description;
+    public Vector3 location;
     public float fixTime;
     public float fixRate;
     public float activeTimer;
-    public Vector3 location;
+    public AdverseEvent adverseEvent;
 }
