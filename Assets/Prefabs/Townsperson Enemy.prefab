@@ -150,3 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a258a2d1f8593bc4fb86af6b602aad5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TownspersonEnemy
+  patrolPoints: []
+  visionRange: 50
+  visionAngle: 90
+  patrolMaterial: {fileID: 2100000, guid: d5d037aa7d009e748a99baf7734f9c97, type: 2}
+  chaseMaterial: {fileID: 2100000, guid: b8345a36e5f071f4ca69b8b47dfb9762, type: 2}

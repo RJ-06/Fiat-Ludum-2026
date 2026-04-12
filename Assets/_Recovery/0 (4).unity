@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -963,7 +963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8919798422869306865, guid: 8e8f762fbe5091a418b0fb0d7fa4013c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1538,7 +1538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1662614837953606127, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1744,14 +1744,6 @@ PrefabInstance:
     - target: {fileID: 6684067190104770103, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
       propertyPath: m_Name
       value: Townsperson Enemy 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7639377638965813385, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
-      propertyPath: m_Speed
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970229523331768155, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
-      propertyPath: visionAngle
-      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8970229523331768155, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
       propertyPath: patrolPoints.Array.size
@@ -2034,14 +2026,6 @@ PrefabInstance:
     - target: {fileID: 6684067190104770103, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
       propertyPath: m_Name
       value: Townsperson Enemy 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7639377638965813385, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
-      propertyPath: m_Speed
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970229523331768155, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
-      propertyPath: visionAngle
-      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8970229523331768155, guid: 8c14d74c59c79df47820ad112ae65dee, type: 3}
       propertyPath: patrolPoints.Array.size
