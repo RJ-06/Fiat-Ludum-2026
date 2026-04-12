@@ -8,6 +8,8 @@ public class WorldScroller : MonoBehaviour
     [Header("Steering")]
     [SerializeField] private float steerSpeed = 60f;
 
+    public GameObject iceberg;
+
     void Update()
     {
         // 1. Move world forward toward ship
@@ -19,7 +21,7 @@ public class WorldScroller : MonoBehaviour
         if (GameplayModeManager.Instance != null &&
             GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.ShipSteering)
         {
-            input = Input.GetAxis("Horizontal");
+            input = -Input.GetAxis("Horizontal");
         }
 
         // 3. ROTATE WORLD around ship (THIS is the key change)
@@ -29,4 +31,21 @@ public class WorldScroller : MonoBehaviour
             input * steerSpeed * Time.deltaTime
         );
     }
+
+    public void SpawnIceberg()
+    {
+        Debug.Log("Spawning iceberg");
+        int numToInstantiate = Random.Range(1, 4);
+
+        for (int i = 0; i < numToInstantiate; i++)
+        {
+            float x = -10 + 20 * Random.value;
+            float y = -12 + 4 * Random.value;
+            float z = -30 + 50 * Random.value;
+
+            Instantiate(iceberg, new Vector3(x, y, z), Quaternion.identity);
+        }
+
+
+        }
 }

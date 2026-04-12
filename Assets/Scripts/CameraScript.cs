@@ -4,7 +4,7 @@ public class CameraScript : MonoBehaviour
 {
     public Transform player;
 
-    public Vector3 offset = new Vector3(0, 5, -6);
+    public Vector3 offset = new Vector3(0, 4, -6);
     public float smoothSpeed = 10f;
 
     [SerializeField] private Transform ship;
@@ -17,6 +17,7 @@ public class CameraScript : MonoBehaviour
         if (p != null)
             player = p.transform;
     }
+
     void LateUpdate()
     {
         if (GameplayModeManager.Instance.currentMode ==
@@ -51,7 +52,7 @@ public class CameraScript : MonoBehaviour
         // Look straight forward relative to ship/world
         targetRotation = Quaternion.LookRotation(-Vector3.forward, Vector3.up);
 
-        transform.position = Vector3.Lerp(transform.position, ship.position + new Vector3(0,0,0.2f), smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, ship.position + new Vector3(0,0,1f), smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             targetRotation,

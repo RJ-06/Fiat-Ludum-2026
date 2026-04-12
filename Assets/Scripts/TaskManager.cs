@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class TaskManager : MonoBehaviour
 {
@@ -13,6 +14,16 @@ public class TaskManager : MonoBehaviour
     public AnimationCurve maxTimeCurve;
     private int spawnedCount;
 
+    public WorldScroller worldScroller;
+    void Start()
+    {
+        InvokeRepeating(nameof(Spawn), 5f, 5f);
+    }
+
+    void Spawn()
+    {
+        worldScroller.SpawnIceberg();
+    }
     public IEnumerator CreateTask() 
     {
         while (true) 

@@ -4,6 +4,7 @@ public class GameplayModeManager : MonoBehaviour
 {
     public static GameplayModeManager Instance;
     public ChangeShipVisibility changeShipVisibility;
+    public GameObject player;
     public enum Mode
     {
         PlayerControl,
@@ -20,7 +21,10 @@ public class GameplayModeManager : MonoBehaviour
     public void SetShipSteeringMode(bool enabled)
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
+        {
             changeShipVisibility.ToggleVisibility();
+            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+        }
 
         currentMode = enabled ? Mode.ShipSteering : Mode.PlayerControl;
 
