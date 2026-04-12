@@ -12,6 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundRaycastPos;
     [SerializeField] private float groundRaycastDist;
 
+
+    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float rotationSpeed = 720f;
+
+    private Vector3 currentVelocity;
+
+
     private bool atStairs;
     private int currentDeck = 0; // 0 = top, 1 = bottom
 
@@ -39,25 +46,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ROTATION (physics-safe)
-        Quaternion turn = Quaternion.Euler(0f, moveDir.x * 120f * Time.fixedDeltaTime, 0f);
+        // ROTATION
+        float turnAmount = moveDir.x * rotationSpeed * Time.fixedDeltaTime;
+        Quaternion turn = Quaternion.Euler(0f, turnAmount, 0f);
         rb.MoveRotation(rb.rotation * turn);
 
-        // MOVEMENT
-        Vector3 forwardMove = transform.forward * (moveDir.y * moveSpeed);
+        // FORWARD (FIXED: use rb.rotation, not transform)
+        Vector3 forward = rb.rotation * Vector3.forward;
+        Vector3 targetVelocity = forward * (moveDir.y * moveSpeed);
 
-        Vector3 velocity = forwardMove;
-        velocity.y = rb.linearVelocity.y;
+        targetVelocity.y = rb.linearVelocity.y;
 
-        // SLOPE HANDLING (smoothed)
+        // SLOPE
         if (Physics.Raycast(groundRaycastPos.position, Vector3.down, out RaycastHit hit, groundRaycastDist))
         {
-            Vector3 projected = Vector3.ProjectOnPlane(velocity, hit.normal);
-            velocity = Vector3.Lerp(velocity, projected, 15f * Time.fixedDeltaTime);
+            forward = Vector3.ProjectOnPlane(forward, hit.normal).normalized;
+            targetVelocity = forward * (moveDir.y * moveSpeed);
+            targetVelocity.y = rb.linearVelocity.y;
         }
 
-        // SMOOTH VELOCITY (KEY FIX)
-        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, velocity, 10f * Time.fixedDeltaTime);
+        // SMOOTH ONLY XZ
+        Vector3 velocity = rb.linearVelocity;
+
+        Vector3 currentXZ = new Vector3(velocity.x, 0f, velocity.z);
+        Vector3 targetXZ = new Vector3(targetVelocity.x, 0f, targetVelocity.z);
+
+        Vector3 smoothXZ = Vector3.Lerp(currentXZ, targetXZ, acceleration * Time.fixedDeltaTime);
+
+        rb.linearVelocity = new Vector3(smoothXZ.x, velocity.y, smoothXZ.z);
 
         // CLAMP Y
         if (rb.linearVelocity.y > maxYSpeed)
