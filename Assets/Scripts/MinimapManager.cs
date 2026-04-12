@@ -6,6 +6,7 @@ public class MinimapManager : MonoBehaviour
     public Camera minimapCamera;
     public RectTransform minimapRect;
     public RectTransform markerPrefab;
+    public RectTransform markerCautionPrefab;
 
     void Awake()
     {

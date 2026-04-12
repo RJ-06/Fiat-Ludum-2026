@@ -6,12 +6,22 @@ public class MinimapMarker : MonoBehaviour
     private Camera minimapCamera;
     private RectTransform minimapRect;
 
+    public bool isCautionMarker;
+
     void Start()
     {
         minimapCamera = MinimapManager.Instance.minimapCamera;
         minimapRect = MinimapManager.Instance.minimapRect;
 
-        icon = Instantiate(
+        if (isCautionMarker)
+        {
+            icon = Instantiate(
+                MinimapManager.Instance.markerCautionPrefab,
+                minimapRect
+            );
+        }
+        else
+            icon = Instantiate(
             MinimapManager.Instance.markerPrefab,
             minimapRect
         );

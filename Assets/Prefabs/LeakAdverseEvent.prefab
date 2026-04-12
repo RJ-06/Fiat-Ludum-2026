@@ -78,7 +78,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -94,9 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0875ffbed3ed36e4fac3edebed9b55b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinimapMarker
-  icon: {fileID: 1439892834323621481, guid: 0549ad0e86ecd5c478f22f5f10987951, type: 3}
-  minimapCamera: {fileID: 0}
-  minimapRect: {fileID: 0}
+  isCautionMarker: 0
 --- !u!1 &8573380555699898535
 GameObject:
   m_ObjectHideFlags: 0
