@@ -27,6 +27,7 @@ public class FishingMinigame : MonoBehaviour
             canCatchNotification.enabled = false;
             failedCatchNotification.enabled = false;
             waitingForFishNotification.enabled = false;
+            StopAllCoroutines();
         }
     }
 

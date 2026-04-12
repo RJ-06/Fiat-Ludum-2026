@@ -47,7 +47,7 @@ public class CameraScript : MonoBehaviour
         }
         else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Fishing) 
         {
-            AlignToForward(fishingSpot, Vector3.left); //SWITCH DIRECTION
+            AlignToForward(fishingSpot, Vector3.right); //SWITCH DIRECTION
             return;
         }
 
