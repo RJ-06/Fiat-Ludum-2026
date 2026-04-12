@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 1364979888}
     - target: {fileID: 1614762453347422850, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_Name
-      value: d
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5052761651286963027, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,6 +363,7 @@ MonoBehaviour:
   minigameObject1: {fileID: 370303040}
   minigameObject2: {fileID: 1000606499}
   minigameText1: {fileID: 1667787074}
+  minigameText2: {fileID: 1301888732}
 --- !u!224 &191908302 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6145227828391380969, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}

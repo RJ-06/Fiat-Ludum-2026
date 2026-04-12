@@ -9,6 +9,7 @@ public class TutorialTextChanger : MonoBehaviour
     public GameObject minigameObject1;
     public GameObject minigameObject2;
     public GameObject minigameText1;
+    public GameObject minigameText2;
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -28,6 +29,7 @@ public class TutorialTextChanger : MonoBehaviour
                     minigameObject1.gameObject.SetActive(true);
                     minigameObject2.gameObject.SetActive(true);
                     minigameText1.gameObject.SetActive(true);
+                    minigameText2.gameObject.SetActive(true);
                 }
             }
         }
