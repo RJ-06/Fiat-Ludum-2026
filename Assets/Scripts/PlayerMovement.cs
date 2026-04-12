@@ -120,12 +120,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentDeck == 0) 
             {
-                StartCoroutine(MoveToTarget(bottomDeckPosition));
+                StartCoroutine(MoveToTarget(bottomDeckPosition.position));
                 currentDeck = 1;
             }
             else 
             {
-                StartCoroutine(MoveToTarget(topDeckPosition));
+                StartCoroutine(MoveToTarget(topDeckPosition.position));
                 currentDeck = 0;
             }
         }
@@ -134,12 +134,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentMastLevel == 0)
             {
-                StartCoroutine(MoveToTarget(topMastPosition));
+                StartCoroutine(MoveToTarget(new Vector3(transform.position.x, topMastPosition.position.y, transform.position.z)));
                 currentMastLevel = 1;
             }
             else
             {
-                StartCoroutine(MoveToTarget(bottomMastPosition));
+                StartCoroutine(MoveToTarget(new Vector3(transform.position.x, bottomMastPosition.position.y, transform.position.z)));
                 currentMastLevel = 0;
             }
         }
@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveToTarget(Transform target, float duration = 1f)
+    public IEnumerator MoveToTarget(Vector3 target, float duration = 1f)
     {
         rb.isKinematic = true;
 
@@ -174,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
         float feetOffset = col.bounds.extents.y;
 
         Vector3 startPos = rb.position;
-        Vector3 adjustedTarget = target.position + Vector3.up * feetOffset;
+        Vector3 adjustedTarget = target + Vector3.up * feetOffset;
 
         float t = 0f;
 
