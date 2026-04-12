@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    [SerializeField] PlayerMovement player;
 
     public GameObject cannonBall;
     public Transform ballSpawnPos;
@@ -34,7 +33,7 @@ public class Cannon : MonoBehaviour
             GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
         {
             // 2. Fetch the moveDir from the player reference in GameplayModeManager
-            Vector2 inputDir = GameplayModeManager.Instance.player.GetComponent<PlayerMovement>().moveDir;
+            Vector2 inputDir = PlayerMovement.instance.moveDir;
 
             // 3. Rotate the cannon based on the input
             // Applying Time.deltaTime ensures the rotation is smooth and frame-rate independent
@@ -69,10 +68,12 @@ public class Cannon : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!player.isGrabbing && other.GetComponent<GrabbableObject>() != null
+        if (!PlayerMovement.instance.isGrabbing && other.GetComponent<GrabbableObject>() != null
             && other.GetComponent<GrabbableObject>().objectType == GrabbableObject.ObjectType.cannonball) 
         {
             cannonBallsLeft++;
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            other.GetComponent<GrabbableObject>().enabled = false;
             Destroy(other.gameObject);
         }
     }

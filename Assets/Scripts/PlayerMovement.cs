@@ -5,6 +5,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement instance;
+
     public Vector2 moveDir;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxYSpeed;
@@ -42,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform topMastPosition;
     [SerializeField] Transform bottomMastPosition;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -243,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrabbing = false;
             objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().useGravity = true;
-            objectFoundToGrab.GetComponent<Rigidbody>().isKinematic = false;
+            objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             objectGrabbedTransform.SetParent(null); //unparents
             objectGrabbedTransform = null;
             return;
