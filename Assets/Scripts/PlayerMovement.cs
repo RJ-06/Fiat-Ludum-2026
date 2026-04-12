@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private bool atCannon;
     private Cannon currentCannon;
 
+    private bool atFishing;
+
     public bool isGrabbing;
     [SerializeField] Transform grabPosition;
     private Transform objectGrabbedTransform;
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameplayModeManager.Instance.IsSteeringMode() || GameplayModeManager.Instance.isCannonShootingMode())
+        if (!GameplayModeManager.Instance.isWalkingMode())
             return; // ignore input in steering mode
 
         if (currentlyRepairing != null)
@@ -143,6 +145,10 @@ public class PlayerMovement : MonoBehaviour
         {
             atKitchen = true;
         }
+        if (other.CompareTag("Fishing")) 
+        {
+           atFishing = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -171,6 +177,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Kitchen"))
         {
             atKitchen = false;
+        }
+        if (other.CompareTag("Fishing")) 
+        {
+            atFishing = false;
         }
     }
 
@@ -228,6 +238,21 @@ public class PlayerMovement : MonoBehaviour
             FindAnyObjectByType<SliceMinigameController>().StartMinigame();
         }
 
+        if (atFishing) 
+        {
+            FishingMinigame fishing = FindAnyObjectByType<FishingMinigame>();
+            if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Fishing)
+            {
+                fishing.tryToCatch();
+            }
+            else 
+            {
+                GameplayModeManager.Instance.SetFishingMode(true);
+                StartCoroutine(fishing.StartFishing());
+            }
+            
+        }
+
         if (atCannon) 
         {
             if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
@@ -283,6 +308,10 @@ public class PlayerMovement : MonoBehaviour
         if (atKitchen)
         {
             GameplayModeManager.Instance.SetCookingMode(false);
+        }
+        if (atFishing) 
+        {
+            GameplayModeManager.Instance.SetFishingMode(false);
         }
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)

@@ -15,6 +15,7 @@ TagManager:
   - Grabbable
   - FillStation
   - Kitchen
+  - Fishing
   layers:
   - Default
   - TransparentFX

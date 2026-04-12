@@ -10,6 +10,7 @@ public class GameplayModeManager : MonoBehaviour
         PlayerControl,
         ShipSteering,
         Cooking,
+        Fishing,
         CannonShooting
     }
 
@@ -42,6 +43,16 @@ public class GameplayModeManager : MonoBehaviour
         currentMode = enabled ? Mode.Cooking : Mode.PlayerControl;
     }
 
+    public void SetFishingMode(bool enabled)
+    {
+        if (!((currentMode == Mode.PlayerControl) ^ enabled))
+        {
+            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+        }
+
+        currentMode = enabled ? Mode.Fishing : Mode.PlayerControl;
+    }
+
     public void SetCannonShootingMode(bool enabled)
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
@@ -61,5 +72,20 @@ public class GameplayModeManager : MonoBehaviour
     public bool isCannonShootingMode()
     {
         return currentMode == Mode.CannonShooting;
+    }
+
+    public bool isFishingMode() 
+    {
+        return (currentMode == Mode.Fishing);
+    }
+
+    public bool isCookingMode()
+    {
+        return (currentMode == Mode.Cooking);
+    }
+
+    public bool isWalkingMode() 
+    {
+        return (currentMode == Mode.PlayerControl);
     }
 }
