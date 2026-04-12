@@ -756,9 +756,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 660770877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a258a2d1f8593bc4fb86af6b602aad5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3821bdc8cbe79e0478e8ea369326c285, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TownspersonEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::ClickToMove
 --- !u!1001 &679489896
 PrefabInstance:
   m_ObjectHideFlags: 0
