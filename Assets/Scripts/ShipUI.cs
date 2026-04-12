@@ -19,7 +19,7 @@ public class ShipUI : MonoBehaviour
 
     public GameObject imagePrefab; // UI Image prefab
     private RectTransform canvas;   // Your Canvas
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         shipManager = ShipManager.shipManager;
@@ -30,7 +30,7 @@ public class ShipUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateTasksUI();
+        //updateTasksUI();
         //percentCrewHealth = shipManager.crewHealth / 1f;
         //percentShipHealth = shipManager.shipHealth / 1f;
         //percentHunger = shipManager.crewHunger / 1f;
@@ -48,7 +48,6 @@ public class ShipUI : MonoBehaviour
         {
             foreach (Task t in taskManager.tasksList.tasks)
             {
-                Debug.Log(t.name);
                 GameObject img = Instantiate(imagePrefab, canvas);
                 RectTransform rt = img.GetComponent<RectTransform>();
                 rt.anchoredPosition = t.UICoordinates; // UI coordinates

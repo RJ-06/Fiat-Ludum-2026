@@ -13,14 +13,25 @@ public class TaskManager : MonoBehaviour
 
     public WorldScroller worldScroller;
 
-    public static TaskManager taskManagerSingleton;
     public TaskList tasksList;
 
     public List<Task> activeTasks;
+    HashSet<int> activeTaskIndices = new HashSet<int>();
+
+    public static TaskManager taskManagerSingleton { get; private set; }
+
+    private void Awake()
+    {
+        if (taskManagerSingleton != null && taskManagerSingleton != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        taskManagerSingleton = this;
+    }
 
     void Start()
     {
-        taskManagerSingleton = this;
         StartCoroutine(CreateTask());
     }
 
@@ -29,13 +40,17 @@ public class TaskManager : MonoBehaviour
         worldScroller.SpawnIceberg();
     }
 
-    public IEnumerator CreateTask() 
+    public IEnumerator CreateTask()
     {
         while (true) 
         {
-            var selectedTask = tasksList.tasks[Random.Range(0,tasksList.tasks.Count)];
-
-            Debug.Log("Spawning task: " + selectedTask.name);
+            int index = Random.Range(0, tasksList.tasks.Count);
+            while (activeTaskIndices.Contains(index))
+            {
+                index = Random.Range(0, tasksList.tasks.Count);
+            }
+            var selectedTask = tasksList.tasks[index];
+            activeTaskIndices.Add(index);
 
             AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
             obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);

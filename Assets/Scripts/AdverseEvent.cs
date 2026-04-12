@@ -25,6 +25,7 @@ public class AdverseEvent : MonoBehaviour
         this.timer = eventDuration;
         this.fixRate = fixRate;
         this.fixTime = fixTime;
+        this.currentFixAmount = fixTime;
     }
 
     void Update()

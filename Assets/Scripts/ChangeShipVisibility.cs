@@ -26,7 +26,7 @@ public class ChangeShipVisibility : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) //IF YOU'RE ON BOTTOM
+    private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerMovement>() != null && viewingTop)
         {
@@ -36,7 +36,6 @@ public class ChangeShipVisibility : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("going to uper deck");
         if (other.GetComponent<PlayerMovement>() != null && !viewingTop)
         {
             ToggleVisibility();

@@ -53,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
         if (GameplayModeManager.Instance.IsSteeringMode())
             return; // ignore input in steering mode
 
+        if (currentlyRepairing != null)
+            return; // ignore movement input while repairing
+
         // ROTATION
         float turnAmount = moveDir.x * rotationSpeed * Time.fixedDeltaTime;
         Quaternion turn = Quaternion.Euler(0f, turnAmount, 0f);
