@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 2f, Color.blue);
     }
 
     private void FixedUpdate()
@@ -93,8 +92,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
         }
     }
-
-
     private void OnMove(InputValue value)
     {
         moveDir = value.Get<Vector2>().normalized;

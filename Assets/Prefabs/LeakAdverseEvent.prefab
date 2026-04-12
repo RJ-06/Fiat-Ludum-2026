@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7664368753937102121}
   - component: {fileID: 7018181160268744746}
   - component: {fileID: 5981633490950803395}
+  - component: {fileID: 3929317312169995354}
   m_Layer: 0
   m_Name: LeakAdverseEvent
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
     activeTimer: 0
     adverseEvent: {fileID: 0}
     UICoordinates: {x: 0, y: 0}
+  taskIndex: 0
 --- !u!136 &5981633490950803395
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -80,6 +82,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3929317312169995354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620808851820299567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0875ffbed3ed36e4fac3edebed9b55b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapMarker
+  icon: {fileID: 1439892834323621481, guid: 0549ad0e86ecd5c478f22f5f10987951, type: 3}
+  minimapCamera: {fileID: 0}
+  minimapRect: {fileID: 0}
 --- !u!1 &8573380555699898535
 GameObject:
   m_ObjectHideFlags: 0
