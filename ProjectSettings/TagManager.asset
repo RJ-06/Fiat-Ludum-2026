@@ -12,6 +12,7 @@ TagManager:
   - Wheel
   - Iceberg
   - Cannon
+  - Grabbable
   layers:
   - Default
   - TransparentFX

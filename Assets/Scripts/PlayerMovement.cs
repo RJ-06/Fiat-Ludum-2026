@@ -28,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
     private bool atCannon;
     private Cannon currentCannon;
 
+    private bool isGrabbing;
+    [SerializeField] Transform grabPosition;
+    private Transform objectGrabbedTransform;
+    private GameObject objectFoundToGrab;
+
     AdverseEvent currentlyRepairing;
 
     public CrewmateBehavior crewmate;
@@ -56,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentlyRepairing != null)
             return; // ignore movement input while repairing
+
+        if (isGrabbing) 
+        {
+            objectGrabbedTransform.position = grabPosition.position;
+        }
 
         // ROTATION
         float turnAmount = moveDir.x * rotationSpeed * Time.fixedDeltaTime;
@@ -107,15 +117,19 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Mast"))
         {
             atMast = true;
-        }   
+        }
         if (other.CompareTag("Wheel"))
         {
             atWheel = true;
         }
-        if (other.CompareTag("Cannon")) 
+        if (other.CompareTag("Cannon"))
         {
             atCannon = true;
             currentCannon = other.gameObject.GetComponent<Cannon>();
+        }
+        if (other.CompareTag("Grabbable")) 
+        {
+            objectFoundToGrab = other.gameObject;
         }
     }
 
@@ -138,10 +152,24 @@ public class PlayerMovement : MonoBehaviour
             atCannon = false;
             currentCannon = null;
         }
+        if (other.CompareTag("Grabbable")) 
+        {
+            objectFoundToGrab = null;
+        }
     }
 
     private void OnInteractPress()
     {
+        if (!isGrabbing && objectFoundToGrab != null) 
+        {
+            isGrabbing = true;
+            objectGrabbedTransform = objectFoundToGrab.transform;
+            objectGrabbedTransform.position = grabPosition.position;
+            objectFoundToGrab.GetComponent<Rigidbody>().useGravity = false;
+            objectGrabbedTransform.SetParent(transform); //parents the object you're holding to the player
+        }
+
+
         if (atStairs) 
         {
             if (currentDeck == 0) 
@@ -210,6 +238,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCommand()
     {
+        if (isGrabbing)
+        {
+            isGrabbing = false;
+            objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            objectGrabbedTransform.SetParent(null); //unparents
+            objectGrabbedTransform = null;
+            return;
+        }
         if (atWheel)
         {
             GameplayModeManager.Instance.SetShipSteeringMode(false);
