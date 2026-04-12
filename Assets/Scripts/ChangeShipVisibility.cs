@@ -1,4 +1,3 @@
-using Unity.Hierarchy;
 using UnityEngine;
 
 public class ChangeShipVisibility : MonoBehaviour
@@ -8,28 +7,30 @@ public class ChangeShipVisibility : MonoBehaviour
     [SerializeField] private GameObject bottomHalf;
     [SerializeField] private Renderer topRenderer;
 
-    [SerializeField] private float transparentAlpha;
-    [SerializeField] private float opaqueAlpha;
 
-    public void ToggleVisibility() 
+    [SerializeField] private Material transparentMat;
+    [SerializeField] private Material opaqueMat;
+
+    public void ToggleVisibility()
     {
         Debug.Log("toggling visibility");
         viewingTop = !viewingTop;
+        Color color = topRenderer.material.color;
+
         if (viewingTop)
         {
-            topRenderer.material.color = new Color(topRenderer.material.color.r,
-                topRenderer.material.color.g, topRenderer.material.color.b, transparentAlpha);
+            topRenderer.material = opaqueMat;
         }
-        else 
+        else
         {
-            topRenderer.material.color = new Color(topRenderer.material.color.r,
-                 topRenderer.material.color.g, topRenderer.material.color.b, opaqueAlpha);
+            topRenderer.material = transparentMat;
         }
     }
 
     private void OnTriggerEnter(Collider other) //IF YOU'RE ON BOTTOM
     {
-        if (other.GetComponent<PlayerMovement>() != null && viewingTop) 
+        Debug.Log("going to loweer deck");
+        if (other.GetComponent<PlayerMovement>() != null && viewingTop)
         {
             ToggleVisibility();
         }
@@ -37,6 +38,7 @@ public class ChangeShipVisibility : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("going to uper deck");
         if (other.GetComponent<PlayerMovement>() != null && !viewingTop)
         {
             ToggleVisibility();
