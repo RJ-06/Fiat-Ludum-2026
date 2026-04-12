@@ -13,6 +13,7 @@ public class ChangeShipVisibility : MonoBehaviour
 
     public void ToggleVisibility() 
     {
+        Debug.Log("toggling visibility");
         viewingTop = !viewingTop;
         if (viewingTop)
         {

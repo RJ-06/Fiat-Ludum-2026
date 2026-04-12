@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,9 +11,18 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Transform groundRaycastPos;
     [SerializeField] private float groundRaycastDist;
+
     private bool atStairs;
-    private int currentDeck = 0;
+    private int currentDeck = 0; // 0 = top, 1 = bottom
+
+    private bool atMast;
+    private int currentMastLevel = 0; // 0 = on deck, 1 = at top
     AdverseEvent currentlyRepairing;
+
+    [SerializeField] Transform topDeckPosition;
+    [SerializeField] Transform bottomDeckPosition;
+    [SerializeField] Transform topMastPosition;
+    [SerializeField] Transform bottomMastPosition;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,32 +39,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ROTATION (left/right input)
-        float turnSpeed = 120f; // tweak this
-        transform.Rotate(Vector3.up, moveDir.x * turnSpeed * Time.deltaTime);
+        // ROTATION (physics-safe)
+        Quaternion turn = Quaternion.Euler(0f, moveDir.x * 120f * Time.fixedDeltaTime, 0f);
+        rb.MoveRotation(rb.rotation * turn);
 
-        // FORWARD/BACK movement (relative to player forward)
+        // MOVEMENT
         Vector3 forwardMove = transform.forward * (moveDir.y * moveSpeed);
 
-        // preserve vertical velocity
-        Vector3 desiredMove = new Vector3(
-            forwardMove.x,
-            rb.linearVelocity.y,
-            forwardMove.z
-        );
+        Vector3 velocity = forwardMove;
+        velocity.y = rb.linearVelocity.y;
 
-        // GROUND / SLOPE HANDLING
+        // SLOPE HANDLING (smoothed)
         if (Physics.Raycast(groundRaycastPos.position, Vector3.down, out RaycastHit hit, groundRaycastDist))
         {
-            Vector3 slopeMoveDir = Vector3.ProjectOnPlane(desiredMove, hit.normal);
-            rb.linearVelocity = slopeMoveDir;
-        }
-        else
-        {
-            rb.linearVelocity = new Vector3(desiredMove.x, rb.linearVelocity.y, desiredMove.z);
+            Vector3 projected = Vector3.ProjectOnPlane(velocity, hit.normal);
+            velocity = Vector3.Lerp(velocity, projected, 15f * Time.fixedDeltaTime);
         }
 
-        // CLAMP Y SPEED
+        // SMOOTH VELOCITY (KEY FIX)
+        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, velocity, 10f * Time.fixedDeltaTime);
+
+        // CLAMP Y
         if (rb.linearVelocity.y > maxYSpeed)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
@@ -72,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
         {
             atStairs = true;
         }
+
+        if (other.CompareTag("Mast"))
+        {
+            atMast = true;
+        }   
     }
 
     private void OnTriggerExit(Collider other)
@@ -79,6 +90,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Stairs"))
         {
             atStairs = false;
+        }
+
+        if (other.CompareTag("Mast"))
+        {
+            atMast = false;
         }
     }
 
@@ -88,15 +104,30 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentDeck == 0) 
             {
-                transform.position -= new Vector3(0, 2, 0);
+                StartCoroutine(MoveToTarget(bottomDeckPosition));
                 currentDeck = 1;
             }
             else 
             {
-                transform.position += new Vector3(0, 4, 0);
+                StartCoroutine(MoveToTarget(topDeckPosition));
                 currentDeck = 0;
             }
         }
+
+        if (atMast)
+        {
+            if (currentMastLevel == 0)
+            {
+                StartCoroutine(MoveToTarget(topMastPosition));
+                currentMastLevel = 1;
+            }
+            else
+            {
+                StartCoroutine(MoveToTarget(bottomMastPosition));
+                currentMastLevel = 0;
+            }
+        }
+
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)
@@ -119,5 +150,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public IEnumerator MoveToTarget(Transform target, float duration = 1f)
+    {
+        rb.isKinematic = true;
 
+        Collider col = GetComponent<Collider>();
+        float feetOffset = col.bounds.extents.y;
+
+        Vector3 startPos = rb.position;
+        Vector3 adjustedTarget = target.position + Vector3.up * feetOffset;
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+
+            rb.MovePosition(Vector3.Lerp(startPos, adjustedTarget, t));
+
+            yield return null;
+        }
+
+        rb.MovePosition(adjustedTarget);
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = false;
+    }
 }
