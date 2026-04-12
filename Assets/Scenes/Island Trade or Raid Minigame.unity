@@ -1796,9 +1796,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2595492565790128042, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595492565790128042, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+      propertyPath: m_Extents.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2595492565790128042, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+      propertyPath: m_Extents.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3072391312621261303, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
       propertyPath: m_Name
       value: Loot Basket (Money) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571092036050786535, guid: 27fa804b0fa8cce4e8c22ac4fea9d23e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

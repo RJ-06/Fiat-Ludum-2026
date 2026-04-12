@@ -55,7 +55,7 @@ public class TownspersonEnemy : MonoBehaviour
             else
                 currentPatrolPoint = 0;
             agent.SetDestination(patrolPoints[currentPatrolPoint]);
-            yield return new WaitUntil(() => Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint]) < 0.5f);
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint]) < 1.5f);
             yield return new WaitForSeconds(5);
         }
     }
