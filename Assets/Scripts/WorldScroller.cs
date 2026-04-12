@@ -34,18 +34,15 @@ public class WorldScroller : MonoBehaviour
 
     public void SpawnIceberg()
     {
-        Debug.Log("Spawning iceberg");
         int numToInstantiate = Random.Range(1, 4);
 
         for (int i = 0; i < numToInstantiate; i++)
         {
             float x = -10 + 20 * Random.value;
-            float y = -12 + 4 * Random.value;
-            float z = -30 + 50 * Random.value;
+            float y = 4 * Random.value;
+            float z = -60 - 50 * Random.value;
 
-            Instantiate(iceberg, new Vector3(x, y, z), Quaternion.identity);
+            Instantiate(iceberg, new Vector3(x, y, z), Quaternion.identity, this.transform);
         }
-
-
-        }
+    }
 }

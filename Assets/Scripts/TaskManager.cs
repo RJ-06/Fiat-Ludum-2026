@@ -25,10 +25,11 @@ public class TaskManager : MonoBehaviour
         InvokeRepeating(nameof(Spawn), 5f, 5f);
     }
 
-    void Spawn()
+    void SpawnIceberg()
     {
         worldScroller.SpawnIceberg();
     }
+
     public IEnumerator CreateTask() 
     {
         while (true) 
