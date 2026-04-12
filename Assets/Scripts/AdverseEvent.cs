@@ -17,6 +17,8 @@ public class AdverseEvent : MonoBehaviour
     public Image timerBar;
     public Image fixBar;
 
+    public Task thisTask;
+
     public void setFields(float eventDuration, float fixRate, float fixTime)
     {
         this.eventDuration = eventDuration;
@@ -92,11 +94,13 @@ public class AdverseEvent : MonoBehaviour
     void OnTimerEnd()
     {
         Debug.Log("Timer finished!");
+        TaskManager.taskManagerSingleton.tasksList.Remove(thisTask);
     }
 
     void OnFixed()
     {
         Debug.Log("Event fixed!");
         GameObject.Destroy(gameObject);
+        TaskManager.taskManagerSingleton.tasksList.Remove(thisTask);
     }
 }

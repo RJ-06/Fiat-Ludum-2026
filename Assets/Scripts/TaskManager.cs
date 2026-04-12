@@ -15,8 +15,13 @@ public class TaskManager : MonoBehaviour
     private int spawnedCount;
 
     public WorldScroller worldScroller;
+
+    public static TaskManager taskManagerSingleton;
+    public List<Task> tasksList;
+
     void Start()
     {
+        taskManagerSingleton = this;
         InvokeRepeating(nameof(Spawn), 5f, 5f);
     }
 
@@ -32,9 +37,11 @@ public class TaskManager : MonoBehaviour
 
             AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
             obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
+            obj.thisTask = selectedTask;
             spawnedCount++;
             minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
             maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
+            tasksList.Add(selectedTask);
 
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
         }
