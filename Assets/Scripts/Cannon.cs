@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
+    [SerializeField] PlayerMovement player;
+
     public GameObject cannonBall;
     public Transform ballSpawnPos;
     public float shootForce;
@@ -55,11 +57,23 @@ public class Cannon : MonoBehaviour
 
     public void ShootCanonBall()
     {
-        if (cannonBallsLeft <= 0) return;
+        if (cannonBallsLeft > 0) 
+        {
+            GameObject newCB = Instantiate(cannonBall, ballSpawnPos.position, Quaternion.identity);
+            Rigidbody rb = newCB.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * shootForce, ForceMode.Impulse);
+            cannonBallsLeft--;
+        }
+        
+    }
 
-        GameObject newCB = Instantiate(cannonBall, ballSpawnPos.position, Quaternion.identity);
-        Rigidbody rb = newCB.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * shootForce, ForceMode.Impulse);
-        cannonBallsLeft--;
+    private void OnTriggerStay(Collider other)
+    {
+        if (!player.isGrabbing && other.GetComponent<GrabbableObject>() != null
+            && other.GetComponent<GrabbableObject>().objectType == GrabbableObject.ObjectType.cannonball) 
+        {
+            cannonBallsLeft++;
+            Destroy(other.gameObject);
+        }
     }
 }

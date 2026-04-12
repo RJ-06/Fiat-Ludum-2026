@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private bool atCannon;
     private Cannon currentCannon;
 
-    private bool isGrabbing;
+    public bool isGrabbing;
     [SerializeField] Transform grabPosition;
     private Transform objectGrabbedTransform;
     private GameObject objectFoundToGrab;
@@ -166,6 +166,7 @@ public class PlayerMovement : MonoBehaviour
             objectGrabbedTransform = objectFoundToGrab.transform;
             objectGrabbedTransform.position = grabPosition.position;
             objectFoundToGrab.GetComponent<Rigidbody>().useGravity = false;
+            objectFoundToGrab.GetComponent<Rigidbody>().isKinematic = true;
             objectGrabbedTransform.SetParent(transform); //parents the object you're holding to the player
         }
 
@@ -242,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrabbing = false;
             objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            objectFoundToGrab.GetComponent<Rigidbody>().isKinematic = false;
             objectGrabbedTransform.SetParent(null); //unparents
             objectGrabbedTransform = null;
             return;
