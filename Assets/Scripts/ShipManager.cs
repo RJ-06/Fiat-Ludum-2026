@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipManager : MonoBehaviour
@@ -25,6 +27,8 @@ public class ShipManager : MonoBehaviour
 
     public TaskManager taskManager;
 
+    public int sceneIndex = 0;
+    public List<string> sceneList = new List<string>() {"TutorialLevel", "TradingScene", "Level2", "TradingScene" };
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
