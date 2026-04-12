@@ -76,7 +76,6 @@ public class TownspersonEnemy : MonoBehaviour
         Vector3 visionDirection = transform.forward;
 
         if (Vector2.Angle(visionDirection, toPlayer) > visionAngle / 2) return false;
-        Debug.Log("Player within FOV");
 
         RaycastHit hit;
         if (!Physics.Raycast(transform.position, toPlayer.normalized, out hit, visionRange, layerMask))
@@ -85,7 +84,6 @@ public class TownspersonEnemy : MonoBehaviour
         if (hit.collider.gameObject != player)
            return false;
 
-        Debug.Log("Player found!");
         return true;
     }
 }
