@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameplayModeManager : MonoBehaviour
 {
     public static GameplayModeManager Instance;
-    public ChangeShipVisibility changeShipVisibility;
     public GameObject player;
     public enum Mode
     {
@@ -25,7 +24,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            changeShipVisibility.ToggleVisibility();
+            ChangeShipVisibility.Instance.ToggleVisibility();
             player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
         }
 
@@ -57,7 +56,6 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            //changeShipVisibility.ToggleVisibility();
             player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
         }
 
