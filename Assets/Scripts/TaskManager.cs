@@ -17,13 +17,14 @@ public class TaskManager : MonoBehaviour
     public WorldScroller worldScroller;
     void Start()
     {
-        InvokeRepeating(nameof(Spawn), 5f, 5f);
+
     }
 
-    void Spawn()
+    void SpawnIceberg()
     {
         worldScroller.SpawnIceberg();
     }
+
     public IEnumerator CreateTask() 
     {
         while (true) 
