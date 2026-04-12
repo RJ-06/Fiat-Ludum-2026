@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TaskManager : MonoBehaviour
+public class TutorialTaskManager : MonoBehaviour
 {
     [SerializeField] float minTimeForNextTask;
     [SerializeField] float maxTimeForNextTask;
@@ -12,27 +12,19 @@ public class TaskManager : MonoBehaviour
     public AnimationCurve maxTimeCurve;
     private int spawnedCount;
 
-    public WorldScroller worldScroller;
 
     public TaskList tasksList;
 
     public List<Task> activeTasks;
     public HashSet<int> activeTaskIndices = new HashSet<int>();
 
-    public static TaskManager taskManagerSingleton { get; private set; }
+    public int spawnedTutorialTasks = 0;
 
-
-    public bool isTutorialLevel = false;
-    private int spawnedTutorialTasks = 0;
+    public static TutorialTaskManager Instance;
 
     private void Awake()
     {
-        if (taskManagerSingleton != null && taskManagerSingleton != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        taskManagerSingleton = this;
+        Instance = this;
     }
 
     void Start()
@@ -40,16 +32,11 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(CreateTask());
     }
 
-    void SpawnIceberg()
-    {
-        worldScroller.SpawnIceberg();
-    }
-
     public IEnumerator CreateTask()
     {
-        while (true) 
+        while (true)
         {
-            if (isTutorialLevel && spawnedTutorialTasks >= 3)
+            if (spawnedTutorialTasks >= 3)
             {
                 yield break;
             }
@@ -69,14 +56,11 @@ public class TaskManager : MonoBehaviour
             maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
             activeTasks.Add(selectedTask);
 
-            if (isTutorialLevel)
-            {
-                spawnedTutorialTasks++;
-            }
-
+            spawnedTutorialTasks++;
+            
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
         }
-        
+
     }
 
 }

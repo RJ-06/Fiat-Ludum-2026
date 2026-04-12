@@ -97,6 +97,12 @@ public class AdverseEvent : MonoBehaviour
     {
         Debug.Log("Timer finished!");
         Destroy(gameObject);
+        if (TutorialTaskManager.Instance != null)
+        {
+            TutorialTaskManager.Instance.activeTaskIndices.Remove(taskIndex);
+            TutorialTaskManager.Instance.activeTasks.Remove(thisTask);
+            return;
+        }
         TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
         TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
     }
@@ -105,6 +111,12 @@ public class AdverseEvent : MonoBehaviour
     {
         Debug.Log("Event fixed!");
         Destroy(gameObject);
+        if (TutorialTaskManager.Instance != null)
+        {
+            TutorialTaskManager.Instance.activeTaskIndices.Remove(taskIndex);
+            TutorialTaskManager.Instance.activeTasks.Remove(thisTask);
+            return;
+        }
         TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
         TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
     }

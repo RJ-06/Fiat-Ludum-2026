@@ -7,8 +7,6 @@ public class ShipUI : MonoBehaviour
     private ShipManager shipManager;
     public Slider crewHealthBar;
     public Slider shipHealthBar;
-    public Slider crewHungerBar;
-    public Slider crewThirstBar;
 
     private float percentCrewHealth;
     private float percentShipHealth;
@@ -41,18 +39,4 @@ public class ShipUI : MonoBehaviour
         //crewHungerBar.value = percentHunger;
         //crewThirstBar.value = percentThirst;
     }
-
-    public void updateTasksUI()
-    {
-        if (taskManager != null)
-        {
-            foreach (Task t in taskManager.tasksList.tasks)
-            {
-                GameObject img = Instantiate(imagePrefab, canvas);
-                RectTransform rt = img.GetComponent<RectTransform>();
-                rt.anchoredPosition = t.UICoordinates; // UI coordinates
-            }
-        }
-    }
-
 }

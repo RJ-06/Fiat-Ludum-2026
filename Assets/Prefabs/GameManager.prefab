@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6125498386392661629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4662791501310877313}
+  - component: {fileID: 4448700440316112614}
+  - component: {fileID: 2121903686717631824}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4662791501310877313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125498386392661629}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.33051, y: -0, z: -2.60369}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4448700440316112614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125498386392661629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7525512d319e2459f7a034dcaa83fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipManager
+  crewHunger: 0
+  vitaminCLevel: 0
+  shipHealth: 0
+  hungerDecreaseRate: 0
+  vitaminCDecreaseRate: 0
+  speedMultiplier: 1
+  cookingLevel: 1
+  fishingLevel: 1
+  numCrew: 0
+  repairEfficiencyMultiplier: 1
+  crewEfficiencyMultiplier: 1
+  hungerDecreaseMultiplier: 1
+  vitaminCDecreaseMultiplier: 1
+  gold: 100
+  taskManager: {fileID: 2121903686717631824}
+--- !u!114 &2121903686717631824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125498386392661629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6d8e65b84e3f4408202e58170c7485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TaskManager
+  minTimeForNextTask: 20
+  maxTimeForNextTask: 50
+  minTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 3.7595026
+      value: 10.027315
+      inSlope: -0.0002354818
+      outSlope: -0.0002354818
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 374.6723
+      value: 9.939972
+      inSlope: -0.0002354818
+      outSlope: -0.0002354818
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.48882294
+      value: 20.029226
+      inSlope: -0.09937605
+      outSlope: -0.09937605
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 97.82086
+      value: 10.259598
+      inSlope: -0.09937605
+      outSlope: -0.09937605
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  worldScroller: {fileID: 0}
+  tasksList: {fileID: 11400000, guid: 12ce5183b00ab9c42925f79cf3092253, type: 2}
+  activeTasks: []
