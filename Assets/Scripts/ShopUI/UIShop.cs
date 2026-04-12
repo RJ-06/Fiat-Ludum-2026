@@ -1,5 +1,7 @@
-using UnityEngine;
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 public class UIShop : MonoBehaviour
 {
@@ -13,10 +15,21 @@ public class UIShop : MonoBehaviour
         shopItemTemplate.gameObject.SetActive(false);
     }
 
-    private void Start()
+    public void CreateShop(List<Item.ItemType> availableItems)
     {
-        CreateItemButton(Item.ItemType.Oranges, null, "Oranges", 10, 0);
-        CreateItemButton(Item.ItemType.Boots, null, "Boots", 50, 1);
+        foreach (Transform child in container)
+        {
+            if (child != shopItemTemplate)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        for (int i = 0; i < availableItems.Count; i++)
+        {
+            Item.ItemType itemType = availableItems[i];
+            CreateItemButton(itemType, null, Item.GetName(itemType), Item.GetPrice(itemType), i);
+        }
     }
 
     private void CreateItemButton(Item.ItemType itemType, Sprite itemSprite, string itemName, int itemCost, int positionIndex)

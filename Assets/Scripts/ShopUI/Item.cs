@@ -8,6 +8,31 @@ public class Item
         Boots,
     }
 
+    //public static Sprite GetSprite(ItemType itemType)
+    //{
+    //    switch (itemType)
+    //    {
+    //        case ItemType.Oranges:
+    //            return Resources.Load<Sprite>("Sprites/Shop/oranges");
+    //        case ItemType.Boots:
+    //            return Resources.Load<Sprite>("Sprites/Shop/boots");
+    //        default:
+    //            return null;
+    //    }
+    //}
+
+    public static string GetName(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.Oranges:
+                return "Oranges";
+            case ItemType.Boots:
+                return "Boots";
+            default:
+                return "";
+        }
+    }
     public static int GetPrice(ItemType itemType)
     {
         switch (itemType)
