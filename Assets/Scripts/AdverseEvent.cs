@@ -94,13 +94,13 @@ public class AdverseEvent : MonoBehaviour
     void OnTimerEnd()
     {
         Debug.Log("Timer finished!");
-        TaskManager.taskManagerSingleton.tasksList.Remove(thisTask);
+        TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
     }
 
     void OnFixed()
     {
         Debug.Log("Event fixed!");
         GameObject.Destroy(gameObject);
-        TaskManager.taskManagerSingleton.tasksList.Remove(thisTask);
+        TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
     }
 }

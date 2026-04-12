@@ -28,7 +28,6 @@ public class ChangeShipVisibility : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //IF YOU'RE ON BOTTOM
     {
-        Debug.Log("going to loweer deck");
         if (other.GetComponent<PlayerMovement>() != null && viewingTop)
         {
             ToggleVisibility();

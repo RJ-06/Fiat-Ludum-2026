@@ -9,45 +9,51 @@ public class ShipUI : MonoBehaviour
     public Slider shipHealthBar;
     public Slider crewHungerBar;
     public Slider crewThirstBar;
-    public TextMeshProUGUI taskListDisplay;
 
     private float percentCrewHealth;
     private float percentShipHealth;
     private float percentHunger;
     private float percentThirst;
 
-    TaskManager taskManager;
+    private TaskManager taskManager;
 
+    public GameObject imagePrefab; // UI Image prefab
+    private RectTransform canvas;   // Your Canvas
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         shipManager = ShipManager.shipManager;
-        taskManager = shipManager.taskManager;
+        taskManager = TaskManager.taskManagerSingleton;
+        canvas = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        percentCrewHealth = shipManager.crewHealth / 1f;
-        percentShipHealth = shipManager.shipHealth / 1f;
-        percentHunger = shipManager.crewHunger / 1f;
-        percentThirst = shipManager.crewThirst / 1f;
+        updateTasksUI();
+        //percentCrewHealth = shipManager.crewHealth / 1f;
+        //percentShipHealth = shipManager.shipHealth / 1f;
+        //percentHunger = shipManager.crewHunger / 1f;
+        //percentThirst = shipManager.crewThirst / 1f;
 
-        crewHealthBar.value = percentCrewHealth;
-        shipHealthBar.value = percentShipHealth;
-        crewHungerBar.value = percentHunger;
-        crewThirstBar.value = percentThirst;
-
-        
+        //crewHealthBar.value = percentCrewHealth;
+        //shipHealthBar.value = percentShipHealth;
+        //crewHungerBar.value = percentHunger;
+        //crewThirstBar.value = percentThirst;
     }
 
-    public void updateTasksUI() 
+    public void updateTasksUI()
     {
-        string s = "";
-        //foreach (Task t in taskManager.activeTasks)
-        //{
-        //    s += t.name + "\n";
-        //}
-        taskListDisplay.text = s;
+        if (taskManager != null)
+        {
+            foreach (Task t in taskManager.tasksList.tasks)
+            {
+                Debug.Log(t.name);
+                GameObject img = Instantiate(imagePrefab, canvas);
+                RectTransform rt = img.GetComponent<RectTransform>();
+                rt.anchoredPosition = t.UICoordinates; // UI coordinates
+            }
+        }
     }
+
 }

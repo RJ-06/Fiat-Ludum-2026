@@ -1,12 +1,9 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 public class TaskManager : MonoBehaviour
 {
-    [SerializeField] private TaskList taskList;
     [SerializeField] float minTimeForNextTask;
     [SerializeField] float maxTimeForNextTask;
 
@@ -17,12 +14,14 @@ public class TaskManager : MonoBehaviour
     public WorldScroller worldScroller;
 
     public static TaskManager taskManagerSingleton;
-    public List<Task> tasksList;
+    public TaskList tasksList;
+
+    public List<Task> activeTasks;
 
     void Start()
     {
         taskManagerSingleton = this;
-        InvokeRepeating(nameof(Spawn), 5f, 5f);
+        StartCoroutine(CreateTask());
     }
 
     void SpawnIceberg()
@@ -34,7 +33,8 @@ public class TaskManager : MonoBehaviour
     {
         while (true) 
         {
-            var selectedTask = taskList.tasks[Random.Range(0,taskList.tasks.Count)];
+            var selectedTask = tasksList.tasks[Random.Range(0,tasksList.tasks.Count)];
+            Debug.Log("Spawning task: " + selectedTask.name);
 
             AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
             obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
@@ -42,7 +42,7 @@ public class TaskManager : MonoBehaviour
             spawnedCount++;
             minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
             maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
-            tasksList.Add(selectedTask);
+            activeTasks.Add(selectedTask);
 
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
         }

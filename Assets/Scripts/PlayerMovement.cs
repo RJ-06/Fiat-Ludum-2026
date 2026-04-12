@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float acceleration = 20f;
     [SerializeField] private float rotationSpeed = 720f;
 
-    private Vector3 currentVelocity;
-
 
     private bool atStairs;
     private int currentDeck = 0; // 0 = top, 1 = bottom
