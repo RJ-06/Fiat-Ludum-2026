@@ -25,10 +25,19 @@ public class ShipManager : MonoBehaviour
 
     public TaskManager taskManager;
 
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        if (shipManager != null && shipManager != this)
+        {
+            Destroy(gameObject); // kill duplicates
+            return;
+        }
+
         shipManager = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void FixedUpdate()

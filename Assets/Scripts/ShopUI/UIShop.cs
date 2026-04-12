@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -8,11 +10,32 @@ public class UIShop : MonoBehaviour
     private Transform container;
     private Transform shopItemTemplate;
 
+    List<Item.ItemType> availableItems;
+
+
     private void Awake()
     {
         container = transform.Find("Container");
         shopItemTemplate = container.Find("ShopItemTemplate");
         shopItemTemplate.gameObject.SetActive(false);
+    }
+
+    public static List<T> GetRandomElements<T>(int count) where T : Enum
+    {
+        // 1. Get all values from the enum
+        T[] allValues = (T[])Enum.GetValues(typeof(T));
+
+        // 2. Shuffle using a simple Fisher-Yates or LINQ (if performance allows)
+        // Fisher-Yates is better for performance, but LINQ is concise:
+        return allValues.OrderBy(x => UnityEngine.Random.value)
+                        .Take(count)
+                        .ToList();
+    }
+
+    void Start()
+    {
+        availableItems = GetRandomElements<Item.ItemType>(8);
+        CreateShop(availableItems);
     }
 
     public void CreateShop(List<Item.ItemType> availableItems)
@@ -45,11 +68,13 @@ public class UIShop : MonoBehaviour
         shopItemRectTransform.Find("Name").GetComponent<TMP_Text>().text = itemName;
         shopItemRectTransform.Find("Price").GetComponent<TMP_Text>().text = itemCost.ToString();
 
+        var hover = shopItemTransform.GetComponent<ShopItemHover>();
+        hover.SetDescription(Item.GetDescription(itemType));
+
         shopItemRectTransform
             .GetComponent<UnityEngine.UI.Button>()
             .onClick.AddListener(() => TryToBuy(itemType));
     }
-
     private void TryToBuy(Item.ItemType itemType) 
     {
         if (ShipManager.shipManager.gold >= Item.GetPrice(itemType))
