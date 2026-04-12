@@ -1,5 +1,7 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Unity.Collections.AllocatorManager;
 
 public class TutorialTextChanger : MonoBehaviour
 {
@@ -37,10 +39,21 @@ public class TutorialTextChanger : MonoBehaviour
         if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && collider.gameObject.CompareTag("Kitchen"))
         {
             tutorialText.text = "";
+            Invoke(nameof(BeginSwitchingScenes), 15f);
         }
     }
 
+    void BeginSwitchingScenes()
+    {
+        GameplayModeManager.Instance.currentMode = GameplayModeManager.Mode.PlayerControl;
+        tutorialText.text = "It's time to start spending some money! Head to the shop and buy some items to help you out!";
+        tutorialText.fontSize = 18;
+        Invoke(nameof(SwitchScenes), 5f);
+    }
 
-
-
+    void SwitchScenes()
+    {
+        ShipManager.shipManager.sceneIndex++;
+        SceneManager.LoadScene(ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex]);
+    }
 }
