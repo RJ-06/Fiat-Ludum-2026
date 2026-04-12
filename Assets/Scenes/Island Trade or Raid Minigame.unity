@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f075850f3bf424ebb5a6ad06865a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigamePlayerMovement
-  moveSpeed: 5
+  moveSpeed: 5.5
   maxYSpeed: 0
   groundRaycastPos: {fileID: 835045339}
   groundRaycastDist: 0.1
