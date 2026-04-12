@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool atMast;
     private int currentMastLevel = 0; // 0 = on deck, 1 = at top
+
+    private bool atWheel;
+
     AdverseEvent currentlyRepairing;
 
     [SerializeField] Transform topDeckPosition;
@@ -46,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameplayModeManager.Instance.IsSteeringMode())
+            return; // ignore input in steering mode
+
         // ROTATION
         float turnAmount = moveDir.x * rotationSpeed * Time.fixedDeltaTime;
         Quaternion turn = Quaternion.Euler(0f, turnAmount, 0f);
@@ -99,6 +105,10 @@ public class PlayerMovement : MonoBehaviour
         {
             atMast = true;
         }   
+        if (other.CompareTag("Wheel"))
+        {
+            atWheel = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -111,6 +121,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Mast"))
         {
             atMast = false;
+        }
+
+        if (other.CompareTag("Wheel"))
+        {
+            atWheel = false;
         }
     }
 
@@ -144,6 +159,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (atWheel)
+        {
+            GameplayModeManager.Instance.SetShipSteeringMode(true);
+        }
+
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)
@@ -163,6 +183,14 @@ public class PlayerMovement : MonoBehaviour
         {
             currentlyRepairing.StopFixing();
             currentlyRepairing = null;
+        }
+    }
+
+    private void OnCommand()
+    {
+        if (atWheel)
+        {
+            GameplayModeManager.Instance.SetShipSteeringMode(false);
         }
     }
 

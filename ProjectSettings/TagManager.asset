@@ -9,6 +9,8 @@ TagManager:
   - LootMoney
   - Stairs
   - Mast
+  - Wheel
+  - Iceberg
   layers:
   - Default
   - TransparentFX

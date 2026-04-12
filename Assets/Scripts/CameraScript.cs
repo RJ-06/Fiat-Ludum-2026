@@ -7,6 +7,10 @@ public class CameraScript : MonoBehaviour
     public Vector3 offset = new Vector3(0, 5, -6);
     public float smoothSpeed = 10f;
 
+    [SerializeField] private Transform ship;
+
+    private Quaternion targetRotation;
+
     void AssignPlayer()
     {
         GameObject p = GameObject.FindWithTag("Player");
@@ -15,6 +19,13 @@ public class CameraScript : MonoBehaviour
     }
     void LateUpdate()
     {
+        if (GameplayModeManager.Instance.currentMode ==
+            GameplayModeManager.Mode.ShipSteering)
+        {
+            AlignToForward();
+            return;
+        }
+
         if (player == null)
         {
             AssignPlayer();
@@ -32,5 +43,19 @@ public class CameraScript : MonoBehaviour
 
         // Always look at player
         transform.LookAt(player.position + Vector3.up * 1.5f);
+    }
+
+
+    void AlignToForward()
+    {
+        // Look straight forward relative to ship/world
+        targetRotation = Quaternion.LookRotation(-Vector3.forward, Vector3.up);
+
+        transform.position = Vector3.Lerp(transform.position, ship.position + new Vector3(0,0,0.2f), smoothSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            Time.deltaTime * smoothSpeed
+        );
     }
 }
