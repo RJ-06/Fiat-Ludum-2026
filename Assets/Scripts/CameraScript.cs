@@ -7,7 +7,10 @@ public class CameraScript : MonoBehaviour
     public Vector3 offset = new Vector3(0, 4, -6);
     public float smoothSpeed = 10f;
 
-    [SerializeField] private Transform ship;
+    [SerializeField] private Transform wheelPos;
+    [SerializeField] private Transform cannonOnePos;
+    [SerializeField] private Transform cannonTwoPos;
+    [SerializeField] private Transform cookingTable;
 
     private Quaternion targetRotation;
 
@@ -23,7 +26,21 @@ public class CameraScript : MonoBehaviour
         if (GameplayModeManager.Instance.currentMode ==
             GameplayModeManager.Mode.ShipSteering)
         {
-            AlignToForward();
+            AlignToForward(wheelPos, Vector3.back);
+            return;
+        }
+        else if(GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting) 
+        { //choose between which of the two cannons to use by finding which one you're closer to (the one you're in interaction range of)
+            float distanceOne = Vector2.Distance(player.position, cannonOnePos.position);
+            float distanceTwo = Vector2.Distance(player.position, cannonTwoPos.position);
+            Transform cannonChoice = 
+                (distanceOne <= distanceTwo) ? cannonChoice = cannonOnePos : cannonTwoPos;
+
+            AlignToForward(cannonChoice, Vector3.right);
+            return;
+        } else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Cooking)
+        {
+            AlignToForward(cookingTable, Vector3.down);
             return;
         }
 
@@ -47,12 +64,12 @@ public class CameraScript : MonoBehaviour
     }
 
 
-    void AlignToForward()
+    void AlignToForward(Transform positionToAlignTo, Vector3 dirToFace)
     {
         // Look straight forward relative to ship/world
-        targetRotation = Quaternion.LookRotation(-Vector3.forward, Vector3.up);
+        targetRotation = Quaternion.LookRotation(dirToFace, Vector3.up);
 
-        transform.position = Vector3.Lerp(transform.position, ship.position + new Vector3(0,0,1f), smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, positionToAlignTo.position + new Vector3(0,0,1f), smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             targetRotation,

@@ -5,7 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector2 moveDir;
+    public static PlayerMovement instance;
+
+    public Vector2 moveDir;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxYSpeed;
     private Rigidbody rb;
@@ -25,13 +27,29 @@ public class PlayerMovement : MonoBehaviour
 
     private bool atWheel;
 
+    private bool atKitchen;
+
+    private bool atCannon;
+    private Cannon currentCannon;
+
+    public bool isGrabbing;
+    [SerializeField] Transform grabPosition;
+    private Transform objectGrabbedTransform;
+    private GameObject objectFoundToGrab;
+
     AdverseEvent currentlyRepairing;
+
+    public CrewmateBehavior crewmate;
 
     [SerializeField] Transform topDeckPosition;
     [SerializeField] Transform bottomDeckPosition;
     [SerializeField] Transform topMastPosition;
     [SerializeField] Transform bottomMastPosition;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,13 +60,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 2f, Color.blue);
     }
 
     private void FixedUpdate()
     {
-        if (GameplayModeManager.Instance.IsSteeringMode())
+        if (GameplayModeManager.Instance.IsSteeringMode() || GameplayModeManager.Instance.isCannonShootingMode())
             return; // ignore input in steering mode
+
+        if (currentlyRepairing != null)
+            return; // ignore movement input while repairing
+
+        if (isGrabbing) 
+        {
+            objectGrabbedTransform.position = grabPosition.position;
+        }
 
         // ROTATION
         float turnAmount = moveDir.x * rotationSpeed * Time.fixedDeltaTime;
@@ -85,8 +110,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
         }
     }
-
-
     private void OnMove(InputValue value)
     {
         moveDir = value.Get<Vector2>().normalized;
@@ -102,10 +125,23 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Mast"))
         {
             atMast = true;
-        }   
+        }
         if (other.CompareTag("Wheel"))
         {
             atWheel = true;
+        }
+        if (other.CompareTag("Cannon"))
+        {
+            atCannon = true;
+            currentCannon = other.gameObject.GetComponent<Cannon>();
+        }
+        if (other.CompareTag("Grabbable")) 
+        {
+            objectFoundToGrab = other.gameObject;
+        }
+        if (other.CompareTag("Kitchen"))
+        {
+            atKitchen = true;
         }
     }
 
@@ -115,20 +151,42 @@ public class PlayerMovement : MonoBehaviour
         {
             atStairs = false;
         }
-
         if (other.CompareTag("Mast"))
         {
             atMast = false;
         }
-
         if (other.CompareTag("Wheel"))
         {
             atWheel = false;
+        }
+        if (other.CompareTag("Cannon")) 
+        {
+            atCannon = false;
+            currentCannon = null;
+        }
+        if (other.CompareTag("Grabbable")) 
+        {
+            objectFoundToGrab = null;
+        }
+        if (other.CompareTag("Kitchen"))
+        {
+            atKitchen = false;
         }
     }
 
     private void OnInteractPress()
     {
+        if (!isGrabbing && objectFoundToGrab != null) 
+        {
+            isGrabbing = true;
+            objectGrabbedTransform = objectFoundToGrab.transform;
+            objectGrabbedTransform.position = grabPosition.position;
+            objectFoundToGrab.GetComponent<Rigidbody>().useGravity = false;
+            objectFoundToGrab.GetComponent<Rigidbody>().isKinematic = true;
+            objectGrabbedTransform.SetParent(transform); //parents the object you're holding to the player
+        }
+
+
         if (atStairs) 
         {
             if (currentDeck == 0) 
@@ -162,6 +220,22 @@ public class PlayerMovement : MonoBehaviour
             GameplayModeManager.Instance.SetShipSteeringMode(true);
         }
 
+        if (atKitchen)
+        {
+            GameplayModeManager.Instance.SetCookingMode(true);
+            FindAnyObjectByType<SliceMinigameController>().StartMinigame();
+        }
+
+        if (atCannon) 
+        {
+            if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
+            {
+                currentCannon.ShootCanonBall();
+            }
+            GameplayModeManager.Instance.SetCannonShootingMode(true);
+            
+        }
+
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)
@@ -170,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
                 currentlyRepairing.BeginFixing();
+                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
                 break;
             }
         }
@@ -186,9 +261,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCommand()
     {
+        if (isGrabbing)
+        {
+            isGrabbing = false;
+            objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            objectGrabbedTransform.SetParent(null); //unparents
+            objectGrabbedTransform = null;
+            return;
+        }
         if (atWheel)
         {
             GameplayModeManager.Instance.SetShipSteeringMode(false);
+        }
+        if (atCannon) 
+        {
+            GameplayModeManager.Instance.SetCannonShootingMode(false);
+        }
+        if (atKitchen)
+        {
+            GameplayModeManager.Instance.SetCookingMode(false);
+        }
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<AdverseEvent>() != null)
+            {
+                crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
+                break;
+            }
         }
     }
 

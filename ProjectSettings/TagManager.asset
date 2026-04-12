@@ -11,6 +11,10 @@ TagManager:
   - Mast
   - Wheel
   - Iceberg
+  - Cannon
+  - Grabbable
+  - FillStation
+  - Kitchen
   layers:
   - Default
   - TransparentFX

@@ -4,41 +4,36 @@ public class ShipManager : MonoBehaviour
 {
     public static ShipManager shipManager;
     public float crewHunger;
-    public float crewThirst;
-    public float crewHealth;
+    public float vitaminCLevel;
     public float shipHealth;
 
     public float hungerDecreaseRate;
-    public float thirstDecreaseRate;
-    public float healthDecrease;
+    public float vitaminCDecreaseRate;
+
+    [Header("Player Stats")]
+    public float speedMultiplier = 1f;
+    public int cookingLevel = 1;
+    public int fishingLevel = 1;
+    public int numCrew = 0;
+    public float repairEfficiencyMultiplier = 1f;
+    public float crewEfficiencyMultiplier = 1f;
+    public float hungerDecreaseMultiplier = 1f;
+    public float vitaminCDecreaseMultiplier = 1f;
+
+    [Header("Resources")]
+    public int gold = 100;
 
     public TaskManager taskManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         shipManager = this;
-        taskManager = GetComponent<TaskManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
     {
-        crewHunger -= hungerDecreaseRate;
-        crewThirst -= thirstDecreaseRate;
-        if (crewHunger <= 0) 
-        {
-            crewHealth -= healthDecrease;
-        }
-        if (crewThirst <= 0) 
-        {
-            crewHealth -= healthDecrease;
-        }
-
+        crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier;
+        vitaminCLevel -= vitaminCDecreaseRate * vitaminCDecreaseMultiplier;
     }
 }

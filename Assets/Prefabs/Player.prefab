@@ -38,6 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5387114956447936973}
+  - {fileID: 2321218492061725317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3412385613237751945
@@ -159,10 +160,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa40a6d8ef2bd145828beb1be55d3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveDir: {x: 0, y: 0}
   moveSpeed: 10
   maxYSpeed: 0
   groundRaycastPos: {fileID: 5387114956447936973}
   groundRaycastDist: 0.1
+  acceleration: 20
+  rotationSpeed: 720
+  crewmate: {fileID: 0}
+  topDeckPosition: {fileID: 0}
+  bottomDeckPosition: {fileID: 0}
+  topMastPosition: {fileID: 0}
+  bottomMastPosition: {fileID: 0}
 --- !u!114 &2097546638663975549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +253,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.045, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5052761651286963027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3864127275495281789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2321218492061725317}
+  m_Layer: 0
+  m_Name: HoldingPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2321218492061725317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864127275495281789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.498, y: 0.273, z: 1.312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
