@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameplayModeManager.Instance.IsSteeringMode())
+        if (GameplayModeManager.Instance.IsSteeringMode() || GameplayModeManager.Instance.isCannonShootingMode())
             return; // ignore input in steering mode
 
         if (currentlyRepairing != null)
@@ -180,8 +180,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (atCannon) 
         {
+            if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
+            {
+                currentCannon.ShootCanonBall();
+            }
             GameplayModeManager.Instance.SetCannonShootingMode(true);
-            currentCannon.ShootCanonBall(); //note - this doesn't work rn 
+            
         }
 
 
