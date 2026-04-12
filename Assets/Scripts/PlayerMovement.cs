@@ -190,6 +190,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
                 currentlyRepairing.BeginFixing();
+                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
                 break;
             }
         }

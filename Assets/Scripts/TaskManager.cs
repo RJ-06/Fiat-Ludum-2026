@@ -16,7 +16,7 @@ public class TaskManager : MonoBehaviour
     public TaskList tasksList;
 
     public List<Task> activeTasks;
-    HashSet<int> activeTaskIndices = new HashSet<int>();
+    public HashSet<int> activeTaskIndices = new HashSet<int>();
 
     public static TaskManager taskManagerSingleton { get; private set; }
 
