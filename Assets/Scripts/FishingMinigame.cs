@@ -12,6 +12,7 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] private float timer = 0f;
     public float score;
 
+    [SerializeField] Image waitingForFishNotification;
     [SerializeField] Image canCatchNotification;
     [SerializeField] Image failedCatchNotification;
 
@@ -21,6 +22,12 @@ public class FishingMinigame : MonoBehaviour
         {
             timer += Time.fixedDeltaTime;
         }
+        if (!GameplayModeManager.Instance.isFishingMode()) 
+        {
+            canCatchNotification.enabled = false;
+            failedCatchNotification.enabled = false;
+            waitingForFishNotification.enabled = false;
+        }
     }
 
     public IEnumerator StartFishing()
@@ -29,6 +36,7 @@ public class FishingMinigame : MonoBehaviour
         timer = 0;
         canCatchNotification.enabled = false;
         failedCatchNotification.enabled = false;
+        waitingForFishNotification.enabled = true;
         canCatch = false;
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         canCatchNotification.enabled = true;
@@ -39,7 +47,7 @@ public class FishingMinigame : MonoBehaviour
 
     public IEnumerator StopFishing()
     {
-
+       
         yield return new WaitForSeconds(timeToCatch);
         if (canCatch) 
         {
@@ -50,7 +58,9 @@ public class FishingMinigame : MonoBehaviour
         timer = 0;
         if(score == 0)failedCatchNotification.enabled = true;
         yield return new WaitForSeconds(1f);
+        canCatchNotification.enabled = false;
         failedCatchNotification.enabled = false;
+        waitingForFishNotification.enabled = false;
         GameplayModeManager.Instance.SetFishingMode(false);
     }
 
@@ -64,6 +74,19 @@ public class FishingMinigame : MonoBehaviour
             timer = 0;
             GameplayModeManager.Instance.SetFishingMode(false);
             Debug.Log(score);
+
+            canCatchNotification.enabled = false;
+            failedCatchNotification.enabled = false;
+            waitingForFishNotification.enabled = false;
+        }
+        if (!canCatch) 
+        {
+            canCatchNotification.enabled = false;
+            failedCatchNotification.enabled = false;
+            waitingForFishNotification.enabled = false;
+            GameplayModeManager.Instance.SetFishingMode(false);
+            timer = 0;
+            score = 0;
         }
     }
 
