@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TaskManager : MonoBehaviour
@@ -16,7 +15,7 @@ public class TaskManager : MonoBehaviour
 
     public TaskList tasksList;
 
-    public List<Task> activeTasks;
+    public List<Task> activeTasks = new List<Task>();
     public HashSet<int> activeTaskIndices = new HashSet<int>();
 
     public static TaskManager taskManagerSingleton { get; private set; }
@@ -99,10 +98,16 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    // NEW METHOD: Spawns a single random available task immediately. 
-    // You can call this from KrakenScript via TaskManager.taskManagerSingleton.SpawnImmediateTask()
+    //spawns a singular task - used in create tasks regular script + kraken
     public void SpawnImmediateTask()
     {
+        // Add these safety checks against unassigned inspector values
+        if (tasksList == null || tasksList.tasks == null)
+        {
+            Debug.LogError("TasksList or its tasks are not assigned in TaskManager!");
+            return;
+        }
+
         if (activeTaskIndices.Count >= tasksList.tasks.Count)
         {
             // All available tasks are already active
@@ -118,12 +123,21 @@ public class TaskManager : MonoBehaviour
         var selectedTask = tasksList.tasks[index];
         activeTaskIndices.Add(index);
 
+        if (selectedTask.adverseEvent == null)
+        {
+            Debug.LogError($"Adverse event prefab is missing on task index {index}!");
+            return;
+        }
+
         AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
         obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
         obj.thisTask = selectedTask;
+
         spawnedCount++;
-        minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
-        maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
+
+        if (minTimeCurve != null) minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
+        if (maxTimeCurve != null) maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
+
         activeTasks.Add(selectedTask);
 
         spawnedTasks++;
