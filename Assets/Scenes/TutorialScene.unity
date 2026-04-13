@@ -1719,7 +1719,12 @@ PrefabInstance:
       propertyPath: cookingTable
       value: 
       objectReference: {fileID: 2100676011}
-    m_RemovedComponents: []
+    - target: {fileID: 8802068791512171637, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8802068791512171637, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
