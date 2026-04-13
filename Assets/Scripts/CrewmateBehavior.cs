@@ -80,7 +80,21 @@ public class CrewmateBehavior : MonoBehaviour
             if (HasArrived(stairPos))
             {
                 currentDeck = targetDeck;
-                agent.Warp((currentDeck == 0) ? topStairsPosition.transform.position : bottomStairsPosition.transform.position);
+
+                Vector3 warpPos = (currentDeck == 0)
+                    ? topStairsPosition.position
+                    : bottomStairsPosition.position;
+
+                if (NavMesh.SamplePosition(warpPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+                {
+                    warpPos = hit.position;
+                }
+
+                agent.Warp(warpPos);
+                agent.enabled = false;
+                agent.enabled = true;
+
+                Debug.Log($"Arrived at stairs, warped to {(currentDeck == 0 ? "top" : "bottom")} stairs. Now navigating to final target.");
 
                 goingToStairs = false;
 
@@ -109,10 +123,12 @@ public class CrewmateBehavior : MonoBehaviour
     {
         if (agent.pathPending) return false;
 
-        if (agent.remainingDistance > agent.stoppingDistance + 0.1f)
-            return false;
+        if (!agent.hasPath) return true;
 
-        return true;
+        // close enough check (ignore exact NavMesh distance)
+        float dist = Vector3.Distance(transform.position, target);
+
+        return dist <= agent.stoppingDistance + 0.2f;
     }
 
     public void DoTask(Vector3 position, int deck, AdverseEvent e)
@@ -124,9 +140,9 @@ public class CrewmateBehavior : MonoBehaviour
                 crewmateAnimator.SetBool(isFixingHash, true);
             }
             e.BeginFixing();
+            Invoke(nameof(AddSelfToQueue), e.fixTime);
         });
 
-        Invoke(nameof(AddSelfToQueue), e.fixTime);
     }
 
     private void AddSelfToQueue()

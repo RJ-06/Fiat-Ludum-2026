@@ -36,7 +36,7 @@ public class TutorialTextChanger : MonoBehaviour
             }
         }
 
-        if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && collider.gameObject.CompareTag("Kitchen"))
+        if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && (collider.gameObject.CompareTag("Kitchen") || collider.gameObject.CompareTag("Fishing")))
         {
             tutorialText.text = "";
             Invoke(nameof(BeginSwitchingScenes), 15f);
