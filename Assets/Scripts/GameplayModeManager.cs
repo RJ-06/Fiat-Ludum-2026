@@ -24,7 +24,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            ChangeShipVisibility.Instance.ToggleVisibility();
+            ChangeShipVisibility.Instance.ToggleVisibilityTop();
             PlayerMovement.instance.playerRend.enabled = !PlayerMovement.instance.playerRend.enabled;
         }
 

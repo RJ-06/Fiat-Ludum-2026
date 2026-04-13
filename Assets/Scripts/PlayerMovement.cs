@@ -220,13 +220,13 @@ public class PlayerMovement : MonoBehaviour
             if (currentDeck == 0)
             {
                 StartCoroutine(MoveToTarget(bottomDeckPosition.position));
-                ChangeShipVisibility.Instance.ToggleVisibility();
+                ChangeShipVisibility.Instance.ToggleVisibilityTop();
                 currentDeck = 1;
             }
             else
             {
                 StartCoroutine(MoveToTarget(topDeckPosition.position));
-                ChangeShipVisibility.Instance.ToggleVisibility();
+                ChangeShipVisibility.Instance.ToggleVisibilityTop();
                 currentDeck = 0;
             }
         }
@@ -277,7 +277,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentCannon.ShootCanonBall();
             }
-            GameplayModeManager.Instance.SetCannonShootingMode(true);
+            else 
+            {
+                GameplayModeManager.Instance.SetCannonShootingMode(true);
+                ChangeShipVisibility.Instance.ToggleVisibilityBottom();
+            }
+            
 
         }
 
@@ -325,6 +330,7 @@ public class PlayerMovement : MonoBehaviour
         if (atCannon)
         {
             GameplayModeManager.Instance.SetCannonShootingMode(false);
+            ChangeShipVisibility.Instance.ToggleVisibilityBottom();
         }
         if (atKitchen)
         {
