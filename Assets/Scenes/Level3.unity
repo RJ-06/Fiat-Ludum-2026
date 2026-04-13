@@ -657,15 +657,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5052761651286963027, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -2.788
       objectReference: {fileID: 0}
     - target: {fileID: 5052761651286963027, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.08
+      value: 10.592
       objectReference: {fileID: 0}
     - target: {fileID: 5052761651286963027, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12
+      value: 10.596
       objectReference: {fileID: 0}
     - target: {fileID: 5052761651286963027, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1158,7 +1158,7 @@ PrefabInstance:
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: crewmate
       value: 
-      objectReference: {fileID: 1706745706917430338, guid: 43320ded3326e4042a8d2bd425debdb1, type: 3}
+      objectReference: {fileID: 5236933468080699550, guid: 43320ded3326e4042a8d2bd425debdb1, type: 3}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: crewHunger
       value: 100
