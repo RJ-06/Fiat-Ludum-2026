@@ -13,6 +13,9 @@ public class UIShop : MonoBehaviour
 
     List<Item.ItemType> availableItems;
 
+    [SerializeField] AudioSource buySuccessSound;
+    [SerializeField] AudioSource buyFailureSound;
+
 
     private void Awake()
     {
@@ -82,10 +85,12 @@ public class UIShop : MonoBehaviour
         {
             ShipManager.shipManager.gold -= Item.GetPrice(itemType);
             Item.DoEffect(itemType);
+            buySuccessSound.Play();
             Debug.Log($"Bought {itemType}");
         }
         else
         {
+            buyFailureSound.Play();
             Debug.Log($"Not enough money to buy {itemType}");
         }
     }
