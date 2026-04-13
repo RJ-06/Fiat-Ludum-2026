@@ -46,7 +46,7 @@ public class TaskManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(CreateTask());
-        if (spawnFire) 
+        if (spawnFire)
         {
             text.text = "Fires require a bucket to put out. Grab buckets with (E) and take it to the spigot (back of ship) to fill. Drop full buckets on fires with (Q).";
             Invoke(nameof(RemoveText), 15f);
@@ -71,9 +71,10 @@ public class TaskManager : MonoBehaviour
         worldScroller.SpawnIceberg();
     }
 
+    // Refactored to call out to SpawnImmediateTask()
     public IEnumerator CreateTask()
     {
-        while (!spawnFire) 
+        while (!spawnFire)
         {
             if (spawnedTasks >= numToSpawn)
             {
@@ -92,31 +93,45 @@ public class TaskManager : MonoBehaviour
                 continue;
             }
 
-            int index = Random.Range(0, tasksList.tasks.Count);
-            while (activeTaskIndices.Contains(index))
-            {
-                index = Random.Range(0, tasksList.tasks.Count);
-            }
-            var selectedTask = tasksList.tasks[index];
-            activeTaskIndices.Add(index);
-
-            AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
-            obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
-            obj.thisTask = selectedTask;
-            spawnedCount++;
-            minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
-            maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
-            activeTasks.Add(selectedTask);
-
-            spawnedTasks++;
+            SpawnImmediateTask();
 
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
         }
     }
 
-    public IEnumerator SpawnFires() 
+    // NEW METHOD: Spawns a single random available task immediately. 
+    // You can call this from KrakenScript via TaskManager.taskManagerSingleton.SpawnImmediateTask()
+    public void SpawnImmediateTask()
     {
-        while (true) 
+        if (activeTaskIndices.Count >= tasksList.tasks.Count)
+        {
+            // All available tasks are already active
+            return;
+        }
+
+        int index = Random.Range(0, tasksList.tasks.Count);
+        while (activeTaskIndices.Contains(index))
+        {
+            index = Random.Range(0, tasksList.tasks.Count);
+        }
+
+        var selectedTask = tasksList.tasks[index];
+        activeTaskIndices.Add(index);
+
+        AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
+        obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
+        obj.thisTask = selectedTask;
+        spawnedCount++;
+        minTimeForNextTask = minTimeCurve.Evaluate(spawnedCount);
+        maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
+        activeTasks.Add(selectedTask);
+
+        spawnedTasks++;
+    }
+
+    public IEnumerator SpawnFires()
+    {
+        while (true)
         {
             if (firesSpawned >= numToSpawn)
             {
