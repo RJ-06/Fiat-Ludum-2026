@@ -173,7 +173,7 @@ public class KrakenScript : MonoBehaviour
                     tentacleAnimator.SetTrigger("SweepAttack");
                 }
 
-                krakenAttackSound.Play();
+                StartCoroutine("AttackSound");
 
                 yield return new WaitForSeconds(attackDuration);
             }
@@ -218,6 +218,12 @@ public class KrakenScript : MonoBehaviour
                 krakenAnimator.SetTrigger("TakeDamage");
             }
         }
+    }
+
+    IEnumerator AttackSound()
+    {
+        yield return new WaitForSeconds(1.5f);
+        krakenAttackSound.Play();
     }
 
     private void Die()
