@@ -48,6 +48,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform topMastPosition;
     [SerializeField] Transform bottomMastPosition;
 
+    private Animator playerAnimator;
+
+    // Animation Hashes
+    private readonly int isWalkingHash = Animator.StringToHash("isWalking");
+    private readonly int isClimbingHash = Animator.StringToHash("isClimbing");
+    private readonly int isFixingHash = Animator.StringToHash("isFixing");
+    private readonly int dropObjectHash = Animator.StringToHash("dropObject");
+    private readonly int climbSpeedHash = Animator.StringToHash("climbSpeed"); // Multiplier for forward/backward climbing
+
     private void Awake()
     {
         instance = this;
@@ -57,11 +66,18 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerAnimator != null)
+        {
+            // Player is considered walking if there's movement input, they aren't fixing, and not climbing (isKinematic is true during climbing)
+            bool isWalking = moveDir.sqrMagnitude > 0.01f && currentlyRepairing == null && !rb.isKinematic;
+            playerAnimator.SetBool(isWalkingHash, isWalking);
+        }
     }
 
     private void FixedUpdate()
@@ -72,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         if (currentlyRepairing != null)
             return; // ignore movement input while repairing
 
-        if (isGrabbing) 
+        if (isGrabbing)
         {
             objectGrabbedTransform.position = grabPosition.position;
         }
@@ -137,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
             atCannon = true;
             currentCannon = other.gameObject.GetComponent<Cannon>();
         }
-        if (other.CompareTag("Grabbable")) 
+        if (other.CompareTag("Grabbable"))
         {
             objectFoundToGrab = other.gameObject;
         }
@@ -145,9 +161,9 @@ public class PlayerMovement : MonoBehaviour
         {
             atKitchen = true;
         }
-        if (other.CompareTag("Fishing")) 
+        if (other.CompareTag("Fishing"))
         {
-           atFishing = true;
+            atFishing = true;
         }
     }
 
@@ -165,12 +181,12 @@ public class PlayerMovement : MonoBehaviour
         {
             atWheel = false;
         }
-        if (other.CompareTag("Cannon")) 
+        if (other.CompareTag("Cannon"))
         {
             atCannon = false;
             currentCannon = null;
         }
-        if (other.CompareTag("Grabbable")) 
+        if (other.CompareTag("Grabbable"))
         {
             objectFoundToGrab = null;
         }
@@ -178,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
         {
             atKitchen = false;
         }
-        if (other.CompareTag("Fishing")) 
+        if (other.CompareTag("Fishing"))
         {
             atFishing = false;
         }
@@ -186,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnInteractPress()
     {
-        if (!isGrabbing && objectFoundToGrab != null) 
+        if (!isGrabbing && objectFoundToGrab != null)
         {
             isGrabbing = true;
             objectGrabbedTransform = objectFoundToGrab.transform;
@@ -196,27 +212,16 @@ public class PlayerMovement : MonoBehaviour
             objectGrabbedTransform.SetParent(transform); //parents the object you're holding to the player
         }
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.GetComponent<AdverseEvent>() != null)
-            {
-                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
-                currentlyRepairing.BeginFixing();
-                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
-                return;
-            }
-        }
 
-        if (atStairs) 
+        if (atStairs)
         {
-            if (currentDeck == 0) 
+            if (currentDeck == 0)
             {
                 StartCoroutine(MoveToTarget(bottomDeckPosition.position));
                 ChangeShipVisibility.Instance.ToggleVisibility();
                 currentDeck = 1;
             }
-            else 
+            else
             {
                 StartCoroutine(MoveToTarget(topDeckPosition.position));
                 ChangeShipVisibility.Instance.ToggleVisibility();
@@ -249,29 +254,43 @@ public class PlayerMovement : MonoBehaviour
             FindAnyObjectByType<SliceMinigameController>().StartMinigame();
         }
 
-        if (atFishing) 
+        if (atFishing)
         {
             FishingMinigame fishing = FindAnyObjectByType<FishingMinigame>();
             if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Fishing)
             {
                 fishing.tryToCatch();
             }
-            else 
+            else
             {
                 GameplayModeManager.Instance.SetFishingMode(true);
                 StartCoroutine(fishing.StartFishing());
             }
-            
+
         }
 
-        if (atCannon) 
+        if (atCannon)
         {
             if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
             {
                 currentCannon.ShootCanonBall();
             }
             GameplayModeManager.Instance.SetCannonShootingMode(true);
-            
+
+        }
+
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<AdverseEvent>() != null)
+            {
+                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
+                currentlyRepairing.BeginFixing();
+                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
+                if (playerAnimator != null) playerAnimator.SetBool(isFixingHash, true); // Trigger fixing animation
+                break;
+            }
         }
     }
 
@@ -281,6 +300,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentlyRepairing.StopFixing();
             currentlyRepairing = null;
+            if (playerAnimator != null) playerAnimator.SetBool(isFixingHash, false); // Stop fixing animation
         }
     }
 
@@ -293,13 +313,14 @@ public class PlayerMovement : MonoBehaviour
             objectGrabbedTransform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             objectGrabbedTransform.SetParent(null); //unparents
             objectGrabbedTransform = null;
+            if (playerAnimator != null) playerAnimator.SetTrigger(dropObjectHash); // Trigger drop/throw animation
             return;
         }
         if (atWheel)
         {
             GameplayModeManager.Instance.SetShipSteeringMode(false);
         }
-        if (atCannon) 
+        if (atCannon)
         {
             GameplayModeManager.Instance.SetCannonShootingMode(false);
         }
@@ -307,7 +328,7 @@ public class PlayerMovement : MonoBehaviour
         {
             GameplayModeManager.Instance.SetCookingMode(false);
         }
-        if (atFishing) 
+        if (atFishing)
         {
             GameplayModeManager.Instance.SetFishingMode(false);
         }
@@ -332,6 +353,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 startPos = rb.position;
         Vector3 adjustedTarget = target + Vector3.up * feetOffset;
 
+        // Check if the target is physically higher than where we are starting
+        float climbDirection = (adjustedTarget.y > startPos.y) ? 1f : -1f;
+
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat(climbSpeedHash, climbDirection); // Set the speed multiplier
+            playerAnimator.SetBool(isClimbingHash, true); // Start climbing animation
+        }
+
         float t = 0f;
 
         while (t < 1f)
@@ -348,5 +378,7 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.isKinematic = false;
+
+        if (playerAnimator != null) playerAnimator.SetBool(isClimbingHash, false); // Stop climbing animation
     }
 }

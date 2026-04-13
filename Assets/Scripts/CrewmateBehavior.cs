@@ -20,13 +20,26 @@ public class CrewmateBehavior : MonoBehaviour
 
     private Action onComplete;
 
+    private Animator crewmateAnimator;
+
+    // Optional: Cache animation hashes for slightly better performance
+    private readonly int isWalkingHash = Animator.StringToHash("isWalking");
+    private readonly int isFixingHash = Animator.StringToHash("isFixing");
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        crewmateAnimator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        // Update walking animation based on whether the crewmate is navigating
+        if (crewmateAnimator != null)
+        {
+            crewmateAnimator.SetBool(isWalkingHash, navigating);
+        }
+
         if (!navigating) return;
 
         HandleNavigation();
@@ -34,12 +47,19 @@ public class CrewmateBehavior : MonoBehaviour
 
     public void NavigateTo(Vector3 targetPosition, int deck, Action callback = null)
     {
+        // Cancel fixing animation if they are interrupted / start moving
+        if (crewmateAnimator != null)
+        {
+            crewmateAnimator.SetBool(isFixingHash, false);
+        }
+
         finalTarget = targetPosition;
         targetDeck = deck;
 
         navigating = true;
         goingToStairs = false;
         onComplete = callback;
+
     }
 
     private void HandleNavigation()
@@ -100,6 +120,10 @@ public class CrewmateBehavior : MonoBehaviour
     {
         NavigateTo(position, deck, () =>
         {
+            if (crewmateAnimator != null)
+            {
+                crewmateAnimator.SetBool(isFixingHash, true);
+            }
             e.BeginFixing();
         });
 
