@@ -62,7 +62,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _depth: 0.6
-    - _displacement: 0.025
+    - _displacement: 0.03
     - _normalStrength: 25
     - _strength: 0.8
     m_Colors:
