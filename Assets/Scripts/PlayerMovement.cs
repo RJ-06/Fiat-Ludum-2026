@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 using static UnityEngine.GraphicsBuffer;
+using System.Linq;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
     private GameObject objectFoundToGrab;
 
     AdverseEvent currentlyRepairing;
-
-    public CrewmateBehavior crewmate;
 
     [SerializeField] Transform topDeckPosition;
     [SerializeField] Transform bottomDeckPosition;
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
         // FORWARD (FIXED: use rb.rotation, not transform)
         Vector3 forward = rb.rotation * Vector3.forward;
-        Vector3 targetVelocity = forward * (moveDir.y * moveSpeed);
+        Vector3 targetVelocity = forward * (moveDir.y * moveSpeed * ShipManager.shipManager.speedMultiplier * ShipManager.shipManager.actingSpeedMultiplier);
 
         targetVelocity.y = rb.linearVelocity.y;
 
@@ -318,8 +318,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hitCollider.GetComponent<AdverseEvent>() != null)
             {
-                crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
-                break;
+                if (ShipManager.shipManager.crewmateQueue.Count != 0)
+                {
+                    CrewmateBehavior crewmate = ShipManager.shipManager.crewmateQueue.Dequeue();
+                    crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
+                    break;
+                }
             }
         }
     }

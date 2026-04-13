@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class ShipManager : MonoBehaviour
 {
@@ -14,18 +16,25 @@ public class ShipManager : MonoBehaviour
 
     [Header("Player Stats")]
     public float speedMultiplier = 1f;
-    public int cookingLevel = 1;
-    public int fishingLevel = 1;
+    public int cookingLevel = 0;
+    public int fishingLevel = 0;
     public int numCrew = 0;
     public float repairEfficiencyMultiplier = 1f;
-    public float crewEfficiencyMultiplier = 1f;
     public float hungerDecreaseMultiplier = 1f;
     public float vitaminCDecreaseMultiplier = 1f;
 
+    public float actingSpeedMultiplier = 1f;
+    public float actingEfficiencyMultiplier = 1f;
+    public float actingHungerDecreaseMultiplier = 1f;
+
     [Header("Resources")]
-    public int gold = 100;
+    public int gold = 10000;
 
     public TaskManager taskManager;
+
+    public Queue<CrewmateBehavior> crewmateQueue = new Queue<CrewmateBehavior>();
+    public CrewmateBehavior crewmate;
+
 
     public int sceneIndex = 0;
     public List<string> sceneList = new List<string>() {"TutorialLevel", "TradingScene", "Level2", "TradingScene" };
@@ -44,10 +53,63 @@ public class ShipManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name.Contains("TradingScene"))
+        {
+            taskManager.enabled = false;
+        } else
+        {
+            taskManager.enabled = true;
+        }
+
+        if (scene.name.Contains("Level")) // or whatever your naming is
+        {
+            crewmateQueue.Clear();
+
+            if (sceneList[sceneIndex].Contains("Level"))
+                for (int i = 0; i < numCrew; i++)
+                {
+                    CrewmateBehavior newCrew = Instantiate(crewmate, new Vector3(-1, 8, 12), Quaternion.identity);
+                    crewmateQueue.Enqueue(newCrew);
+                }
+        }
+    }
+
     private void FixedUpdate()
     {
-        crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier;
-        vitaminCLevel -= vitaminCDecreaseRate * vitaminCDecreaseMultiplier;
+        crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier * actingHungerDecreaseMultiplier * Time.deltaTime;
+        vitaminCLevel -= vitaminCDecreaseRate * vitaminCDecreaseMultiplier * Time.deltaTime;
+
+        if (crewHunger < 30f)
+        {
+            actingEfficiencyMultiplier = 0.5f;
+            actingSpeedMultiplier = 0.5f;
+        } else
+        {
+            actingEfficiencyMultiplier = 1f;
+            actingSpeedMultiplier = 1f;
+        }
+
+        if (vitaminCLevel < 0f)
+        {
+            actingHungerDecreaseMultiplier = 2f;
+            vitaminCLevel = 0f;
+        } else
+        {
+            actingHungerDecreaseMultiplier = 1f;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -60,4 +122,11 @@ public class ShipManager : MonoBehaviour
             Debug.Log("Ship destroyed! Game Over.");
         }
     }
+
+    public void AddCrew()
+    {
+        numCrew++;
+    }
+
+
 }

@@ -30,7 +30,7 @@ public class SliderMover : MonoBehaviour
     {
         if (!isMoving) return;
 
-        float t = Mathf.PingPong(Time.time * speed, 1f);
+        float t = Mathf.PingPong(Time.time * (speed - 0.3f * ShipManager.shipManager.cookingLevel), 1f);
         currentValue = Mathf.Lerp(leftBound, rightBound, t);
 
         UpdateVisual();

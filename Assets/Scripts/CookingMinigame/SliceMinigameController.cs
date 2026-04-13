@@ -42,7 +42,7 @@ public class SliceMinigameController : MonoBehaviour
 
         float score = evaluator.Evaluate(value);
 
-        totalScore += score;
+        totalScore += score + 0.3f * ShipManager.shipManager.cookingLevel;
         attemptsUsed++;
 
         Debug.Log($"Attempt {attemptsUsed}/{maxAttempts} | Score: {score}");
@@ -76,7 +76,7 @@ public class SliceMinigameController : MonoBehaviour
         else if (score > 0.5f)
             return "Weak Cut";
         else
-            return "Missed Cut";
+            return "Nothing";
     }
 
     private IEnumerator HideAfterDelay()

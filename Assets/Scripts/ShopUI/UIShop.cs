@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Item;
 
 public class UIShop : MonoBehaviour
 {
@@ -49,11 +50,13 @@ public class UIShop : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < availableItems.Count; i++)
+        for (int i = 1; i < availableItems.Count; i++)
         {
             Item.ItemType itemType = availableItems[i];
             CreateItemButton(itemType, null, Item.GetName(itemType), Item.GetPrice(itemType), i);
         }
+        CreateItemButton(Item.ItemType.Crewmate, null, Item.GetName(Item.ItemType.Crewmate), Item.GetPrice(Item.ItemType.Crewmate), 0);
+
     }
 
     private void CreateItemButton(Item.ItemType itemType, Sprite itemSprite, string itemName, int itemCost, int positionIndex)

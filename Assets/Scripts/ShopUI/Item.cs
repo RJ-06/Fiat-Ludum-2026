@@ -4,12 +4,13 @@ public class Item
 {
     public enum ItemType
     {
+        ShipRepairKit,
+        Food,
         Oranges,
         Boots,
         ArtOfStarvation,
         ArtOfScurvy,
         RepairManual,
-        TeamworkManual,
         Cookbook,
         Fishbook,
         Crewmate
@@ -34,6 +35,10 @@ public class Item
         {
             case ItemType.Oranges:
                 return "Oranges";
+            case ItemType.ShipRepairKit:
+                return "Ship Repair Kit";
+            case ItemType.Food:
+                return "Food";
             case ItemType.Boots:
                 return "Boots";
             case ItemType.ArtOfStarvation:
@@ -42,8 +47,6 @@ public class Item
                 return "The Art of Scurvy";
             case ItemType.RepairManual:
                 return "Repair Manual";
-            case ItemType.TeamworkManual:
-                return "Teamwork Manual";
             case ItemType.Cookbook:
                 return "Rordan Gamsey's Culinary Concoctions";
             case ItemType.Fishbook:
@@ -59,7 +62,11 @@ public class Item
         switch (itemType)
         {
             case ItemType.Oranges:
-                return 10;
+                return 20;
+            case ItemType.ShipRepairKit:
+                return 20;
+            case ItemType.Food:
+                return 20;
             case ItemType.Boots:
                 return 50;
             case ItemType.ArtOfStarvation:
@@ -67,8 +74,6 @@ public class Item
             case ItemType.ArtOfScurvy:
                 return 100;
             case ItemType.RepairManual:
-                return 150;
-            case ItemType.TeamworkManual:
                 return 150;
             case ItemType.Cookbook:
                 return 200;
@@ -86,7 +91,11 @@ public class Item
         switch (itemType)
         {
             case ItemType.Oranges:
-                return "Increases vitamin C level by 20.";
+                return "Increases vitamin C level by 10.";
+            case ItemType.ShipRepairKit:
+                return "Repairs 10 health to the ship.";
+            case ItemType.Food:
+                return "Increases hunger level by 10.";
             case ItemType.Boots:
                 return "Increases your speed by 50%.";
             case ItemType.ArtOfStarvation:
@@ -95,8 +104,6 @@ public class Item
                 return "Increases vitamin C decrease multiplier by 20%.";
             case ItemType.RepairManual:
                 return "Increases repair efficiency multiplier by 20%.";
-            case ItemType.TeamworkManual:
-                return "Increases crew efficiency multiplier by 20%.";
             case ItemType.Cookbook:
                 return "Increases cooking level by 1.";
             case ItemType.Fishbook:
@@ -113,7 +120,21 @@ public class Item
         switch (itemType)
         {
             case ItemType.Oranges:
-                ShipManager.shipManager.vitaminCLevel += 20;
+                ShipManager.shipManager.vitaminCLevel += 10;
+                break;
+            case ItemType.ShipRepairKit:
+                ShipManager.shipManager.shipHealth += 10;
+                if (ShipManager.shipManager.shipHealth > 100f)
+                {
+                    ShipManager.shipManager.shipHealth = 100f;
+                }
+                break;
+            case ItemType.Food:
+                ShipManager.shipManager.crewHunger += 10;
+                if (ShipManager.shipManager.crewHunger > 100f)
+                {
+                    ShipManager.shipManager.crewHunger = 100f;
+                }
                 break;
             case ItemType.Boots:
                 ShipManager.shipManager.speedMultiplier += 0.5f;
@@ -127,9 +148,6 @@ public class Item
             case ItemType.RepairManual:
                 ShipManager.shipManager.repairEfficiencyMultiplier += 0.2f;
                 break;
-            case ItemType.TeamworkManual:
-                ShipManager.shipManager.crewEfficiencyMultiplier += 0.2f;
-                break;
             case ItemType.Cookbook:
                 ShipManager.shipManager.cookingLevel += 1;
                 break;
@@ -137,7 +155,7 @@ public class Item
                 ShipManager.shipManager.fishingLevel += 1;
                 break;
             case ItemType.Crewmate:
-                ShipManager.shipManager.numCrew += 1;
+                ShipManager.shipManager.AddCrew();
                 break;
         }
     }
