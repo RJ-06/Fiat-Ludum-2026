@@ -196,6 +196,17 @@ public class PlayerMovement : MonoBehaviour
             objectGrabbedTransform.SetParent(transform); //parents the object you're holding to the player
         }
 
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<AdverseEvent>() != null)
+            {
+                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
+                currentlyRepairing.BeginFixing();
+                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
+                return;
+            }
+        }
 
         if (atStairs) 
         {
@@ -261,19 +272,6 @@ public class PlayerMovement : MonoBehaviour
             }
             GameplayModeManager.Instance.SetCannonShootingMode(true);
             
-        }
-
-
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.GetComponent<AdverseEvent>() != null)
-            {
-                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
-                currentlyRepairing.BeginFixing();
-                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
-                break;
-            }
         }
     }
 

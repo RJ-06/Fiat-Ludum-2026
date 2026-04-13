@@ -21,9 +21,14 @@ public class TaskManager : MonoBehaviour
 
     public static TaskManager taskManagerSingleton { get; private set; }
 
+    public TMPro.TMP_Text text;
+    private int spawnedTasks = 0;
 
-    public bool isTutorialLevel = false;
-    private int spawnedTutorialTasks = 0;
+    public int numToSpawn;
+
+    bool initiatedEnding = false;
+
+
 
     private void Awake()
     {
@@ -40,6 +45,13 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(CreateTask());
     }
 
+    void EndingSequence()
+    {
+        StartCoroutine(SpawnIcebergs());
+        Invoke(nameof(moveToNext), 20f);
+        text.text = "Icebergs are approaching! Run to the WHEEL, use (E), then (A/D) to steer around them!";
+    }
+
     void SpawnIceberg()
     {
         worldScroller.SpawnIceberg();
@@ -49,8 +61,14 @@ public class TaskManager : MonoBehaviour
     {
         while (true) 
         {
-            if (isTutorialLevel && spawnedTutorialTasks >= 3)
+            if (spawnedTasks >= numToSpawn)
             {
+                Debug.Log("Finished spawning tasks.");
+                if (!initiatedEnding)
+                {
+                    initiatedEnding = true;
+                    EndingSequence();
+                }
                 yield break;
             }
             int index = Random.Range(0, tasksList.tasks.Count);
@@ -69,14 +87,25 @@ public class TaskManager : MonoBehaviour
             maxTimeForNextTask = maxTimeCurve.Evaluate(spawnedCount);
             activeTasks.Add(selectedTask);
 
-            if (isTutorialLevel)
-            {
-                spawnedTutorialTasks++;
-            }
+            spawnedTasks++;
 
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
         }
-        
     }
 
+    public IEnumerator SpawnIcebergs()
+    {
+        while (true)
+        {
+            SpawnIceberg();
+            yield return new WaitForSeconds(5f);
+        }
+    }
+
+    void moveToNext()
+    {
+        ShipManager.shipManager.sceneIndex++;
+        string nextScene = ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex];
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+    }
 }

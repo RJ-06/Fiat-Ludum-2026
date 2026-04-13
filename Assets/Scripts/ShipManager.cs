@@ -23,7 +23,7 @@ public class ShipManager : MonoBehaviour
     public float vitaminCDecreaseMultiplier = 1f;
 
     [Header("Resources")]
-    public int gold = 100;
+    public int gold;
 
     public TaskManager taskManager;
 

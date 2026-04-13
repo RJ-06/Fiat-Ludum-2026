@@ -169,7 +169,6 @@ MonoBehaviour:
   rotationSpeed: 180
   isGrabbing: 0
   grabPosition: {fileID: 2321218492061725317}
-  crewmate: {fileID: 0}
   topDeckPosition: {fileID: 0}
   bottomDeckPosition: {fileID: 0}
   topMastPosition: {fileID: 0}

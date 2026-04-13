@@ -19,32 +19,27 @@ MonoBehaviour:
     fixRate: 1
     activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-    UICoordinates: {x: 250, y: 100}
   - name: Leak2
     location: {x: -1, y: 8, z: 12}
     fixTime: 5
     fixRate: 1
     activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-    UICoordinates: {x: 250, y: 100}
   - name: Leak3
     location: {x: -1, y: 7, z: -7}
     fixTime: 5
     fixRate: 1
     activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-    UICoordinates: {x: 250, y: 100}
   - name: Leak4
     location: {x: 2.3, y: 6, z: 1.5}
     fixTime: 5
     fixRate: 1
     activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-    UICoordinates: {x: 250, y: 100}
   - name: Leak5
     location: {x: 0, y: 1, z: 6}
     fixTime: 5
     fixRate: 1
     activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-    UICoordinates: {x: 250, y: 100}

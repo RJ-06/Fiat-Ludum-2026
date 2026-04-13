@@ -27,5 +27,4 @@ public struct Task
     public float fixRate;
     public float activeTimer;
     public AdverseEvent adverseEvent;
-    public Vector2 UICoordinates;
 }
