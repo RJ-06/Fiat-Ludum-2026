@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547da755dccbc494c9190518726c9d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdverseEvent
+  fixTime: 10
+  textFadePrefab: {fileID: 7293496843493688715, guid: 42c78dd657a53b54297c681c1340eb5c, type: 3}
+  uiCanvas: {fileID: 1534501907156416708, guid: 42c78dd657a53b54297c681c1340eb5c, type: 3}
   timerBar: {fileID: 210265302318551410}
   fixBar: {fileID: 5373228264505682423}
   thisTask:
@@ -57,7 +60,6 @@ MonoBehaviour:
     fixRate: 0
     activeTimer: 0
     adverseEvent: {fileID: 0}
-    UICoordinates: {x: 0, y: 0}
   taskIndex: 0
 --- !u!136 &5981633490950803395
 CapsuleCollider:

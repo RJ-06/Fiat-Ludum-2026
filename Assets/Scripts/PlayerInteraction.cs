@@ -66,7 +66,7 @@ public class PlayerInteraction : MonoBehaviour
             text.text = "The townspeople caught you stealing! You lost 250 gold.";
             Time.timeScale = 0f;
             ShipManager.shipManager.gold = Mathf.Max(0, ShipManager.shipManager.gold - 250);
-            Invoke(nameof(SwitchScene), 5f);
+            StartCoroutine(SwitchSceneAfterDelay());
         }
     }
 

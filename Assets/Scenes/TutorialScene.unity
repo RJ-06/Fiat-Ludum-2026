@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2685921038591689183, guid: fd76ba18869412942b94a1204e47525b, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6087268805507746109, guid: fd76ba18869412942b94a1204e47525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -667,6 +671,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinimapMarker
   isCautionMarker: 1
+--- !u!1001 &630451389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3120660096257033750, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_Name
+      value: SceneTransitionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.86536
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.06284
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674436390594153817, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
 --- !u!1 &669650226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,7 +1909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome Cap! Fix critical issues around your ship; check the top-right
+  m_text: Welcome Cap'n! Fix critical issues around your ship; check the top-right
     minimap for where to go!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e9f14d48ab1d344bb5fc7c9eea1e814, type: 2}
@@ -2535,3 +2596,4 @@ SceneRoots:
   - {fileID: 1000606500}
   - {fileID: 303938748}
   - {fileID: 2128721699}
+  - {fileID: 630451389}

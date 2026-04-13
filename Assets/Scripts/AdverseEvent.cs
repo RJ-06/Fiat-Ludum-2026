@@ -13,6 +13,7 @@ public class AdverseEvent : MonoBehaviour
     private bool isRunning = true;
     private bool isFixing = false;
 
+    [SerializeField] private TextFade textFadePrefab;
 
     public Image timerBar;
     public Image fixBar;
@@ -53,7 +54,7 @@ public class AdverseEvent : MonoBehaviour
             fixTime = currentFixAmount;
         }
 
-        timerBar.enabled = true;    
+        timerBar.enabled = true;
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
@@ -96,6 +97,8 @@ public class AdverseEvent : MonoBehaviour
     void OnTimerEnd()
     {
         Destroy(gameObject);
+        ShipManager.shipManager.TakeDamage(5);
+
         if (TutorialTaskManager.Instance != null)
         {
             TutorialTaskManager.Instance.activeTaskIndices.Remove(taskIndex);
@@ -105,21 +108,34 @@ public class AdverseEvent : MonoBehaviour
         TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
         TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
 
-        ShipManager.shipManager.TakeDamage(5);
     }
 
     void OnFixed()
     {
-        Destroy(gameObject);
+        // Give reward
+        ShipManager.shipManager.gold += 20;
+
+        // Remove from task systems
         if (TutorialTaskManager.Instance != null)
         {
             TutorialTaskManager.Instance.activeTaskIndices.Remove(taskIndex);
             TutorialTaskManager.Instance.activeTasks.Remove(thisTask);
-            return;
         }
-        TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
-        TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
+        else
+        {
+            TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
+            TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
+        }
 
-        ShipManager.shipManager.gold += 20;
+        TextFade text = Instantiate(textFadePrefab);
+        Vector3 worldPos = transform.position + Vector3.up * 1f;
+        text.transform.position = worldPos;
+
+        if (GetComponent<FireBehavior>() != null) 
+            text.Show("+50 Gold");
+        else
+            text.Show("+20 Gold");
+
+        Destroy(gameObject);
     }
 }

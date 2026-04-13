@@ -13,6 +13,8 @@ public class TutorialTextChanger : MonoBehaviour
     public GameObject minigameText1;
     public GameObject minigameText2;
 
+    private bool sceneSwitchScheduled = false;
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.GetComponent<AdverseEvent>())
@@ -38,22 +40,21 @@ public class TutorialTextChanger : MonoBehaviour
 
         if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && (collider.gameObject.CompareTag("Kitchen") || collider.gameObject.CompareTag("Fishing")))
         {
-            tutorialText.text = "";
-            Invoke(nameof(BeginSwitchingScenes), 15f);
+            if (!sceneSwitchScheduled)
+            {
+                tutorialText.text = "";
+                Invoke(nameof(BeginSwitchingScenes), 15f);
+            }
+            sceneSwitchScheduled = true;
         }
     }
 
     void BeginSwitchingScenes()
     {
         GameplayModeManager.Instance.currentMode = GameplayModeManager.Mode.PlayerControl;
+        ShipManager.shipManager.sceneIndex++;
+        SceneTransitionManager.Instance.StartTransition(ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex]);
         tutorialText.text = "It's time to start spending some money! Head to the shop and buy some items to help you out!";
         tutorialText.fontSize = 18;
-        Invoke(nameof(SwitchScenes), 5f);
-    }
-
-    void SwitchScenes()
-    {
-        ShipManager.shipManager.sceneIndex++;
-        SceneManager.LoadScene(ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex]);
     }
 }

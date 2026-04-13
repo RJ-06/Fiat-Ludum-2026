@@ -30,6 +30,7 @@ public class TaskManager : MonoBehaviour
 
     public FireBehavior firePrefab;
     public bool spawnFire = false;
+    int firesSpawned = 0;
 
 
     private void Awake()
@@ -117,6 +118,12 @@ public class TaskManager : MonoBehaviour
     {
         while (true) 
         {
+            if (firesSpawned >= numToSpawn)
+            {
+                moveToNext();
+                yield break;
+            }
+
             if (activeTaskIndices.Count >= tasksList.tasks.Count)
             {
                 yield return null;
@@ -133,6 +140,7 @@ public class TaskManager : MonoBehaviour
 
             FireBehavior fire = Instantiate(firePrefab, selectedTask.location, Quaternion.identity);
             fire.index = index;
+            firesSpawned++;
             yield return new WaitForSeconds(15f);
         }
     }
@@ -149,8 +157,7 @@ public class TaskManager : MonoBehaviour
     void moveToNext()
     {
         ShipManager.shipManager.sceneIndex++;
-        string nextScene = ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex];
+        SceneTransitionManager.Instance.StartTransition(ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex]);
         StopAllCoroutines();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 }
