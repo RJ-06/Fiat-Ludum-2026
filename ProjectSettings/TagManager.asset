@@ -16,6 +16,7 @@ TagManager:
   - FillStation
   - Kitchen
   - Fishing
+  - Ship Ground
   layers:
   - Default
   - TransparentFX

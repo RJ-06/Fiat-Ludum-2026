@@ -9,6 +9,7 @@ public class GrabbableObject : MonoBehaviour
     }
     public ObjectType objectType;
     private Rigidbody rb;
+    [SerializeField] AudioSource dropSound;
 
     void Awake()
     {
@@ -18,7 +19,7 @@ public class GrabbableObject : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if (other.collider.CompareTag("Ship Ground") && rb.linearVelocity.y < 0f)
         {
-            Debug.Log("Playing drop sound");
+            dropSound.Play();
         }
     }
 
