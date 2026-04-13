@@ -17,7 +17,7 @@ public class GrabbableObject : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
-        if (other.collider.CompareTag("Ship Ground") && rb.linearVelocity.y < 0f)
+        if (other.collider.CompareTag("Ship Ground"))
         {
             dropSound.Play();
         }
