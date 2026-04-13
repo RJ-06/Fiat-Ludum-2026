@@ -30,7 +30,7 @@ public class BucketScript : MonoBehaviour
         }
         if (currentFillAmount == 0f) 
         {
-            OnEmpty();
+            
         }
 
         fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
@@ -60,6 +60,7 @@ public class BucketScript : MonoBehaviour
     private void OnEmpty() 
     {
         isFilled = false;
+        currentFillAmount = 0f;
         waterObj.SetActive(true);
     }
 
