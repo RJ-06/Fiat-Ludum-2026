@@ -21,6 +21,7 @@ public class CrewmateBehavior : MonoBehaviour
     private Action onComplete;
 
     [SerializeField] private Animator crewmateAnimator;
+    [SerializeField] AudioSource walkSound;
 
     // Cache animation hashes for slightly better performance
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
