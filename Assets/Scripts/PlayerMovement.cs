@@ -342,10 +342,12 @@ public class PlayerMovement : MonoBehaviour
         if (atKitchen)
         {
             GameplayModeManager.Instance.SetCookingMode(false);
+            FindAnyObjectByType<SliceMinigameController>().ExitMinigame();
         }
         if (atFishing)
         {
             GameplayModeManager.Instance.SetFishingMode(false);
+            FindAnyObjectByType<FishingMinigame>().ExitFishing();
         }
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);

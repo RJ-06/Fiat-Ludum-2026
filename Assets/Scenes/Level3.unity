@@ -745,6 +745,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2479085009509749871, guid: aa4b386b64cafec44afe925224828921, type: 3}
+      propertyPath: conflictText
+      value: 
+      objectReference: {fileID: 1788736988}
+    - target: {fileID: 2479085009509749871, guid: aa4b386b64cafec44afe925224828921, type: 3}
       propertyPath: tutorialText
       value: 
       objectReference: {fileID: 633922175}
@@ -1286,14 +1290,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 302302787004963828, guid: fd76ba18869412942b94a1204e47525b, type: 3}
-      propertyPath: fillTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5706511091357512754, guid: fd76ba18869412942b94a1204e47525b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7.93
-      objectReference: {fileID: 0}
     - target: {fileID: 6087268805507746109, guid: fd76ba18869412942b94a1204e47525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

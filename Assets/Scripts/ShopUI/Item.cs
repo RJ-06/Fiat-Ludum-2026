@@ -96,7 +96,7 @@ public class Item
             case ItemType.Fishbook:
                 return 200;
             case ItemType.Crewmate:
-                return 500;
+                return 350;
             default:
                 return 0;
         }

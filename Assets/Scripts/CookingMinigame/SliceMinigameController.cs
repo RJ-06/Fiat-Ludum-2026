@@ -139,4 +139,19 @@ public class SliceMinigameController : MonoBehaviour
         minigameUIRoot.SetActive(false);
         GameplayModeManager.Instance.SetCookingMode(false);
     }
+
+    public void ExitMinigame()
+    {
+        if (!isPlaying) return;
+
+        isPlaying = false;
+
+        StopAllCoroutines();
+        sliderMover.StopMoving();
+
+        resultText.gameObject.SetActive(false);
+        minigameUIRoot.SetActive(false);
+
+        GameplayModeManager.Instance.SetCookingMode(false);
+    }
 }

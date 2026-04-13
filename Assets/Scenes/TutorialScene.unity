@@ -2060,6 +2060,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: gold
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: crewHunger
       value: 100
       objectReference: {fileID: 0}

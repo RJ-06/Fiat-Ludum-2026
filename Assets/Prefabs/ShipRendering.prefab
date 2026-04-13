@@ -162,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 3923786189331047653}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 9.6, z: 2.23}
+  m_LocalPosition: {x: -1.41, y: 7.93, z: 2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 4640640432556719714}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.95379, y: -19.4, z: -38.78721}
+  m_LocalPosition: {x: 11.95379, y: -30, z: -38.78721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2915,9 +2915,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrabbableBucket
       objectReference: {fileID: 0}
+    - target: {fileID: 8401646670638221618, guid: da578deaea4b94f4fa89a55cd1a460ea, type: 3}
+      propertyPath: fillTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8960548866951350557, guid: da578deaea4b94f4fa89a55cd1a460ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.35
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8960548866951350557, guid: da578deaea4b94f4fa89a55cd1a460ea, type: 3}
       propertyPath: m_LocalPosition.y

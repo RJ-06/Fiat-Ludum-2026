@@ -4,23 +4,26 @@ using UnityEngine.UI;
 
 public class FishingMinigame : MonoBehaviour
 {
+    [Header("Timing")]
     [SerializeField] private float minWaitTime;
     [SerializeField] private float maxWaitTime;
     [SerializeField] private float timeToCatch;
 
-    [SerializeField] private bool canCatch = false;
-    [SerializeField] private float timer = 0f;
+    [Header("State")]
+    private bool canCatch = false;
+    private bool hasEnded = false;
+    private bool isActive = false;
+    private float timer = 0f;
+
     public float score;
 
-    [SerializeField] Image waitingForFishNotification;
-    [SerializeField] Image canCatchNotification;
-    [SerializeField] Image failedCatchNotification;
-
-    public TMPro.TMP_Text resultText;
+    [Header("UI")]
+    [SerializeField] private Image waitingForFishNotification;
+    [SerializeField] private Image canCatchNotification;
+    [SerializeField] private Image failedCatchNotification;
+    [SerializeField] private TMPro.TMP_Text resultText;
 
     public enum ResourceType { Gold, Wood }
-
-    private bool hasEnded = false;
 
     // ----------------- SCORING -----------------
 
@@ -28,7 +31,7 @@ public class FishingMinigame : MonoBehaviour
     {
         float baseThreshold = 0.5f;
         float reductionPerLevel = 0.1f;
-        return Mathf.Clamp01(baseThreshold - level * reductionPerLevel);
+        return Mathf.Clamp01(baseThreshold - level * 0.1f);
     }
 
     int GetScaledMax(int min, int max, int level)
@@ -65,37 +68,28 @@ public class FishingMinigame : MonoBehaviour
         return (type, finalAmount);
     }
 
-    // ----------------- UPDATE -----------------
-
-    public void FixedUpdate()
-    {
-        if (canCatch)
-        {
-            timer += Time.fixedDeltaTime;
-        }
-
-        if (!GameplayModeManager.Instance.isFishingMode())
-        {
-            waitingForFishNotification.enabled = false;
-            canCatchNotification.enabled = false;
-            failedCatchNotification.enabled = false;
-        }
-    }
-
-    // ----------------- START FISHING -----------------
+    // ----------------- PUBLIC ENTRY -----------------
 
     public IEnumerator StartFishing()
     {
+        ExitFishing();
+
+        isActive = true;
+        hasEnded = false;
+
         score = 0;
         timer = 0;
-        hasEnded = false;
         canCatch = false;
 
         waitingForFishNotification.enabled = true;
         canCatchNotification.enabled = false;
         failedCatchNotification.enabled = false;
 
+        GameplayModeManager.Instance.SetFishingMode(true);
+
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+
+        if (!isActive) yield break;
 
         waitingForFishNotification.enabled = false;
         canCatchNotification.enabled = true;
@@ -105,16 +99,15 @@ public class FishingMinigame : MonoBehaviour
         StartCoroutine(StopFishing());
     }
 
-    // ----------------- AUTO FAIL TIMER -----------------
+    // ----------------- AUTO FAIL -----------------
 
-    public IEnumerator StopFishing()
+    private IEnumerator StopFishing()
     {
         yield return new WaitForSeconds(timeToCatch);
 
-        if (hasEnded) yield break;
+        if (!isActive || hasEnded) yield break;
 
         hasEnded = true;
-
         canCatch = false;
         timer = 0;
 
@@ -122,29 +115,28 @@ public class FishingMinigame : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        if (!isActive) yield break;
+
         failedCatchNotification.enabled = false;
         canCatchNotification.enabled = false;
         waitingForFishNotification.enabled = false;
 
         GameplayModeManager.Instance.SetFishingMode(false);
+        isActive = false;
     }
 
     // ----------------- PLAYER INPUT -----------------
 
     public void tryToCatch()
     {
-        if (hasEnded) return;
+        if (!isActive || hasEnded) return;
 
         hasEnded = true;
 
         if (canCatch)
-        {
             score = 1 - timer / timeToCatch;
-        }
         else
-        {
             score = 0;
-        }
 
         canCatch = false;
         timer = 0;
@@ -152,10 +144,12 @@ public class FishingMinigame : MonoBehaviour
         StartCoroutine(ShowResultAndExit());
     }
 
-    // ----------------- RESULT FLOW -----------------
+    // ----------------- RESULT -----------------
 
-    IEnumerator ShowResultAndExit()
+    private IEnumerator ShowResultAndExit()
     {
+        if (!isActive) yield break;
+
         var reward = GetReward(score, ShipManager.shipManager.fishingLevel);
 
         switch (reward.type)
@@ -170,12 +164,15 @@ public class FishingMinigame : MonoBehaviour
                     Mathf.Clamp(ShipManager.shipManager.shipHealth, 0, 100);
                 break;
         }
+
         canCatchNotification.enabled = false;
 
         resultText.text =
             $"Your score was {score:F2}. You caught {reward.type} x{reward.amount}!";
 
         yield return new WaitForSeconds(2f);
+
+        if (!isActive) yield break;
 
         resultText.text = "";
 
@@ -184,5 +181,47 @@ public class FishingMinigame : MonoBehaviour
         failedCatchNotification.enabled = false;
 
         GameplayModeManager.Instance.SetFishingMode(false);
+        isActive = false;
+    }
+
+    // ----------------- CLEAN EXIT (IMPORTANT) -----------------
+
+    public void ExitFishing()
+    {
+        if (!isActive && !hasEnded)
+        {
+            ResetUI();
+            return;
+        }
+
+        isActive = false;
+        hasEnded = true;
+
+        StopAllCoroutines();
+
+        canCatch = false;
+        timer = 0;
+
+        ResetUI();
+
+        GameplayModeManager.Instance.SetFishingMode(false);
+    }
+
+    private void ResetUI()
+    {
+        waitingForFishNotification.enabled = false;
+        canCatchNotification.enabled = false;
+        failedCatchNotification.enabled = false;
+
+        if (resultText != null)
+            resultText.text = "";
+    }
+
+    // ----------------- UPDATE -----------------
+
+    private void FixedUpdate()
+    {
+        if (canCatch)
+            timer += Time.fixedDeltaTime;
     }
 }
