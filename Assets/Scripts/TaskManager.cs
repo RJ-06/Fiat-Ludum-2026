@@ -165,7 +165,7 @@ public class TaskManager : MonoBehaviour
         while (true)
         {
             SpawnIceberg();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
         }
     }
 

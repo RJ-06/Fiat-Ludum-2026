@@ -9,7 +9,8 @@ public class CollisionWithIceberg : MonoBehaviour
         if (other.gameObject.CompareTag("Iceberg"))
         {
             icebergHitSound.Play();
-            Debug.Log("Ship hit iceberg!");
+            ShipManager.shipManager.shipHealth -= 10f;
+            Destroy(other.gameObject);
         }
     }
 }

@@ -213,6 +213,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: crewHunger
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4662791501310877313, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 513.4563
@@ -844,6 +848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShipRendering
       objectReference: {fileID: 0}
+    - target: {fileID: 8019225981160230750, guid: fd76ba18869412942b94a1204e47525b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8761334956040399929, guid: fd76ba18869412942b94a1204e47525b, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1307,6 +1315,14 @@ PrefabInstance:
       propertyPath: crewThirstBar
       value: 
       objectReference: {fileID: 1335540365}
+    - target: {fileID: 2763767032832882577, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2843655934447089496, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4045510696078762843, guid: 4e9f14d48ab1d344bb5fc7c9eea1e814, type: 2}
     - target: {fileID: 4278147468833776008, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

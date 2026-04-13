@@ -38,7 +38,7 @@ public class WorldScroller : MonoBehaviour
 
         for (int i = 0; i < numToInstantiate; i++)
         {
-            float x = -10 + 20 * Random.value;
+            float x = -30 + 60 * Random.value;
             float y = 4 * Random.value;
             float z = -60 - 50 * Random.value;
 
