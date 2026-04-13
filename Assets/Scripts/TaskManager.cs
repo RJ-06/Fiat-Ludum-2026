@@ -48,7 +48,7 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(CreateTask());
         if (spawnFire)
         {
-            text.text = "Fires require a bucket to put out. Grab buckets with (E) and take it to the spigot (back of ship) to fill. Drop full buckets on fires with (Q).";
+            text.text = "Grab buckets (E) and take it to the spigot (back of ship) to fill. (Q) to drop buckets on fires.";
             Invoke(nameof(RemoveText), 15f);
             StartCoroutine(SpawnFires());
         }

@@ -27,13 +27,13 @@ public class Item
             case ItemType.Food:
                 return Resources.Load<Sprite>("tradingItems/food");
             case ItemType.RepairKit:
-                return Resources.Load<Sprite>("tradingItems/repairkit");
+                return Resources.Load<Sprite>("tradingItems/repairKit");
             case ItemType.ArtOfStarvation:
                 return Resources.Load<Sprite>("tradingItems/starvation");
             case ItemType.ArtOfScurvy:
                 return Resources.Load<Sprite>("tradingItems/scurvy");
             case ItemType.RepairManual:
-                return Resources.Load<Sprite>("tradingItems/repairmanual");
+                return Resources.Load<Sprite>("tradingItems/repairManual");
             case ItemType.Cookbook:
                 return Resources.Load<Sprite>("tradingItems/cookbook");
             case ItemType.Fishbook:

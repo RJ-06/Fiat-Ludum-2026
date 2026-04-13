@@ -156,9 +156,9 @@ MonoBehaviour:
   offset: {x: 0, y: 5, z: -6}
   smoothSpeed: 10
   wheelPos: {fileID: 0}
-  cannonOnePos: {fileID: 0}
-  cannonTwoPos: {fileID: 0}
+  cannonPos: {fileID: 0}
   cookingTable: {fileID: 0}
+  fishingSpot: {fileID: 7067277370982743271, guid: 3094bef8a758c774f98296be80de6198, type: 3}
 --- !u!1 &8696171890022966458
 GameObject:
   m_ObjectHideFlags: 0

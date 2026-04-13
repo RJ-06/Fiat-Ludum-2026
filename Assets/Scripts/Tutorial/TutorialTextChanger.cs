@@ -40,12 +40,28 @@ public class TutorialTextChanger : MonoBehaviour
 
         if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && (collider.gameObject.CompareTag("Kitchen") || collider.gameObject.CompareTag("Fishing")))
         {
+            if (collider.gameObject.CompareTag("Kitchen"))
+            {
+                tutorialText.text = "This is the cooking minigame to gain food! (SPACE) to cut at the dotted lines; (Q) to quit.";
+            }
+            else if (collider.gameObject.CompareTag("Fishing"))
+            {
+                tutorialText.text = "This is the fishing minigame to gain loot!. (E) to hook a fish when the icon appears.";
+            }
+
             if (!sceneSwitchScheduled)
             {
-                tutorialText.text = "";
                 Invoke(nameof(BeginSwitchingScenes), 15f);
             }
             sceneSwitchScheduled = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (TutorialTaskManager.Instance.spawnedTutorialTasks == 3 && (other.gameObject.CompareTag("Kitchen") || other.gameObject.CompareTag("Fishing")))
+        {
+            tutorialText.text = "";
         }
     }
 

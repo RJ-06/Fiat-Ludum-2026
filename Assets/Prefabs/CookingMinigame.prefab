@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dda034e5a021c7418e62ac4569fb89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SliderMover
-  leftBound: -300
-  rightBound: 300
+  leftBound: -200
+  rightBound: 200
   speed: 2
   sliderRect: {fileID: 0}
 --- !u!1 &2208593176738566485
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3db6754351e144aad62b6e3cb64ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SliceZoneVisualizer
-  zonePrefab: {fileID: 1439892834323621481, guid: 0549ad0e86ecd5c478f22f5f10987951, type: 3}
+  zonePrefab: {fileID: 2416447896402786257, guid: c191ec6e4dc39a848be8afee7fe27df5, type: 3}
   markerPrefab: {fileID: 6700868948887899862, guid: fbc55b06d3990f3408236252d7e6c179, type: 3}
   parent: {fileID: 0}
 --- !u!1 &6308931482564897677
@@ -238,6 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2d5ce9c7f8b2145b1fca53913a169a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SliceEvaluator
-  leftBound: -300
-  rightBound: 300
+  leftBound: -200
+  rightBound: 200
   zones: []

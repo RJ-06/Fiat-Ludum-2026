@@ -474,10 +474,6 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 294360259}
-    - target: {fileID: 3287965349989385649, guid: 751ba6d8e7970974392a85e35145f350, type: 3}
-      propertyPath: zonePrefab
-      value: 
-      objectReference: {fileID: 2416447896402786257, guid: c191ec6e4dc39a848be8afee7fe27df5, type: 3}
     - target: {fileID: 4440565243398526908, guid: 751ba6d8e7970974392a85e35145f350, type: 3}
       propertyPath: resultText
       value: 
@@ -534,14 +530,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8460989140959218010, guid: 751ba6d8e7970974392a85e35145f350, type: 3}
-      propertyPath: leftBound
-      value: -200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460989140959218010, guid: 751ba6d8e7970974392a85e35145f350, type: 3}
-      propertyPath: rightBound
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -555,42 +543,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1000606500}
     m_Modifications:
-    - target: {fileID: 4550695362817271323, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: affc821820d260c45a252503f8c9aee1, type: 3}
-    - target: {fileID: 4550695362817271323, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550695362817271323, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4550695362817271323, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5592950345436258232, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 70462b41b6e473740bc5ce25be539832, type: 3}
-    - target: {fileID: 5592950345436258232, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5592950345436258232, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5592950345436258232, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5608927850737605609, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9432b44407cea9940a806019a1e7a57e, type: 3}
     - target: {fileID: 6433919166722735784, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
       propertyPath: m_Name
       value: FishingMinigame
@@ -636,8 +588,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1934845060141140735, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
@@ -1172,6 +1123,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 988239472946656126, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
+    - {fileID: 138677960946833487, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7515854758428217139, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
       insertIndex: -1
@@ -1489,7 +1441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1000606500
 Transform:
   m_ObjectHideFlags: 0
