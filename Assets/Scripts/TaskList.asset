@@ -14,50 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TaskList
   tasks:
   - name: Leak1
-    location: {x: -2.78, y: 6.3, z: -2.79}
+    location: {x: -1, y: 10, z: 12}
     fixTime: 5
     fixRate: 1
-    activeTimer: 15
+    activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
   - name: Leak2
-    location: {x: -1, y: 8, z: 12}
+    location: {x: -4.5, y: 8, z: 0}
     fixTime: 5
     fixRate: 1
-    activeTimer: 15
+    activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
   - name: Leak3
-    location: {x: -1, y: 7, z: -7}
+    location: {x: -2, y: 9, z: -6.75}
     fixTime: 5
     fixRate: 1
-    activeTimer: 15
+    activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
   - name: Leak4
-    location: {x: 2.3, y: 6, z: 1.5}
+    location: {x: -4, y: 2.6, z: 0}
     fixTime: 5
     fixRate: 1
-    activeTimer: 15
+    activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
   - name: Leak5
-    location: {x: 0, y: 1, z: 6}
+    location: {x: 0, y: 2.6, z: 4}
     fixTime: 5
     fixRate: 1
-    activeTimer: 20
-    adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-  - name: Leak6
-    location: {x: -1.64, y: 18.64, z: -1.33}
-    fixTime: 5
-    fixRate: 1
-    activeTimer: 25
-    adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-  - name: Leak7
-    location: {x: -3, y: 2, z: 3}
-    fixTime: 5
-    fixRate: 1
-    activeTimer: 25
-    adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
-  - name: Leak8
-    location: {x: -3, y: 1, z: 1}
-    fixTime: 5
-    fixRate: 1
-    activeTimer: 25
+    activeTimer: 40
     adverseEvent: {fileID: 7018181160268744746, guid: c2140d37d207c2944b94c570c0dd5fd2, type: 3}
