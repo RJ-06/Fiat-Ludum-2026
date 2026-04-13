@@ -279,7 +279,7 @@ Transform:
   - {fileID: 8746470473794524631}
   - {fileID: 5841196862905822625}
   - {fileID: 933116289446878171}
-  - {fileID: 7566659046716997821}
+  - {fileID: 3166630750446734412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8305266865871862220
@@ -945,40 +945,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: b662248f97828f84d96bf2a7b27c9c1e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2918158044912548448}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b662248f97828f84d96bf2a7b27c9c1e, type: 3}
---- !u!1 &6870651936853914286 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: b662248f97828f84d96bf2a7b27c9c1e, type: 3}
-  m_PrefabInstance: {fileID: 3204478942090734503}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2918158044912548448
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6870651936853914286}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 17.326603, y: 13.382332, z: 18.059956}
-  m_Center: {x: -1.2082617, y: -0.6048329, z: -0.69966465}
---- !u!4 &7566659046716997821 stripped
+--- !u!4 &3166630750446734412 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: b662248f97828f84d96bf2a7b27c9c1e, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b662248f97828f84d96bf2a7b27c9c1e, type: 3}
   m_PrefabInstance: {fileID: 3204478942090734503}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5964114636495349365
@@ -1048,6 +1019,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1f0d128833a321d449960afb38e260bb, type: 3}
       propertyPath: m_Name
       value: Boat_bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f0d128833a321d449960afb38e260bb, type: 3}
+      propertyPath: m_TagString
+      value: Ship Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1239,6 +1214,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d3bf61cacce538b499ec340067032421, type: 3}
       propertyPath: m_Name
       value: Boat_Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3bf61cacce538b499ec340067032421, type: 3}
+      propertyPath: m_TagString
+      value: Ship Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
