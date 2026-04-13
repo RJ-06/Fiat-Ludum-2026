@@ -17,5 +17,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: df26b14a1c1887c478a6a54340f91141
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: f799d78c909b44943b0c1793e8354bc5
+  - enabled: 1
+    path: Assets/Scenes/Island Raid.unity
+    guid: a02cb4d03d0bfdd459907ef5ccad500d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

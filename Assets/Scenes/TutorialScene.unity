@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8019225981160230750, guid: fd76ba18869412942b94a1204e47525b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8276863042246964867, guid: fd76ba18869412942b94a1204e47525b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4
@@ -285,76 +289,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 167414806}
   m_SourcePrefab: {fileID: 100100000, guid: aa4b386b64cafec44afe925224828921, type: 3}
---- !u!1 &67871936 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6125498386392661629, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
-  m_PrefabInstance: {fileID: 1617238289}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &67871940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67871936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a27551374b8979149a968231fd5c7746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialTaskManager
-  minTimeForNextTask: 40
-  maxTimeForNextTask: 40
-  minTimeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -12492.01
-      value: 18.942713
-      inSlope: -0.0000036554218
-      outSlope: -0.0000036554218
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 1
-    - serializedVersion: 3
-      time: 84496.42
-      value: 17.134983
-      inSlope: -0.000021806174
-      outSlope: -0.000021806174
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxTimeCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -23.391266
-      value: 30.175446
-      inSlope: -0.000021041098
-      outSlope: -0.000021041098
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 623.478
-      value: 30.161835
-      inSlope: -0.000021041098
-      outSlope: -0.000021041098
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  tasksList: {fileID: 11400000, guid: 9c428f34640223a40a643e17b32ebfdc, type: 2}
-  activeTasks: []
-  spawnedTutorialTasks: 0
 --- !u!1 &167414796 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1614762453347422850, guid: aa4b386b64cafec44afe925224828921, type: 3}
@@ -1102,7 +1036,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 988239472946656126, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7515854758428217139, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
       insertIndex: -1
@@ -2027,8 +1962,24 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: sceneList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: vitaminCDecreaseRate
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: 'sceneList.Array.data[4]'
+      value: Island Raid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: 'sceneList.Array.data[5]'
+      value: TradingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: 'sceneList.Array.data[6]'
+      value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 4662791501310877313, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2078,10 +2029,7 @@ PrefabInstance:
     - {fileID: 2121903686717631824, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6125498386392661629, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 67871940}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
 --- !u!1 &1667787074
 GameObject:
@@ -2353,6 +2301,103 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8904655667277154401, guid: fd76ba18869412942b94a1204e47525b, type: 3}
   m_PrefabInstance: {fileID: 33133520}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2128721697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128721699}
+  - component: {fileID: 2128721698}
+  m_Layer: 0
+  m_Name: TaskManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2128721698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128721697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27551374b8979149a968231fd5c7746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialTaskManager
+  minTimeForNextTask: 40
+  maxTimeForNextTask: 40
+  minTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -12492.01
+      value: 18.942713
+      inSlope: -0.0000036554218
+      outSlope: -0.0000036554218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 84496.42
+      value: 17.134983
+      inSlope: -0.000021806174
+      outSlope: -0.000021806174
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -23.391266
+      value: 30.175446
+      inSlope: -0.000021041098
+      outSlope: -0.000021041098
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 623.478
+      value: 30.161835
+      inSlope: -0.000021041098
+      outSlope: -0.000021041098
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  tasksList: {fileID: 11400000, guid: 9c428f34640223a40a643e17b32ebfdc, type: 2}
+  activeTasks: []
+  spawnedTutorialTasks: 0
+--- !u!4 &2128721699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128721697}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.73746, y: 0, z: -1.17049}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129269922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,3 +2534,4 @@ SceneRoots:
   - {fileID: 370303041}
   - {fileID: 1000606500}
   - {fileID: 303938748}
+  - {fileID: 2128721699}

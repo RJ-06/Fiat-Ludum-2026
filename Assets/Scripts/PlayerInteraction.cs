@@ -1,23 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    [SerializeField] ResourceManager resourceManager;
     private bool nearFoodLoot = false, nearMoneyLoot = false, startedLooting = false;
     private GameObject lootableObject;
+    public TMPro.TMP_Text text;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    int foodLooted = 0;
+    int goldLooted = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnInteractPress(InputValue value)
     {
@@ -31,15 +24,15 @@ public class PlayerInteraction : MonoBehaviour
             startedLooting = false;
             if (nearFoodLoot)
             {
-                ++resourceManager.resources.food;
-                Debug.Log("Food is now " + resourceManager.resources.food);
+                ShipManager.shipManager.crewHunger = Mathf.Min(100f, ShipManager.shipManager.crewHunger + 20f);
+                foodLooted += 20;
             }
             else if (nearMoneyLoot)
             {
                 float rawMoneyAmount = Random.Range(30f, 200f);
                 int adjustedMoney = (int)Mathf.Round(Mathf.Pow(1.02604f, rawMoneyAmount) + 29f);
-                resourceManager.resources.money += adjustedMoney;
-                Debug.Log("Money is now " + resourceManager.resources.money);
+                ShipManager.shipManager.gold += adjustedMoney;
+                goldLooted += adjustedMoney;
             }
 
             // Make sure basket can't be looted more than once
@@ -64,5 +57,39 @@ public class PlayerInteraction : MonoBehaviour
             nearFoodLoot = false;
             nearMoneyLoot = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            text.text = "The townspeople caught you stealing! You lost 250 gold.";
+            Time.timeScale = 0f;
+            ShipManager.shipManager.gold = Mathf.Max(0, ShipManager.shipManager.gold - 250);
+            Invoke(nameof(SwitchScene), 5f);
+        }
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -10f)
+        {
+            text.text = "You successfully escaped with " + goldLooted + " gold and " + foodLooted + " food.";
+            Time.timeScale = 0f;
+            StartCoroutine(SwitchSceneAfterDelay());
+        }
+    }
+
+    IEnumerator SwitchSceneAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+        SwitchScene();
+    }
+    void SwitchScene()
+    {
+        Time.timeScale = 1f;
+        ShipManager.shipManager.sceneIndex++;
+        string nextScene = ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex];
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 }

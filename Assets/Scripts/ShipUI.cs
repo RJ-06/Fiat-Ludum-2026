@@ -7,6 +7,7 @@ public class ShipUI : MonoBehaviour
     private ShipManager shipManager;
     public Slider crewHungerBar;
     public Slider shipHealthBar;
+    public TMPro.TMP_Text goldText;
 
     private float percentShipHealth;
     private float percentHunger;
@@ -28,5 +29,7 @@ public class ShipUI : MonoBehaviour
 
         crewHungerBar.value = percentHunger;
         shipHealthBar.value = percentShipHealth;
+
+        goldText.text = "Gold: " + shipManager.gold.ToString();
     }
 }

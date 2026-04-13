@@ -17,6 +17,7 @@ TagManager:
   - Kitchen
   - Fishing
   - Ship Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX

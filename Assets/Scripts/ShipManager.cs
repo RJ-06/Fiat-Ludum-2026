@@ -33,9 +33,8 @@ public class ShipManager : MonoBehaviour
     public Queue<CrewmateBehavior> crewmateQueue = new Queue<CrewmateBehavior>();
     public GameObject crewmate;
 
-
     public int sceneIndex = 0;
-    public List<string> sceneList = new List<string>() { "TutorialLevel", "TradingScene", "Level2", "TradingScene" };
+    public List<string> sceneList = new List<string>() { "TutorialLevel", "TradingScene", "Level2", "Island Raid", "TradingScene", "Level3", "TradingScene" };
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,7 +42,7 @@ public class ShipManager : MonoBehaviour
     {
         if (shipManager != null && shipManager != this)
         {
-            Destroy(gameObject); // kill duplicates
+            Destroy(gameObject);
             return;
         }
 
@@ -79,28 +78,21 @@ public class ShipManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier * actingHungerDecreaseMultiplier * Time.deltaTime;
-        vitaminCLevel -= vitaminCDecreaseRate * vitaminCDecreaseMultiplier * Time.deltaTime;
+        if (sceneList[sceneIndex].Contains("Level"))
+        {
 
-        if (crewHunger < 30f)
-        {
-            actingEfficiencyMultiplier = 0.5f;
-            actingSpeedMultiplier = 0.5f;
-        }
-        else
-        {
-            actingEfficiencyMultiplier = 1f;
-            actingSpeedMultiplier = 1f;
-        }
+            crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier * actingHungerDecreaseMultiplier * Time.deltaTime;
 
-        if (vitaminCLevel < 0f)
-        {
-            actingHungerDecreaseMultiplier = 2f;
-            vitaminCLevel = 0f;
-        }
-        else
-        {
-            actingHungerDecreaseMultiplier = 1f;
+            if (crewHunger < 30f)
+            {
+                actingEfficiencyMultiplier = 0.5f;
+                actingSpeedMultiplier = 0.5f;
+            }
+            else
+            {
+                actingEfficiencyMultiplier = 1f;
+                actingSpeedMultiplier = 1f;
+            }
         }
     }
 
