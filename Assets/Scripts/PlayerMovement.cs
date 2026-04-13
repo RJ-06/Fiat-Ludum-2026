@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    public Renderer playerRend;
+
     // Animation Hashes
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
     private readonly int isClimbingHash = Animator.StringToHash("isClimbing");
@@ -60,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        playerRend = GetComponentInChildren<Renderer>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

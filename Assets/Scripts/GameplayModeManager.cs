@@ -3,7 +3,6 @@ using UnityEngine;
 public class GameplayModeManager : MonoBehaviour
 {
     public static GameplayModeManager Instance;
-    public GameObject player;
     public enum Mode
     {
         PlayerControl,
@@ -18,6 +17,7 @@ public class GameplayModeManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        
     }
 
     public void SetShipSteeringMode(bool enabled)
@@ -25,7 +25,7 @@ public class GameplayModeManager : MonoBehaviour
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
             ChangeShipVisibility.Instance.ToggleVisibility();
-            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+            PlayerMovement.instance.playerRend.enabled = !PlayerMovement.instance.playerRend.enabled;
         }
 
         currentMode = enabled ? Mode.ShipSteering : Mode.PlayerControl;
@@ -36,7 +36,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+            PlayerMovement.instance.playerRend.enabled = !PlayerMovement.instance.playerRend.enabled;
         }
 
         currentMode = enabled ? Mode.Cooking : Mode.PlayerControl;
@@ -46,7 +46,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+            PlayerMovement.instance.playerRend.enabled = !PlayerMovement.instance.playerRend.enabled;
         }
 
         currentMode = enabled ? Mode.Fishing : Mode.PlayerControl;
@@ -56,7 +56,7 @@ public class GameplayModeManager : MonoBehaviour
     {
         if (!((currentMode == Mode.PlayerControl) ^ enabled))
         {
-            player.GetComponent<Renderer>().enabled = !player.GetComponent<Renderer>().enabled;
+            PlayerMovement.instance.playerRend.enabled = !PlayerMovement.instance.playerRend.enabled;
         }
 
         currentMode = enabled ? Mode.CannonShooting : Mode.PlayerControl;
