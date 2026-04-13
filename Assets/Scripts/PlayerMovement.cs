@@ -391,10 +391,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.MovePosition(adjustedTarget);
-
+        rb.isKinematic = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = false;
+        
 
         if (playerAnimator != null) playerAnimator.SetBool(isClimbingHash, false); // Stop climbing animation
     }

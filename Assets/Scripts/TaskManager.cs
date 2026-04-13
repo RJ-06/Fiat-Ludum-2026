@@ -31,6 +31,8 @@ public class TaskManager : MonoBehaviour
     public bool spawnFire = false;
     int firesSpawned = 0;
 
+    [SerializeField] bool isBossFight;
+
 
     private void Awake()
     {
@@ -45,7 +47,7 @@ public class TaskManager : MonoBehaviour
     void Start()
     {
         SceneTransitionManager.Instance.StartTransition("Island Raid");
-        StartCoroutine(CreateTask());
+        if(!isBossFight)StartCoroutine(CreateTask());
         if (spawnFire)
         {
             text.text = "Grab buckets (E) and take it to the spigot (back of ship) to fill. (Q) to drop buckets on fires.";
