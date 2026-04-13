@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class KrakenScript : MonoBehaviour
 {
-
     public int healthPoints = 100;
     public int damagePerCannonball = 15;
+    [SerializeField] Animator krakenAnimator;
 
     public UnityEvent OnKrakenDeath;
 
@@ -32,10 +32,12 @@ public class KrakenScript : MonoBehaviour
     [Header("Tentacle Sweep Attack")]
     bool isSweepAttacking;
     [SerializeField] GameObject tentacleOne;
-    [SerializeField] float tentacleMoveTime = 1f; // Added a variable to control how fast it rises/falls
-    [SerializeField] Animator krakenAnimator;
+    [SerializeField] float tentacleMoveTime = 1f;
+    [SerializeField] Animator tentacleAnimator;
+    [SerializeField] float tentacleRaiseYPos;
+    [SerializeField] float tentacleSubmergedYPos;
 
-    enum bossState
+    public enum bossState
     {
         submerge,
         waiting,
@@ -43,37 +45,42 @@ public class KrakenScript : MonoBehaviour
         sweepAttack,
     }
 
-    private bossState currentState;
+    public bossState currentState;
+    private bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
     {
         taskManager = FindAnyObjectByType<TaskManager>();
+        OnKrakenDeath.AddListener(OnDeathAnim);
+
         StartCoroutine(StateControl());
     }
 
     IEnumerator StateControl()
     {
-        while (true)
+        while (!isDead)
         {
             int choice = Random.Range(0, 4);
             currentState = (bossState)choice;
+
+            // Generate a variation and clamp the total duration to be > 0
             float randomVariation = Random.Range(-variationTime, variationTime);
+
             switch (currentState)
             {
                 case bossState.submerge:
-                    yield return StartCoroutine(SubmergeKraken(timeSubmerged + randomVariation));
+                    yield return StartCoroutine(SubmergeKraken(Mathf.Max(0, timeSubmerged + randomVariation)));
                     break;
                 case bossState.waiting:
-                    yield return StartCoroutine(KrakenWaiting(timeWaiting + randomVariation));
+                    yield return StartCoroutine(KrakenWaiting(Mathf.Max(0, timeWaiting + randomVariation)));
                     break;
                 case bossState.leakAttack:
                     LeakAttack();
-                    yield return new WaitForSeconds(timeLeakAttack + randomVariation);
+                    yield return new WaitForSeconds(Mathf.Max(0, timeLeakAttack + randomVariation));
                     break;
                 case bossState.sweepAttack:
-                    // Changed this to start the sweep coroutine and wait for it to finish
-                    yield return StartCoroutine(SweepAttack(timeSweepAttack + randomVariation));
+                    yield return StartCoroutine(SweepAttack(Mathf.Max(0, timeSweepAttack + randomVariation)));
                     break;
                 default: break;
             }
@@ -91,7 +98,6 @@ public class KrakenScript : MonoBehaviour
             elapsed += Time.deltaTime;
             float progress = elapsed / duration;
 
-            // Mathf.Sin over progress * PI creates a smooth curve from 0 to 1 and back to 0
             float sinWave = Mathf.Sin(progress * Mathf.PI);
             float currentY = Mathf.Lerp(regularDepth, submergeDepth, sinWave);
 
@@ -100,7 +106,6 @@ public class KrakenScript : MonoBehaviour
             yield return null;
         }
 
-        // Ensure the Kraken ends up exactly back at the regular depth
         transform.position = new Vector3(initialPosition.x, regularDepth, initialPosition.z);
     }
 
@@ -113,7 +118,6 @@ public class KrakenScript : MonoBehaviour
         {
             elapsed += Time.deltaTime;
 
-            // Move left and right relative to the initial X position over time
             float xOffset = Mathf.Sin(elapsed * waitingMoveSpeed) * waitingMoveDistance;
 
             transform.position = new Vector3(initialPosition.x + xOffset, regularDepth, initialPosition.z);
@@ -121,7 +125,6 @@ public class KrakenScript : MonoBehaviour
             yield return null;
         }
 
-        // Ensure it ends up exactly at its original X and regular depth
         transform.position = new Vector3(initialPosition.x, regularDepth, initialPosition.z);
     }
 
@@ -143,8 +146,10 @@ public class KrakenScript : MonoBehaviour
         if (tentacleOne != null)
         {
             Vector3 startPos = tentacleOne.transform.position;
-            Vector3 hiddenPos = new Vector3(startPos.x, submergeDepth, startPos.z);
-            Vector3 raisedPos = new Vector3(startPos.x, regularDepth, startPos.z);
+            Vector3 hiddenPos = new Vector3(startPos.x, tentacleSubmergedYPos, startPos.z);
+            Vector3 raisedPos = new Vector3(startPos.x, tentacleRaiseYPos, startPos.z);
+
+            tentacleOne.transform.position = hiddenPos;
 
             // 1. Lerp Upwards
             float elapsed = 0f;
@@ -156,17 +161,17 @@ public class KrakenScript : MonoBehaviour
             }
             tentacleOne.transform.position = raisedPos;
 
-            // =========================================================
-            // SPACE TO TRIGGER ANIMATION
-            // Calculate how much time is left for the attack animation
+            // Trigger animations
             float attackDuration = duration - (tentacleMoveTime * 2);
             if (attackDuration > 0)
             {
-                // e.g. animator.SetTrigger("SweepAttack");
-                krakenAnimator.SetTrigger("SweepAttack");
+                if (tentacleAnimator != null)
+                {
+                    tentacleAnimator.SetTrigger("SweepAttack");
+                }
+
                 yield return new WaitForSeconds(attackDuration);
             }
-            // =========================================================
 
             // 2. Lerp Downwards
             elapsed = 0f;
@@ -177,24 +182,45 @@ public class KrakenScript : MonoBehaviour
                 yield return null;
             }
             tentacleOne.transform.position = hiddenPos;
+
+            if (tentacleAnimator != null) tentacleAnimator.ResetTrigger("SweepAttack");
         }
 
         isSweepAttacking = false;
     }
 
-    private void FixedUpdate()
+    public void OnDeathAnim()
     {
-        if (healthPoints <= 0) // Minor adjustment: Better to use <= instead of < for health checks 
-        {
-            OnKrakenDeath.Invoke();
-        }
+        krakenAnimator.SetTrigger("Die");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<CannonBall>() != null)
+        if (isDead) return;
+
+        // TryGetComponent applies zero garbage footprint if missing compared to GetComponent
+        if (other.gameObject.TryGetComponent<CannonBall>(out _))
         {
             healthPoints -= damagePerCannonball;
+
+            if (healthPoints <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                krakenAnimator.SetTrigger("TakeDamage");
+            }
         }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+
+        // Stop all active Coroutine attacks and behavior so the boss doesn't keep fighting
+        StopAllCoroutines();
+
+        OnKrakenDeath.Invoke();
     }
 }
