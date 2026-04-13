@@ -72,7 +72,7 @@ public class TaskManager : MonoBehaviour
 
     public IEnumerator CreateTask()
     {
-        while (true) 
+        while (!spawnFire) 
         {
             if (spawnedTasks >= numToSpawn)
             {
@@ -84,6 +84,13 @@ public class TaskManager : MonoBehaviour
                 }
                 yield break;
             }
+
+            if (activeTaskIndices.Count >= tasksList.tasks.Count)
+            {
+                yield return null;
+                continue;
+            }
+
             int index = Random.Range(0, tasksList.tasks.Count);
             while (activeTaskIndices.Contains(index))
             {
@@ -110,6 +117,12 @@ public class TaskManager : MonoBehaviour
     {
         while (true) 
         {
+            if (activeTaskIndices.Count >= tasksList.tasks.Count)
+            {
+                yield return null;
+                continue;
+            }
+
             int index = Random.Range(0, tasksList.tasks.Count);
             while (activeTaskIndices.Contains(index))
             {
@@ -120,7 +133,7 @@ public class TaskManager : MonoBehaviour
 
             FireBehavior fire = Instantiate(firePrefab, selectedTask.location, Quaternion.identity);
             fire.index = index;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(15f);
         }
     }
 
@@ -137,6 +150,7 @@ public class TaskManager : MonoBehaviour
     {
         ShipManager.shipManager.sceneIndex++;
         string nextScene = ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex];
+        StopAllCoroutines();
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class CrewmateBehavior : MonoBehaviour
 {
@@ -127,14 +128,12 @@ public class CrewmateBehavior : MonoBehaviour
             e.BeginFixing();
 
             // FIX 2: Move the Invoke inside the arrival callback!
-            Invoke(nameof(AddSelfToQueue), e.fixTime);
+            StartCoroutine(ReturnToQueueAfterDelay(e.fixTime));
         });
 
-        // Removed the Invoke from down here. 
-        // Before, it was counting down immediately as they START walking!
     }
 
-    private void AddSelfToQueue()
+    private IEnumerator ReturnToQueueAfterDelay(float time)
     {
         // Cancel the fixing animation once they are done and back in queue
         if (crewmateAnimator != null)
@@ -142,6 +141,7 @@ public class CrewmateBehavior : MonoBehaviour
             crewmateAnimator.SetBool(isFixingHash, false);
         }
 
+        yield return new WaitForSeconds(time);
         ShipManager.shipManager.crewmateQueue.Enqueue(this);
     }
 }

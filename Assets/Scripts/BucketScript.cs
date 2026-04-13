@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class BucketScript : MonoBehaviour
 {
     [SerializeField] private float fillRate = 1;
-    [SerializeField] private float fillTime = 5;
+    [SerializeField] private float fillTime = 3;
     private float currentFillAmount = 5;
 
     public Image fillBar;
