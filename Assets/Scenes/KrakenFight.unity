@@ -1911,6 +1911,8 @@ MonoBehaviour:
   tentacleAnimator: {fileID: 1123569505}
   tentacleRaiseYPos: -4
   tentacleSubmergedYPos: -40.8
+  krakenAttackSound: {fileID: 1972755542}
+  krakenDeathSound: {fileID: 1972755541}
   currentState: 0
 --- !u!135 &1972755540
 SphereCollider:
@@ -1945,7 +1947,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 23bfcfd7fce00b347955224ae8d049ff, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2042,7 +2044,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 01e0ed036f0424c5e8130d4cbd3dce43, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

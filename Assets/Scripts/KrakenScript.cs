@@ -36,6 +36,10 @@ public class KrakenScript : MonoBehaviour
     [SerializeField] float tentacleRaiseYPos;
     [SerializeField] float tentacleSubmergedYPos;
 
+    [Header("SFX")]
+    [SerializeField] AudioSource krakenAttackSound;
+    [SerializeField] AudioSource krakenDeathSound;
+
     public enum bossState
     {
         submerge,
@@ -169,6 +173,8 @@ public class KrakenScript : MonoBehaviour
                     tentacleAnimator.SetTrigger("SweepAttack");
                 }
 
+                krakenAttackSound.Play();
+
                 yield return new WaitForSeconds(attackDuration);
             }
 
@@ -190,6 +196,7 @@ public class KrakenScript : MonoBehaviour
 
     public void OnDeathAnim()
     {
+        krakenDeathSound.Play();
         krakenAnimator.SetTrigger("Die");
     }
 
