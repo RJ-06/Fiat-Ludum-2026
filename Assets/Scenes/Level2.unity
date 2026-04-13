@@ -650,6 +650,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5706511091357512754, guid: fd76ba18869412942b94a1204e47525b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.93
+      objectReference: {fileID: 0}
     - target: {fileID: 6087268805507746109, guid: fd76ba18869412942b94a1204e47525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1885,11 +1889,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: hungerDecreaseRate
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: vitaminCDecreaseRate
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4662791501310877313, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2152,10 +2156,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   worldScroller: {fileID: 1409496758}
-  tasksList: {fileID: 11400000, guid: 12ce5183b00ab9c42925f79cf3092253, type: 2}
+  tasksList: {fileID: 11400000, guid: 6df93c6a961263742ad1cd0eafd2a0ab, type: 2}
   activeTasks: []
   text: {fileID: 1211884842}
-  numToSpawn: 15
+  numToSpawn: 10
 --- !u!4 &2045293934
 Transform:
   m_ObjectHideFlags: 0

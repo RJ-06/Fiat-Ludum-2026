@@ -162,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 3923786189331047653}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 7.58, z: 2.23}
+  m_LocalPosition: {x: -1.41, y: 9.6, z: 2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -292,9 +292,7 @@ MonoBehaviour:
   viewingTop: 1
   topHalf: {fileID: 8761334956040399929}
   bottomHalf: {fileID: 6775000951314864932}
-  topRenderer: {fileID: 7104005964087397868}
-  transparentMat: {fileID: 2100000, guid: 8089547ba7e14184a84cd60b28cb4128, type: 2}
-  opaqueMat: {fileID: 2100000, guid: 9bff2d307d2afed4bb3d7a093b02b2e7, type: 2}
+  transparentAlpha: 0.3
 --- !u!65 &2302561893978105845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -486,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 9035396791761547463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.56, y: 4.02, z: 2.67}
+  m_LocalPosition: {x: -1.56, y: 2.77, z: 2.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -814,11 +812,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1017459075641793000}
   m_SourcePrefab: {fileID: 100100000, guid: d3bf61cacce538b499ec340067032421, type: 3}
---- !u!23 &7104005964087397868 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d3bf61cacce538b499ec340067032421, type: 3}
-  m_PrefabInstance: {fileID: 8455484561853059432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8276863042246964867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3bf61cacce538b499ec340067032421, type: 3}
