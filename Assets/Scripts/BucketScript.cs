@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class BucketScript : MonoBehaviour
 {
     [SerializeField] private float fillRate = 1;
-    [SerializeField] private float fillTime = 5;
+    [SerializeField] private float fillTime = 3;
     private float currentFillAmount = 5;
 
     public Image fillBar;
@@ -26,8 +26,10 @@ public class BucketScript : MonoBehaviour
         {
             OnFilled();
         }
+        else 
+        
 
-        fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
+            fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
     }
 
     public void BeginFilling()
@@ -47,13 +49,12 @@ public class BucketScript : MonoBehaviour
         isFilling = false;
         fillBar.enabled = false;
         isFilled = true;
-        GetComponent<Renderer>().material.color = Color.blue; // Change color to indicate it's filled
     }
 
-    private void OnEmpty() 
+    public void OnEmpty() 
     {
         isFilled = false;
-        GetComponent<Renderer>().material.color = Color.gray;
+        currentFillAmount = fillTime;
     }
 
     private void OnTriggerEnter(Collider other)

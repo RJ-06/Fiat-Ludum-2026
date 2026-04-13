@@ -31,7 +31,7 @@ public class ShipManager : MonoBehaviour
     public int gold = 10000;
 
     public Queue<CrewmateBehavior> crewmateQueue = new Queue<CrewmateBehavior>();
-    public CrewmateBehavior crewmate;
+    public GameObject crewmate;
 
 
     public int sceneIndex = 0;
@@ -71,8 +71,8 @@ public class ShipManager : MonoBehaviour
 
             for (int i = 0; i < numCrew; i++)
             {
-                CrewmateBehavior newCrew = Instantiate(crewmate, new Vector3(-1, 8, 12), Quaternion.identity);
-                crewmateQueue.Enqueue(newCrew);
+                GameObject newCrew = Instantiate(crewmate, new Vector3(-1, 8, 12), Quaternion.identity);
+                crewmateQueue.Enqueue(newCrew.GetComponent<CrewmateBehavior>());
             }
         }
     }

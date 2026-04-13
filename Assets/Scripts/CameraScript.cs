@@ -8,8 +8,7 @@ public class CameraScript : MonoBehaviour
     public float smoothSpeed = 10f;
 
     [SerializeField] private Transform wheelPos;
-    [SerializeField] private Transform cannonOnePos;
-    [SerializeField] private Transform cannonTwoPos;
+    [SerializeField] private Transform cannonPos;
     [SerializeField] private Transform cookingTable;
     [SerializeField] private Transform fishingSpot;
 
@@ -32,12 +31,8 @@ public class CameraScript : MonoBehaviour
         }
         else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.CannonShooting)
         { //choose between which of the two cannons to use by finding which one you're closer to (the one you're in interaction range of)
-            float distanceOne = Vector2.Distance(player.position, cannonOnePos.position);
-            float distanceTwo = Vector2.Distance(player.position, cannonTwoPos.position);
-            Transform cannonChoice =
-                (distanceOne <= distanceTwo) ? cannonChoice = cannonOnePos : cannonTwoPos;
 
-            AlignToForward(cannonChoice, Vector3.left); //DIRECTION HAS TO BE CHANGED ONCE SWITCHED TO LOWER DECK CANNONSa
+            AlignToForward(cannonPos, Vector3.left); 
             return;
         }
         else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Cooking)
@@ -47,7 +42,7 @@ public class CameraScript : MonoBehaviour
         }
         else if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Fishing) 
         {
-            AlignToForward(fishingSpot, Vector3.right); //SWITCH DIRECTION
+            AlignToForward(fishingSpot, Vector3.right); 
             return;
         }
 
