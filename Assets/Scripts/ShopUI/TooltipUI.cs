@@ -7,6 +7,7 @@ public class TooltipUI : MonoBehaviour
 
     [SerializeField] private GameObject root;
     [SerializeField] private TMP_Text text;
+    [SerializeField] private UnityEngine.UI.Image image;
 
     private void Awake()
     {
@@ -14,14 +15,15 @@ public class TooltipUI : MonoBehaviour
         Hide();
     }
 
-    public void Show(string description)
+    public void Show(string description, Sprite itemSprite)
     {
         root.SetActive(true);
         text.text = description;
+        image.sprite = itemSprite;
     }
 
     public void Hide()
     {
-        root.SetActive(false);
+        text.text = "Description";
     }
 }

@@ -16,18 +16,34 @@ public class Item
         Crewmate
     }
 
-    //public static Sprite GetSprite(ItemType itemType)
-    //{
-    //    switch (itemType)
-    //    {
-    //        case ItemType.Oranges:
-    //            return Resources.Load<Sprite>("Sprites/Shop/oranges");
-    //        case ItemType.Boots:
-    //            return Resources.Load<Sprite>("Sprites/Shop/boots");
-    //        default:
-    //            return null;
-    //    }
-    //}
+    public static Sprite GetSprite(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.Oranges:
+                return Resources.Load<Sprite>("tradingItems/oranges");
+            case ItemType.Boots:
+                return Resources.Load<Sprite>("tradingItems/boots");
+            case ItemType.Food:
+                return Resources.Load<Sprite>("tradingItems/food");
+            case ItemType.RepairKit:
+                return Resources.Load<Sprite>("tradingItems/repairkit");
+            case ItemType.ArtOfStarvation:
+                return Resources.Load<Sprite>("tradingItems/starvation");
+            case ItemType.ArtOfScurvy:
+                return Resources.Load<Sprite>("tradingItems/scurvy");
+            case ItemType.RepairManual:
+                return Resources.Load<Sprite>("tradingItems/repairmanual");
+            case ItemType.Cookbook:
+                return Resources.Load<Sprite>("tradingItems/cookbook");
+            case ItemType.Fishbook:
+                return Resources.Load<Sprite>("tradingItems/artOfTheSea");
+            case ItemType.Crewmate:
+                return Resources.Load<Sprite>("tradingItems/crewmate");
+            default:
+                return null;
+        }
+    }
 
     public static string GetName(ItemType itemType)
     {
@@ -42,13 +58,13 @@ public class Item
             case ItemType.Boots:
                 return "Boots";
             case ItemType.ArtOfStarvation:
-                return "The Art of Starvation";
+                return "Art of Starvation";
             case ItemType.ArtOfScurvy:
-                return "The Art of Scurvy";
+                return "Art of Scurvy";
             case ItemType.RepairManual:
                 return "Repair Manual";
             case ItemType.Cookbook:
-                return "Rordan Gamsey's Culinary Concoctions";
+                return "Art of Cooking";
             case ItemType.Fishbook:
                 return "Art of the Sea";
             case ItemType.Crewmate:
@@ -99,17 +115,17 @@ public class Item
             case ItemType.Boots:
                 return "Increases your speed by 50%.";
             case ItemType.ArtOfStarvation:
-                return "Increases hunger decrease multiplier by 20%.";
+                return "Increases hunger decrease multiplier by 20% (lose hunger slower).";
             case ItemType.ArtOfScurvy:
                 return "Increases vitamin C decrease multiplier by 20%.";
             case ItemType.RepairManual:
-                return "Increases repair efficiency multiplier by 20%.";
+                return "Increases repair efficiency multiplier by 20% (fix things faster).";
             case ItemType.Cookbook:
-                return "Increases cooking level by 1.";
+                return "Increases cooking level by 1. Gain more food from cooking minigame.";
             case ItemType.Fishbook:
-                return "Increases fishing level by 1.";
+                return "Increases fishing level by 1. Gain more loot from fishing minigame.";
             case ItemType.Crewmate:
-                return "Adds a crew member to your ship, who can help do tasks autonomously. When standing near an issue, press (Q) to summon the crewmate who will come and repair it.";
+                return "Adds a crew member to your ship to help do tasks. When standing near an issue, press (Q) to summon the crewmate to repair it.";
             default:
                 return "";
         }

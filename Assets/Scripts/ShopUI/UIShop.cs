@@ -55,7 +55,7 @@ public class UIShop : MonoBehaviour
         for (int i = 0; i < availableItems.Count; i++)
         {
             Item.ItemType itemType = availableItems[i];
-            CreateItemButton(itemType, null, Item.GetName(itemType), Item.GetPrice(itemType), i);
+            CreateItemButton(itemType, Item.GetSprite(itemType), Item.GetName(itemType), Item.GetPrice(itemType), i);
         }
     }
 
@@ -68,12 +68,13 @@ public class UIShop : MonoBehaviour
         float shopItemHeight = 40;
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
-        //shopItemRectTransform.Find("itemImage").GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;
+        //shopItemRectTransform.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = itemSprite;
         shopItemRectTransform.Find("Name").GetComponent<TMP_Text>().text = itemName;
         shopItemRectTransform.Find("Price").GetComponent<TMP_Text>().text = itemCost.ToString();
 
         var hover = shopItemTransform.GetComponent<ShopItemHover>();
         hover.SetDescription(Item.GetDescription(itemType));
+        hover.SetSprite(itemSprite);
 
         shopItemRectTransform
             .GetComponent<UnityEngine.UI.Button>()
