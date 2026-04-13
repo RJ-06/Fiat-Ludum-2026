@@ -2036,7 +2036,7 @@ PrefabInstance:
     - target: {fileID: 4525975448937749705, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
       propertyPath: island
       value: 
-      objectReference: {fileID: 8569722211694520561, guid: fdccec4758d85ac489e697752a124950, type: 3}
+      objectReference: {fileID: 6384088671039126751, guid: d1a2a37d6c448aa4486718c5b6041820, type: 3}
     - target: {fileID: 4525975448937749705, guid: c1b0e8bd6a048f54da42236f7e271300, type: 3}
       propertyPath: transitionText
       value: 

@@ -58,14 +58,15 @@ public class SceneTransitionManager : MonoBehaviour
         } else
         {
             // 1. Spawn island in distance
-            Vector3 spawnPos = boat.position + new Vector3(0, 0, -150f);
+            Vector3 spawnPos = boat.position + new Vector3(0, -20f, -300f);
             GameObject land = Instantiate(island, spawnPos, Quaternion.identity);
 
             Vector3 startPos = mainCamera.transform.position;
             Quaternion startRot = mainCamera.transform.rotation;
 
             Vector3 targetPos = startPos + new Vector3(0, 10f, 0f);
-            Quaternion targetRot = Quaternion.LookRotation(land.transform.position - targetPos);
+            
+
 
             float t = 0f;
             float duration = 5f;
@@ -77,11 +78,13 @@ public class SceneTransitionManager : MonoBehaviour
                 t += Time.deltaTime;
                 float p = t / duration;
 
-                land.transform.position += Vector3.forward * 5f * Time.deltaTime;
+                land.transform.position += Vector3.forward * Time.deltaTime * 20f;
+
+                Vector3 lookTarget = land.transform.position + new Vector3(0, 20f, 0);
+                Quaternion targetRot = Quaternion.LookRotation(lookTarget - mainCamera.transform.position);
 
                 mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, p);
                 mainCamera.transform.rotation = Quaternion.Slerp(startRot, targetRot, p);
-
 
                 yield return null;
             }

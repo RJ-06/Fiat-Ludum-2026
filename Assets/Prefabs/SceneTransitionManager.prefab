@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionManager
   boat: {fileID: 3483358828790771002, guid: 4035711d0acf48f4495e97e4500f9aa5, type: 3}
   tradingShipPrefab: {fileID: 8974472265492003120, guid: d35605a94dc5e4b4f9806b2de051841b, type: 3}
+  island: {fileID: 919132149155446097, guid: 215f1243ddee40a4ba25537e672b09f0, type: 3}
+  transitionText: {fileID: 0}

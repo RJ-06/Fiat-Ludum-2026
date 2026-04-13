@@ -109,13 +109,13 @@ public class Item
             case ItemType.Oranges:
                 return "Increases vitamin C level by 20.";
             case ItemType.Food:
-                return "Increases hunger level by 20.";
+                return "Increases hunger level by 20. You will move and fix slower at low hunger.";
             case ItemType.RepairKit:
                 return "Increases ship health by 20.";
             case ItemType.Boots:
                 return "Increases your speed by 50%.";
             case ItemType.ArtOfStarvation:
-                return "Increases hunger decrease multiplier by 20% (lose hunger slower).";
+                return "Increases hunger decrease multiplier by 20% (lose hunger slower). You will move and fix slower at low hunger.";
             case ItemType.ArtOfScurvy:
                 return "Increases vitamin C decrease multiplier by 20%.";
             case ItemType.RepairManual:

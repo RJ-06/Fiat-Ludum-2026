@@ -300,12 +300,7 @@ public class PlayerMovement : MonoBehaviour
                 GameplayModeManager.Instance.SetCannonShootingMode(true);
                 ChangeShipVisibility.Instance.ToggleVisibilityBottom();
             }
-            
-
         }
-
-
-
     }
 
     private void OnInteractRelease()

@@ -44,6 +44,7 @@ public class TaskManager : MonoBehaviour
 
     void Start()
     {
+        SceneTransitionManager.Instance.StartTransition("Island Raid");
         StartCoroutine(CreateTask());
         if (spawnFire)
         {
