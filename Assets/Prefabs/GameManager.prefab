@@ -55,11 +55,19 @@ MonoBehaviour:
   fishingLevel: 1
   numCrew: 0
   repairEfficiencyMultiplier: 1
-  crewEfficiencyMultiplier: 1
   hungerDecreaseMultiplier: 1
   vitaminCDecreaseMultiplier: 1
+  actingSpeedMultiplier: 1
+  actingEfficiencyMultiplier: 1
+  actingHungerDecreaseMultiplier: 1
   gold: 100
-  taskManager: {fileID: 2121903686717631824}
+  crewmate: {fileID: 1706745706917430338, guid: 43320ded3326e4042a8d2bd425debdb1, type: 3}
+  sceneIndex: 0
+  sceneList:
+  - TutorialLevel
+  - TradingScene
+  - Level2
+  - TradingScene
 --- !u!114 &2121903686717631824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,3 +133,5 @@ MonoBehaviour:
   worldScroller: {fileID: 0}
   tasksList: {fileID: 11400000, guid: 12ce5183b00ab9c42925f79cf3092253, type: 2}
   activeTasks: []
+  text: {fileID: 0}
+  numToSpawn: 0

@@ -11,15 +11,12 @@ public class ShipUI : MonoBehaviour
     private float percentShipHealth;
     private float percentHunger;
 
-    private TaskManager taskManager;
-
     public GameObject imagePrefab; // UI Image prefab
     private RectTransform canvas;   // Your Canvas
 
     void Start()
     {
         shipManager = ShipManager.shipManager;
-        taskManager = TaskManager.taskManagerSingleton;
         canvas = GetComponent<RectTransform>();
     }
 

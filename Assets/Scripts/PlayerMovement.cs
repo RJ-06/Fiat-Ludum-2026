@@ -202,6 +202,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnInteractPress()
     {
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponent<AdverseEvent>() != null)
+            {
+                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
+                currentlyRepairing.BeginFixing();
+                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
+                if (playerAnimator != null) playerAnimator.SetBool(isFixingHash, true); // Trigger fixing animation
+                return;
+            }
+        }
         if (!isGrabbing && objectFoundToGrab != null)
         {
             isGrabbing = true;
@@ -280,18 +293,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.GetComponent<AdverseEvent>() != null)
-            {
-                currentlyRepairing = hitCollider.GetComponent<AdverseEvent>();
-                currentlyRepairing.BeginFixing();
-                rb.linearVelocity = Vector3.zero; // stop player movement immediately when starting to repair
-                if (playerAnimator != null) playerAnimator.SetBool(isFixingHash, true); // Trigger fixing animation
-                break;
-            }
-        }
+
     }
 
     private void OnInteractRelease()

@@ -30,8 +30,6 @@ public class ShipManager : MonoBehaviour
     [Header("Resources")]
     public int gold = 10000;
 
-    public TaskManager taskManager;
-
     public Queue<CrewmateBehavior> crewmateQueue = new Queue<CrewmateBehavior>();
     public CrewmateBehavior crewmate;
 
@@ -66,25 +64,16 @@ public class ShipManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name.Contains("TradingScene"))
-        {
-            taskManager.enabled = false;
-        }
-        else
-        {
-            taskManager.enabled = true;
-        }
 
-        if (scene.name.Contains("Level")) // or whatever your naming is
+        if (scene.name.Contains("Level"))
         {
             crewmateQueue.Clear();
 
-            if (sceneList[sceneIndex].Contains("Level"))
-                for (int i = 0; i < numCrew; i++)
-                {
-                    CrewmateBehavior newCrew = Instantiate(crewmate, new Vector3(-1, 8, 12), Quaternion.identity);
-                    crewmateQueue.Enqueue(newCrew);
-                }
+            for (int i = 0; i < numCrew; i++)
+            {
+                CrewmateBehavior newCrew = Instantiate(crewmate, new Vector3(-1, 8, 12), Quaternion.identity);
+                crewmateQueue.Enqueue(newCrew);
+            }
         }
     }
 
