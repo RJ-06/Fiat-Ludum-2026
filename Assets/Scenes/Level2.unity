@@ -119,6 +119,138 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &57082237
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 195121518}
+    m_Modifications:
+    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: maxWaitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: minWaitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: timeToCatch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6433919166722735784, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_Name
+      value: FishingMinigame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.758
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.422
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+--- !u!4 &57082238 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
+  m_PrefabInstance: {fileID: 57082237}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &195121516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195121518}
+  - component: {fileID: 195121517}
+  m_Layer: 0
+  m_Name: FishingMinigame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &195121517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195121516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0875ffbed3ed36e4fac3edebed9b55b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinimapMarker
+  isCautionMarker: 1
+--- !u!4 &195121518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195121516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 3.367, y: 7.69, z: 1.509}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 57082238}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &461308317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -582,97 +714,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &897182086
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1304825014}
-    m_Modifications:
-    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: maxWaitTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: minWaitTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740185059229954550, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: timeToCatch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6433919166722735784, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_Name
-      value: FishingMinigame
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.758
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.422
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
---- !u!4 &897182087 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8252678417310863532, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-  m_PrefabInstance: {fileID: 897182086}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &897182088 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8609923451651387394, guid: a22fa415148ae5444a125cdd5395763c, type: 3}
-  m_PrefabInstance: {fileID: 897182086}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &982519404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1172,52 +1213,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1304825013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1304825014}
-  - component: {fileID: 1304825015}
-  m_Layer: 0
-  m_Name: FishingMinigame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1304825014
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304825013}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.28, y: 6.33, z: 0.95}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 897182088}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1304825015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304825013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0875ffbed3ed36e4fac3edebed9b55b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MinimapMarker
-  isCautionMarker: 1
 --- !u!1001 &1335540361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,7 +1824,7 @@ PrefabInstance:
     - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
       propertyPath: fishingSpot
       value: 
-      objectReference: {fileID: 897182087}
+      objectReference: {fileID: 0}
     - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
       propertyPath: cookingTable
       value: 
@@ -2081,7 +2076,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1031322174}
-  - {fileID: 1304825014}
   - {fileID: 1335540361}
   - {fileID: 1272396731}
   - {fileID: 823706054}
@@ -2097,3 +2091,4 @@ SceneRoots:
   - {fileID: 1773297307}
   - {fileID: 2045293934}
   - {fileID: 860959928}
+  - {fileID: 195121518}

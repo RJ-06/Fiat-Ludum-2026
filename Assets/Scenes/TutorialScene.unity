@@ -1426,7 +1426,7 @@ Transform:
   m_GameObject: {fileID: 1000606499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.82, y: 7.69, z: 0.8}
+  m_LocalPosition: {x: 3.367, y: 7.69, z: 1.509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1681,6 +1681,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
+      propertyPath: wheelPos
+      value: 
+      objectReference: {fileID: 1508724173}
+    - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
+      propertyPath: cannonPos
+      value: 
+      objectReference: {fileID: 1508724173}
     - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
       propertyPath: fishingSpot
       value: 
@@ -1990,6 +1998,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499206954}
   m_CullTransparentMesh: 1
+--- !u!1 &1508724172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508724173}
+  m_Layer: 0
+  m_Name: placeholderpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1508724173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508724172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.88215, y: 7.70917, z: -0.15839}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1617238289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2597,3 +2636,4 @@ SceneRoots:
   - {fileID: 303938748}
   - {fileID: 2128721699}
   - {fileID: 630451389}
+  - {fileID: 1508724173}
