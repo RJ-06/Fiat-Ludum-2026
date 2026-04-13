@@ -8,5 +8,18 @@ public class GrabbableObject : MonoBehaviour
         bucket
     }
     public ObjectType objectType;
+    private Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (other.collider.CompareTag("Ship Ground") && rb.linearVelocity.y < 0f)
+        {
+            Debug.Log("Playing drop sound");
+        }
+    }
 
 }
