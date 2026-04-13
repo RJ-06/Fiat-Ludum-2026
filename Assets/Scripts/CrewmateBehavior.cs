@@ -20,7 +20,7 @@ public class CrewmateBehavior : MonoBehaviour
 
     private Action onComplete;
 
-    private Animator crewmateAnimator;
+    [SerializeField] private Animator crewmateAnimator;
 
     // Optional: Cache animation hashes for slightly better performance
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
@@ -29,7 +29,6 @@ public class CrewmateBehavior : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        crewmateAnimator = GetComponent<Animator>();
     }
 
     void Update()
