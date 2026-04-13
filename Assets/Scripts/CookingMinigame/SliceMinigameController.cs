@@ -59,24 +59,76 @@ public class SliceMinigameController : MonoBehaviour
 
         float finalScore = totalScore;
 
-        string reward = GetReward(finalScore);
-
+        var (text, reward) = GetCookingResult(finalScore, ShipManager.shipManager.cookingLevel);
         resultText.gameObject.SetActive(true);
-        resultText.text = $"Score: {finalScore:0.00}. You obtained: {reward}";
+        resultText.text = text;
+        ShipManager.shipManager.crewHunger += (reward);
 
         StartCoroutine(HideAfterDelay());
     }
 
-    private string GetReward(float score)
+    public enum CutQuality { Miss, Weak, Good, Perfect }
+
+    CutQuality GetCutQuality(float score, int level)
     {
-        if (score > 2.5f)
-            return "Perfect Cut";
-        else if (score > 1.5f)
-            return "Good Cut";
-        else if (score > 0.5f)
-            return "Weak Cut";
+        float reduction = level * 0.3f; // tweak this
+
+        float perfect = 2.5f - reduction;
+        float good = 1.5f - reduction;
+        float weak = 0.5f - reduction;
+
+        if (score > perfect)
+            return CutQuality.Perfect;
+        else if (score > good)
+            return CutQuality.Good;
+        else if (score > weak)
+            return CutQuality.Weak;
         else
-            return "Missed Cut";
+            return CutQuality.Miss;
+    }
+    int GetFoodReward(CutQuality quality, int level)
+    {
+        int min = 0;
+        int max = 0;
+
+        switch (quality)
+        {
+            case CutQuality.Perfect:
+                min = 8; max = 12;
+                break;
+            case CutQuality.Good:
+                min = 5; max = 8;
+                break;
+            case CutQuality.Weak:
+                min = 1; max = 5;
+                break;
+            case CutQuality.Miss:
+                return 0;
+        }
+
+        // Scale with level (0–4)
+        float t = level / 4f;
+
+        int scaledMin = Mathf.RoundToInt(min * Mathf.Lerp(1f, 1.8f, t));
+        int scaledMax = Mathf.RoundToInt(max * Mathf.Lerp(1f, 1.8f, t));
+
+        return Random.Range(scaledMin, scaledMax + 1);
+    }
+
+    (string text, int foodAmount) GetCookingResult(float score, int level)
+    {
+        CutQuality quality = GetCutQuality(score, level);
+        int amount = GetFoodReward(quality, level);
+
+        string text = quality switch
+        {
+            CutQuality.Perfect => $"Perfect Cut! You gained {amount} food.",
+            CutQuality.Good => $"Good Cut. You gained {amount} food.",
+            CutQuality.Weak => $"Weak Cut. You gained {amount} food.",
+            _ => $"Missed Cut. You gained {amount} food."
+        };
+
+        return (text, amount);
     }
 
     private IEnumerator HideAfterDelay()
@@ -85,5 +137,6 @@ public class SliceMinigameController : MonoBehaviour
 
         resultText.gameObject.SetActive(false);
         minigameUIRoot.SetActive(false);
+        GameplayModeManager.Instance.SetCookingMode(false);
     }
 }

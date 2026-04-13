@@ -17,7 +17,7 @@ public class FishingMinigame : MonoBehaviour
     [SerializeField] Image failedCatchNotification;
 
     public TMPro.TMP_Text resultText;
-    public enum ResourceType { Gold, Wood, Food }
+    public enum ResourceType { Gold, Wood }
 
     bool hasEnded = false;  
     float GetThreshold(int level)
@@ -52,10 +52,6 @@ public class FishingMinigame : MonoBehaviour
                 break;
 
             case ResourceType.Wood:
-                maxAmount = GetScaledMax(4, 20, level);
-                break;
-
-            case ResourceType.Food:
                 maxAmount = GetScaledMax(4, 20, level);
                 break;
         }
@@ -163,13 +159,9 @@ public class FishingMinigame : MonoBehaviour
                 ShipManager.shipManager.shipHealth += reward.amount;
                 ShipManager.shipManager.shipHealth = Mathf.Clamp(ShipManager.shipManager.shipHealth, 0, 100);
                 break;
-            case ResourceType.Food:
-                ShipManager.shipManager.crewHunger += reward.amount;
-                ShipManager.shipManager.crewHunger = Mathf.Clamp(ShipManager.shipManager.crewHunger, 0, 100);
-                break;
         }
 
-        resultText.text = $"Your score was {score}. You caught {(reward.type == ResourceType.Gold ? "Gold" : reward.type == ResourceType.Wood ? "Wood" : "Food")} x{reward.amount}!";
+        resultText.text = $"Your score was {score}. You caught {(reward.type == ResourceType.Gold ? "Gold" : "Wood")} x{reward.amount}!";
         // Show result text for 2 seconds
         yield return new WaitForSeconds(2f);
 

@@ -26,7 +26,7 @@ public class SliceEvaluator : MonoBehaviour
             {
                 float pos = Random.Range(leftBound, rightBound);
 
-                float radius = Random.Range(6f, 12f); // thin slices
+                float radius = Random.Range(8f, 15f); // thin slices
 
                 SliceZone newZone = new SliceZone(pos, radius);
 
@@ -71,29 +71,26 @@ public class SliceEvaluator : MonoBehaviour
     {
         float bestScore = 0f;
 
-        float bestDistance = float.MaxValue;
-        SliceZone closestZone = null;
-
-        // 1. find closest slice
         foreach (var zone in zones)
         {
-            float dist = Mathf.Abs(value - zone.position);
+            float distanceToCenter = Mathf.Abs(value - zone.position);
 
-            if (dist < bestDistance)
+            if (distanceToCenter <= zone.radius)
             {
-                bestDistance = dist;
-                closestZone = zone;
+                return 1f;
             }
+
+            // Distance from the EDGE of the slice (not center)
+            float distanceFromEdge = distanceToCenter - zone.radius;
+
+            float maxFalloff = zone.radius; // tweak for how forgiving it is
+
+            float normalized = distanceFromEdge / maxFalloff;
+
+            float score = Mathf.Clamp01(1f - normalized);
+
+            bestScore = Mathf.Max(bestScore, score);
         }
-
-        if (closestZone == null)
-            return 0f;
-
-        float maxEffectiveDistance = closestZone.radius * 2f;
-
-        float normalized = bestDistance / maxEffectiveDistance;
-
-        bestScore = Mathf.Clamp01(1f - normalized);
 
         return bestScore;
     }
