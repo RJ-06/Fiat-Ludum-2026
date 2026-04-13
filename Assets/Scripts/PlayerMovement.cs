@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform bottomMastPosition;
 
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] AudioSource walkSound;
 
     public Renderer playerRend;
 
@@ -72,12 +73,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Player is considered walking if there's movement input, they aren't fixing, and not climbing (isKinematic is true during climbing)
+        bool isWalking = moveDir.sqrMagnitude > 0.01f && currentlyRepairing == null && !rb.isKinematic;
+
         if (playerAnimator != null)
         {
-            // Player is considered walking if there's movement input, they aren't fixing, and not climbing (isKinematic is true during climbing)
-            bool isWalking = moveDir.sqrMagnitude > 0.01f && currentlyRepairing == null && !rb.isKinematic;
             playerAnimator.SetBool(isWalkingHash, isWalking);
         }
+
+        if (!walkSound.isPlaying && isWalking) walkSound.Play();
+        else if (walkSound.isPlaying && !isWalking) walkSound.Stop();
     }
 
     private void FixedUpdate()
@@ -127,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
         }
+
+
     }
     private void OnMove(InputValue value)
     {
