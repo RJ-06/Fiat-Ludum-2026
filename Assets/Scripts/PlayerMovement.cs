@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform topMastPosition;
     [SerializeField] Transform bottomMastPosition;
 
-    private Animator playerAnimator;
+    [SerializeField] private Animator playerAnimator;
 
     // Animation Hashes
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
@@ -66,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
