@@ -1081,7 +1081,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   worldScroller: {fileID: 0}
-  tasksList: {fileID: 11400000, guid: 88f6d1a1a7d9f5440b2a46d1bde63ac2, type: 2}
+  tasksList: {fileID: 11400000, guid: 6df93c6a961263742ad1cd0eafd2a0ab, type: 2}
   activeTasks: []
   text: {fileID: 0}
   numToSpawn: 0
@@ -1859,7 +1859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 231625caaf83af44d8afdb72704227b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.7
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 231625caaf83af44d8afdb72704227b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2292,7 +2292,7 @@ Transform:
   m_GameObject: {fileID: 2100688904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.173, y: -0.98, z: 44.17}
+  m_LocalPosition: {x: -16.417, y: -1.346, z: 48.635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

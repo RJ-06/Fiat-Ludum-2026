@@ -123,7 +123,7 @@ public class KrakenScript : MonoBehaviour
 
             float xOffset = Mathf.Sin(elapsed * waitingMoveSpeed) * waitingMoveDistance;
 
-            transform.position = new Vector3(initialPosition.x + xOffset, regularDepth, initialPosition.z);
+            transform.position = new Vector3(initialPosition.x, regularDepth, initialPosition.z + xOffset);
 
             yield return null;
         }
