@@ -125,10 +125,10 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 smoothXZ = Vector3.Lerp(currentXZ, targetXZ, acceleration * Time.fixedDeltaTime);
 
-        rb.linearVelocity = new Vector3(smoothXZ.x, velocity.y, smoothXZ.z);
+        if(!rb.isKinematic) rb.linearVelocity = new Vector3(smoothXZ.x, velocity.y, smoothXZ.z);
 
         // CLAMP Y
-        if (rb.linearVelocity.y > maxYSpeed)
+        if (rb.linearVelocity.y > maxYSpeed && !rb.isKinematic)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, maxYSpeed, rb.linearVelocity.z);
         }

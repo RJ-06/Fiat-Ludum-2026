@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,6 +33,7 @@ public class KrakenScript : MonoBehaviour
     bool isSweepAttacking;
     [SerializeField] GameObject tentacleOne;
     [SerializeField] float tentacleMoveTime = 1f; // Added a variable to control how fast it rises/falls
+    [SerializeField] Animator krakenAnimator;
 
     enum bossState
     {
@@ -161,6 +163,7 @@ public class KrakenScript : MonoBehaviour
             if (attackDuration > 0)
             {
                 // e.g. animator.SetTrigger("SweepAttack");
+                krakenAnimator.SetTrigger("SweepAttack");
                 yield return new WaitForSeconds(attackDuration);
             }
             // =========================================================
