@@ -12,8 +12,6 @@ public class BucketScript : MonoBehaviour
     bool isFilling = false;
     public bool isFilled = false;
 
-    [SerializeField] GameObject waterObj;
-
     void Update()
     {
         UpdateFilling();
@@ -28,13 +26,8 @@ public class BucketScript : MonoBehaviour
         {
             OnFilled();
         }
-        if (currentFillAmount == 0f) 
-        {
-            
-        }
 
         fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
-        
     }
 
     public void BeginFilling()
@@ -54,14 +47,11 @@ public class BucketScript : MonoBehaviour
         isFilling = false;
         fillBar.enabled = false;
         isFilled = true;
-        waterObj.SetActive(true);
     }
 
     private void OnEmpty() 
     {
         isFilled = false;
-        currentFillAmount = 0f;
-        waterObj.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -142,7 +142,6 @@ public class CrewmateBehavior : MonoBehaviour
             e.BeginFixing();
             Invoke(nameof(AddSelfToQueue), e.fixTime);
         });
-
     }
 
     private void AddSelfToQueue()

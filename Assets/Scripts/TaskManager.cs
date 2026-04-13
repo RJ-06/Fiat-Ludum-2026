@@ -28,6 +28,8 @@ public class TaskManager : MonoBehaviour
 
     bool initiatedEnding = false;
 
+    public FireBehavior firePrefab;
+    public bool spawnFire = false;
 
 
     private void Awake()
@@ -43,6 +45,12 @@ public class TaskManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(CreateTask());
+        if (spawnFire) 
+        {
+            text.text = "Fires require a bucket to put out. Grab buckets with (E) and take it to the spigot (back of ship) to fill. Drop full buckets on fires with (Q).";
+            Invoke(nameof(RemoveText), 15f);
+            StartCoroutine(SpawnFires());
+        }
     }
 
     void EndingSequence()
@@ -50,6 +58,11 @@ public class TaskManager : MonoBehaviour
         StartCoroutine(SpawnIcebergs());
         Invoke(nameof(moveToNext), 20f);
         text.text = "Icebergs are approaching! Run to the WHEEL, use (E), then (A/D) to steer around them!";
+    }
+
+    void RemoveText()
+    {
+        text.text = "";
     }
 
     void SpawnIceberg()
@@ -90,6 +103,24 @@ public class TaskManager : MonoBehaviour
             spawnedTasks++;
 
             yield return new WaitForSeconds(Random.Range(minTimeForNextTask, maxTimeForNextTask));
+        }
+    }
+
+    public IEnumerator SpawnFires() 
+    {
+        while (true) 
+        {
+            int index = Random.Range(0, tasksList.tasks.Count);
+            while (activeTaskIndices.Contains(index))
+            {
+                index = Random.Range(0, tasksList.tasks.Count);
+            }
+            var selectedTask = tasksList.tasks[index];
+            activeTaskIndices.Add(index);
+
+            FireBehavior fire = Instantiate(firePrefab, selectedTask.location, Quaternion.identity);
+            fire.index = index;
+            yield return new WaitForSeconds(5f);
         }
     }
 

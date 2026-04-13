@@ -125,6 +125,7 @@ MonoBehaviour:
   fillTime: 5
   fillBar: {fileID: 4399999831847665996}
   isFilled: 0
+  waterObj: {fileID: 9135486766812462984}
 --- !u!1 &9135486766812462984
 GameObject:
   m_ObjectHideFlags: 0

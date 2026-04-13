@@ -6,6 +6,7 @@ public class FireBehavior : MonoBehaviour
     [SerializeField] float burnRate;
     [SerializeField] float damageDealt;
     ShipManager shipManagerInstance;
+    public int index;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +33,7 @@ public class FireBehavior : MonoBehaviour
             other.GetComponent<BucketScript>().isFilled = false;
             Destroy(gameObject);
             shipManagerInstance.gold += 30;
+            TaskManager.taskManagerSingleton.activeTaskIndices.Remove(index);
         }
     }
 }
