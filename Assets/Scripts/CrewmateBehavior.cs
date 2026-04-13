@@ -35,11 +35,13 @@ public class CrewmateBehavior : MonoBehaviour
     {
         // FIX 1: Use the agent's actual velocity to determine if they are walking. 
         // Just checking the 'navigating' bool can cause them to animate while stuck or standing still.
+        bool isActuallyMoving = navigating && agent.velocity.sqrMagnitude > 0.01f;
         if (crewmateAnimator != null && agent != null)
         {
-            bool isActuallyMoving = navigating && agent.velocity.sqrMagnitude > 0.01f;
             crewmateAnimator.SetBool(isWalkingHash, isActuallyMoving);
         }
+        if (isActuallyMoving && !walkSound.isPlaying) walkSound.Play();
+        else if (!isActuallyMoving && walkSound.isPlaying) walkSound.Stop();
 
         if (!navigating) return;
 
