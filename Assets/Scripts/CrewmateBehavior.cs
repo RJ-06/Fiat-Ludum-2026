@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +21,7 @@ public class CrewmateBehavior : MonoBehaviour
 
     [SerializeField] private Animator crewmateAnimator;
 
-    // Optional: Cache animation hashes for slightly better performance
+    // Cache animation hashes for slightly better performance
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
     private readonly int isFixingHash = Animator.StringToHash("isFixing");
 
@@ -33,10 +32,12 @@ public class CrewmateBehavior : MonoBehaviour
 
     void Update()
     {
-        // Update walking animation based on whether the crewmate is navigating
-        if (crewmateAnimator != null)
+        // FIX 1: Use the agent's actual velocity to determine if they are walking. 
+        // Just checking the 'navigating' bool can cause them to animate while stuck or standing still.
+        if (crewmateAnimator != null && agent != null)
         {
-            crewmateAnimator.SetBool(isWalkingHash, navigating);
+            bool isActuallyMoving = navigating && agent.velocity.sqrMagnitude > 0.01f;
+            crewmateAnimator.SetBool(isWalkingHash, isActuallyMoving);
         }
 
         if (!navigating) return;
@@ -58,7 +59,6 @@ public class CrewmateBehavior : MonoBehaviour
         navigating = true;
         goingToStairs = false;
         onComplete = callback;
-
     }
 
     private void HandleNavigation()
@@ -67,7 +67,7 @@ public class CrewmateBehavior : MonoBehaviour
         if (currentDeck != targetDeck)
         {
             Vector3 stairPos =
-                (currentDeck == 0) ? topStairsPosition.transform.position : bottomStairsPosition.transform.position;
+                (currentDeck == 0) ? topStairsPosition.position : bottomStairsPosition.position;
 
             // only set once
             if (!goingToStairs)
@@ -80,21 +80,7 @@ public class CrewmateBehavior : MonoBehaviour
             if (HasArrived(stairPos))
             {
                 currentDeck = targetDeck;
-
-                Vector3 warpPos = (currentDeck == 0)
-                    ? topStairsPosition.position
-                    : bottomStairsPosition.position;
-
-                if (NavMesh.SamplePosition(warpPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
-                {
-                    warpPos = hit.position;
-                }
-
-                agent.Warp(warpPos);
-                agent.enabled = false;
-                agent.enabled = true;
-
-                Debug.Log($"Arrived at stairs, warped to {(currentDeck == 0 ? "top" : "bottom")} stairs. Now navigating to final target.");
+                agent.Warp((currentDeck == 0) ? topStairsPosition.position : bottomStairsPosition.position);
 
                 goingToStairs = false;
 
@@ -123,29 +109,39 @@ public class CrewmateBehavior : MonoBehaviour
     {
         if (agent.pathPending) return false;
 
-        if (!agent.hasPath) return true;
+        if (agent.remainingDistance > agent.stoppingDistance + 0.1f)
+            return false;
 
-        // close enough check (ignore exact NavMesh distance)
-        float dist = Vector3.Distance(transform.position, target);
-
-        return dist <= agent.stoppingDistance + 0.2f;
+        return true;
     }
 
     public void DoTask(Vector3 position, int deck, AdverseEvent e)
     {
         NavigateTo(position, deck, () =>
         {
+            // This runs WHEN they arrive
             if (crewmateAnimator != null)
             {
                 crewmateAnimator.SetBool(isFixingHash, true);
             }
             e.BeginFixing();
+
+            // FIX 2: Move the Invoke inside the arrival callback!
             Invoke(nameof(AddSelfToQueue), e.fixTime);
         });
+
+        // Removed the Invoke from down here. 
+        // Before, it was counting down immediately as they START walking!
     }
 
     private void AddSelfToQueue()
     {
+        // Cancel the fixing animation once they are done and back in queue
+        if (crewmateAnimator != null)
+        {
+            crewmateAnimator.SetBool(isFixingHash, false);
+        }
+
         ShipManager.shipManager.crewmateQueue.Enqueue(this);
     }
 }

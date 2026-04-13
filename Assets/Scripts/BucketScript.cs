@@ -26,8 +26,10 @@ public class BucketScript : MonoBehaviour
         {
             OnFilled();
         }
+        else 
+        
 
-        fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
+            fillBar.fillAmount = (fillTime - currentFillAmount) / fillTime;
     }
 
     public void BeginFilling()
@@ -49,9 +51,10 @@ public class BucketScript : MonoBehaviour
         isFilled = true;
     }
 
-    private void OnEmpty() 
+    public void OnEmpty() 
     {
         isFilled = false;
+        currentFillAmount = fillTime;
     }
 
     private void OnTriggerEnter(Collider other)

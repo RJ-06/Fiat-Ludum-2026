@@ -30,7 +30,7 @@ public class FireBehavior : MonoBehaviour
             !PlayerMovement.instance.isGrabbing &&
             other.GetComponent<BucketScript>().isFilled) 
         { //check if a bucket has been placed which the player is holding and is filled with water
-            other.GetComponent<BucketScript>().isFilled = false;
+            other.GetComponent<BucketScript>().OnEmpty();
             Destroy(gameObject);
             shipManagerInstance.gold += 30;
             TaskManager.taskManagerSingleton.activeTaskIndices.Remove(index);
