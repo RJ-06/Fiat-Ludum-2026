@@ -41,8 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     AdverseEvent currentlyRepairing;
 
-    public CrewmateBehavior crewmate;
-
     [SerializeField] Transform topDeckPosition;
     [SerializeField] Transform bottomDeckPosition;
     [SerializeField] Transform topMastPosition;
@@ -102,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
         // FORWARD (FIXED: use rb.rotation, not transform)
         Vector3 forward = rb.rotation * Vector3.forward;
-        Vector3 targetVelocity = forward * (moveDir.y * moveSpeed);
+        Vector3 targetVelocity = forward * (moveDir.y * moveSpeed * ShipManager.shipManager.actingSpeedMultiplier * ShipManager.shipManager.speedMultiplier);
 
         targetVelocity.y = rb.linearVelocity.y;
 
@@ -110,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(groundRaycastPos.position, Vector3.down, out RaycastHit hit, groundRaycastDist))
         {
             forward = Vector3.ProjectOnPlane(forward, hit.normal).normalized;
-            targetVelocity = forward * (moveDir.y * moveSpeed);
+            targetVelocity = forward * (moveDir.y * moveSpeed * ShipManager.shipManager.actingSpeedMultiplier * ShipManager.shipManager.speedMultiplier);
             targetVelocity.y = rb.linearVelocity.y;
         }
 
@@ -334,13 +332,18 @@ public class PlayerMovement : MonoBehaviour
         {
             GameplayModeManager.Instance.SetFishingMode(false);
         }
+
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.GetComponent<AdverseEvent>() != null)
             {
-                crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
-                break;
+                if (ShipManager.shipManager.crewmateQueue.Count != 0)
+                {
+                    CrewmateBehavior crewmate = ShipManager.shipManager.crewmateQueue.Dequeue();
+                    crewmate.DoTask(hitCollider.transform.position, currentDeck, hitCollider.GetComponent<AdverseEvent>());
+                    break;
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ public class AdverseEvent : MonoBehaviour
     private float timer = 20;
 
     private float fixRate = 1;
-    private float fixTime = 10;
+    public float fixTime = 10;
     private float currentFixAmount = 10;
 
     private bool isRunning = true;
@@ -71,7 +71,7 @@ public class AdverseEvent : MonoBehaviour
         fixBar.enabled = currentFixAmount < fixTime;
         if (!isFixing) return;
         fixBar.enabled = true;
-        currentFixAmount -= fixRate * Time.deltaTime;
+        currentFixAmount -= fixRate * ShipManager.shipManager.actingEfficiencyMultiplier * ShipManager.shipManager.repairEfficiencyMultiplier * Time.deltaTime;
 
         if (currentFixAmount <= 0f)
         {
