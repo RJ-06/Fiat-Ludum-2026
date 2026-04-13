@@ -95,7 +95,6 @@ public class AdverseEvent : MonoBehaviour
     }
     void OnTimerEnd()
     {
-        Debug.Log("Timer finished!");
         Destroy(gameObject);
         if (TutorialTaskManager.Instance != null)
         {
@@ -105,11 +104,12 @@ public class AdverseEvent : MonoBehaviour
         }
         TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
         TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
+
+        ShipManager.shipManager.TakeDamage(5);
     }
 
     void OnFixed()
     {
-        Debug.Log("Event fixed!");
         Destroy(gameObject);
         if (TutorialTaskManager.Instance != null)
         {
@@ -119,5 +119,7 @@ public class AdverseEvent : MonoBehaviour
         }
         TaskManager.taskManagerSingleton.activeTasks.Remove(thisTask);
         TaskManager.taskManagerSingleton.activeTaskIndices.Remove(taskIndex);
+
+        ShipManager.shipManager.gold += 20;
     }
 }

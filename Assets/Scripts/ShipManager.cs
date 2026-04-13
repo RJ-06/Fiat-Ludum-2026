@@ -5,9 +5,9 @@ using UnityEngine;
 public class ShipManager : MonoBehaviour
 {
     public static ShipManager shipManager;
-    public float crewHunger;
-    public float vitaminCLevel;
-    public float shipHealth;
+    public float crewHunger = 100;
+    public float vitaminCLevel = 20;
+    public float shipHealth = 100;
 
     public float hungerDecreaseRate;
     public float vitaminCDecreaseRate;
@@ -48,5 +48,16 @@ public class ShipManager : MonoBehaviour
     {
         crewHunger -= hungerDecreaseRate * hungerDecreaseMultiplier;
         vitaminCLevel -= vitaminCDecreaseRate * vitaminCDecreaseMultiplier;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        shipHealth -= damage;
+        if (shipHealth <= 0f)
+        {
+            shipHealth = 0f;
+            // Handle ship destruction or game over logic here
+            Debug.Log("Ship destroyed! Game Over.");
+        }
     }
 }

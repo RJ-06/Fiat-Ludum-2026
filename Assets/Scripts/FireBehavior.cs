@@ -17,7 +17,7 @@ public class FireBehavior : MonoBehaviour
     {
         while (true) 
         {
-            shipManagerInstance.shipHealth -= damageDealt;
+            shipManagerInstance.TakeDamage(damageDealt);
             yield return new WaitForSeconds(burnRate);
         }
     }
@@ -31,7 +31,7 @@ public class FireBehavior : MonoBehaviour
         { //check if a bucket has been placed which the player is holding and is filled with water
             other.GetComponent<BucketScript>().isFilled = false;
             Destroy(gameObject);
+            shipManagerInstance.gold += 30;
         }
     }
-
 }
