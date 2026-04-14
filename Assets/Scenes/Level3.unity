@@ -1167,7 +1167,7 @@ MonoBehaviour:
   tasksList: {fileID: 11400000, guid: 6df93c6a961263742ad1cd0eafd2a0ab, type: 2}
   activeTasks: []
   text: {fileID: 1788736988}
-  numToSpawn: 1
+  numToSpawn: 15
   firePrefab: {fileID: 5134110495095640468, guid: 1e47b50dcca14f0428dca9cd606b2c47, type: 3}
   spawnFire: 1
   isBoss: 0
