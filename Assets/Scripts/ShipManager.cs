@@ -103,6 +103,7 @@ public class ShipManager : MonoBehaviour
             shipHealth = 0f;
             // Handle ship destruction or game over logic here
             Debug.Log("Ship destroyed! Game Over.");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScene");
         }
     }
 
