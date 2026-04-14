@@ -18,8 +18,6 @@ public class SwapToCredits : MonoBehaviour
 
     IEnumerator ScrollCredits()
     {
-        Debug.Log("Credits started");
-
         creditsImage.anchoredPosition = new Vector2(
             creditsImage.anchoredPosition.x,
             startY
@@ -35,8 +33,6 @@ public class SwapToCredits : MonoBehaviour
             creditsImage.anchoredPosition.x,
             endY
         );
-
-        Debug.Log("Credits finished - coroutine ended");
 
         yield break;
     }

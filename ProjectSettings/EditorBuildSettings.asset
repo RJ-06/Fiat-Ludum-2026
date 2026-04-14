@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Level2.unity
     guid: df26b14a1c1887c478a6a54340f91141
   - enabled: 1
-    path: Assets/Scenes/Island Raid.unity
+    path: Assets/Scenes/IslandRaid.unity
     guid: a02cb4d03d0bfdd459907ef5ccad500d
   - enabled: 1
     path: Assets/Scenes/Level3.unity

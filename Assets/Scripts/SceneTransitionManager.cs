@@ -1,17 +1,20 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance;
 
     private Camera mainCamera;
+
     [SerializeField] private Transform boat;
     [SerializeField] private GameObject tradingShipPrefab;
     [SerializeField] private GameObject island;
-    [SerializeField] TMPro.TMP_Text transitionText;
+    [SerializeField] private TMP_Text transitionText;
+
+    private bool isTransitioning;
 
     private void Awake()
     {
@@ -21,7 +24,16 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void StartTransition(string nextScene)
     {
-        mainCamera.GetComponent<CameraScript>().enabled = false;
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        if (mainCamera != null)
+        {
+            var camScript = mainCamera.GetComponent<CameraScript>();
+            if (camScript != null)
+                camScript.enabled = false;
+        }
+
         StartCoroutine(TransitionRoutine(nextScene));
     }
 
@@ -29,11 +41,14 @@ public class SceneTransitionManager : MonoBehaviour
     {
         if (nextScene == "TradingScene")
         {
-            // 1. Spawn trading ship near boat
             Vector3 spawnPos = boat.position;
-            GameObject ship = Instantiate(tradingShipPrefab, spawnPos + new Vector3(0, 0, 20f), Quaternion.Euler(new Vector3(270, 0, 0)));
 
-            // 2. Camera pan to ship
+            GameObject ship = Instantiate(
+                tradingShipPrefab,
+                spawnPos + new Vector3(0, 0, 20f),
+                Quaternion.Euler(270f, 0f, 0f)
+            );
+
             Vector3 startPos = mainCamera.transform.position;
             Quaternion startRot = mainCamera.transform.rotation;
 
@@ -48,53 +63,65 @@ public class SceneTransitionManager : MonoBehaviour
                 t += Time.deltaTime;
                 float p = t / duration;
 
-                ship.transform.position -= Vector3.forward * 5f * Time.deltaTime;
+                if (ship != null)
+                    ship.transform.position -= Vector3.forward * 5f * Time.deltaTime;
 
-                mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, p);
-                mainCamera.transform.rotation = Quaternion.Slerp(startRot, targetRot, p);
+                if (mainCamera != null)
+                {
+                    mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, p);
+                    mainCamera.transform.rotation = Quaternion.Slerp(startRot, targetRot, p);
+                }
 
                 yield return null;
             }
-        } else
+        }
+        else
         {
-            // 1. Spawn island in distance
             Vector3 spawnPos = boat.position + new Vector3(0, -20f, -300f);
             GameObject land = Instantiate(island, spawnPos, Quaternion.identity);
 
             Vector3 startPos = mainCamera.transform.position;
             Quaternion startRot = mainCamera.transform.rotation;
-
             Vector3 targetPos = startPos + new Vector3(0, 10f, 0f);
-            
 
+            if (transitionText != null)
+                transitionText.text = "Land Ahoy! It's time to raid the island for supplies. Prepare the crew!";
 
             float t = 0f;
             float duration = 5f;
-
-            transitionText.text = "Land Ahoy! It's time to raid the island for supplies. Prepare the crew!";
 
             while (t < duration)
             {
                 t += Time.deltaTime;
                 float p = t / duration;
 
-                land.transform.position += Vector3.forward * Time.deltaTime * 20f;
+                if (land != null)
+                    land.transform.position += Vector3.forward * Time.deltaTime * 20f;
 
-                Vector3 lookTarget = land.transform.position + new Vector3(0, 20f, 0);
-                Quaternion targetRot = Quaternion.LookRotation(lookTarget - mainCamera.transform.position);
+                if (mainCamera != null)
+                {
+                    Vector3 lookTarget = land != null
+                        ? land.transform.position + new Vector3(0, 20f, 0)
+                        : mainCamera.transform.position + mainCamera.transform.forward;
 
-                mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, p);
-                mainCamera.transform.rotation = Quaternion.Slerp(startRot, targetRot, p);
+                    Vector3 direction = lookTarget - mainCamera.transform.position;
+
+                    mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, p);
+
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion targetRot = Quaternion.LookRotation(direction);
+                        mainCamera.transform.rotation = Quaternion.Slerp(startRot, targetRot, p);
+                    }
+                }
 
                 yield return null;
             }
         }
 
-        // 3. Hold briefly
         yield return new WaitForSeconds(1.5f);
-        mainCamera.GetComponent<CameraScript>().enabled = true;
 
-        // 4. Load next scene
+        StopAllCoroutines(); // prevent coroutine running into scene load
         SceneManager.LoadScene(nextScene);
     }
 }
