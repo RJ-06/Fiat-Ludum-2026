@@ -4,6 +4,8 @@ public class MenuScript : MonoBehaviour
 {
     public void OnPlay()
     {
-         UnityEngine.SceneManagement.SceneManager.LoadScene("TutorialScene");
+        Debug.Log("clicked!");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TutorialScene");
+        
     }
 }
