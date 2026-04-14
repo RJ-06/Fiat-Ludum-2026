@@ -34,7 +34,7 @@ public class ShipManager : MonoBehaviour
     public GameObject crewmate;
 
     public int sceneIndex = 0;
-    public List<string> sceneList = new List<string>() { "TutorialLevel", "TradingScene", "Level2", "Island Raid", "TradingScene", "Level3", "TradingScene" };
+    public List<string> sceneList = new List<string>() { "TutorialLevel", "TradingScene", "Level2", "Island Raid", "TradingScene", "Level3", "TradingScene", "KrakenFight" };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()

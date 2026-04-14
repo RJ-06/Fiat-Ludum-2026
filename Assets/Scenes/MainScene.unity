@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableObject
   objectType: 0
+  dropSound: {fileID: 0}
 --- !u!1 &125976112
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,11 +491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed10389777686d64e93d62683565f54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrewmateBehavior
---- !u!4 &239521486 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6119240780201856271, guid: fd76ba18869412942b94a1204e47525b, type: 3}
-  m_PrefabInstance: {fileID: 5656045085605896296}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &393786990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3491413556573555400, guid: fd76ba18869412942b94a1204e47525b, type: 3}
@@ -743,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableObject
   objectType: 0
+  dropSound: {fileID: 0}
 --- !u!224 &909767181 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4539424867019106103, guid: 93f8e4746b7af1947a905e52e5ccca7b, type: 3}
@@ -998,6 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableObject
   objectType: 0
+  dropSound: {fileID: 0}
 --- !u!1 &1402874024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1666,7 @@ PrefabInstance:
     - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
       propertyPath: fishingSpot
       value: 
-      objectReference: {fileID: 239521486}
+      objectReference: {fileID: 0}
     - target: {fileID: 5945273389339012524, guid: bde2d2062ac65d34ea43311b2447cd75, type: 3}
       propertyPath: cannonOnePos
       value: 

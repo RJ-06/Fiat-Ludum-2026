@@ -29,4 +29,13 @@ public class ShowMinigameTutorial : MonoBehaviour
             tutorialText.text = "";
         }
     }
+
+    private void Update()
+    {
+        if (conflictText.text != "")
+        {
+            tutorialText.text = "";
+        }
+
+    }
 }

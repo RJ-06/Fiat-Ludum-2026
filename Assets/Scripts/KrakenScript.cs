@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class KrakenScript : MonoBehaviour
 {
@@ -234,5 +235,11 @@ public class KrakenScript : MonoBehaviour
         StopAllCoroutines();
 
         OnKrakenDeath.Invoke();
+        Invoke(nameof(ChangeScenes), 5f);
+    }
+
+    void ChangeScenes()
+    {
+        SceneManager.LoadScene("EndingCutscene");
     }
 }

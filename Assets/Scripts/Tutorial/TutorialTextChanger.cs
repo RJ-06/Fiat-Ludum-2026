@@ -51,7 +51,7 @@ public class TutorialTextChanger : MonoBehaviour
 
             if (!sceneSwitchScheduled)
             {
-                Invoke(nameof(BeginSwitchingScenes), 15f);
+                Invoke(nameof(BeginSwitchingScenes), 25f);
             }
             sceneSwitchScheduled = true;
         }
@@ -67,6 +67,11 @@ public class TutorialTextChanger : MonoBehaviour
 
     void BeginSwitchingScenes()
     {
+        if (GameplayModeManager.Instance.currentMode == GameplayModeManager.Mode.Cooking)
+        {
+            FindAnyObjectByType<SliceMinigameController>().ExitMinigame();
+        }
+
         GameplayModeManager.Instance.currentMode = GameplayModeManager.Mode.PlayerControl;
         ShipManager.shipManager.sceneIndex++;
         SceneTransitionManager.Instance.StartTransition(ShipManager.shipManager.sceneList[ShipManager.shipManager.sceneIndex]);

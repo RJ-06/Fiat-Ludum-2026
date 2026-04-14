@@ -199,14 +199,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8904655667277154401, guid: fd76ba18869412942b94a1204e47525b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 8904655667277154401, guid: fd76ba18869412942b94a1204e47525b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.35
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5760959492606135751, guid: fd76ba18869412942b94a1204e47525b, type: 3}
     m_RemovedGameObjects: []
@@ -2101,16 +2093,20 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
-      propertyPath: 'sceneList.Array.data[4]'
+      propertyPath: 'sceneList.Array.data[3]'
       value: Island Raid
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
-      propertyPath: 'sceneList.Array.data[5]'
+      propertyPath: 'sceneList.Array.data[4]'
       value: TradingScene
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
-      propertyPath: 'sceneList.Array.data[6]'
+      propertyPath: 'sceneList.Array.data[5]'
       value: Level3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
+      propertyPath: 'sceneList.Array.data[6]'
+      value: TradingScene
       objectReference: {fileID: 0}
     - target: {fileID: 4662791501310877313, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: m_LocalPosition.x

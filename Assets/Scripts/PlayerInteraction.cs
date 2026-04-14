@@ -24,13 +24,18 @@ public class PlayerInteraction : MonoBehaviour
             startedLooting = false;
             if (nearFoodLoot)
             {
+                FindAnyObjectByType<TextFade>().Show("Gained 20 food!");
+
                 ShipManager.shipManager.crewHunger = Mathf.Min(100f, ShipManager.shipManager.crewHunger + 20f);
                 foodLooted += 20;
             }
             else if (nearMoneyLoot)
             {
+
                 float rawMoneyAmount = Random.Range(30f, 200f);
                 int adjustedMoney = (int)Mathf.Round(Mathf.Pow(1.02604f, rawMoneyAmount) + 29f);
+                FindAnyObjectByType<TextFade>().Show("Gained " + adjustedMoney + " gold!");
+
                 ShipManager.shipManager.gold += adjustedMoney;
                 goldLooted += adjustedMoney;
             }

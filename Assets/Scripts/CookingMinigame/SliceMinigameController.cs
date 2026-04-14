@@ -21,6 +21,7 @@ public class SliceMinigameController : MonoBehaviour
 
     public void StartMinigame()
     {
+        if (isPlaying) return;
         isPlaying = true;
         minigameUIRoot.SetActive(true);
 
