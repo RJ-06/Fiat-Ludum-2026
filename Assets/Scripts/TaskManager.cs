@@ -31,6 +31,7 @@ public class TaskManager : MonoBehaviour
     public bool spawnFire = false;
     int firesSpawned = 0;
 
+    [SerializeField] bool isBoss;
 
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class TaskManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(CreateTask());
+        if(!isBoss)StartCoroutine(CreateTask());
         if (spawnFire)
         {
             text.text = "Grab buckets (E) and take it to the spigot (back of ship) to fill. (Q) to drop buckets on fires.";
