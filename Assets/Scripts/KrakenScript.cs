@@ -58,6 +58,37 @@ public class KrakenScript : MonoBehaviour
         taskManager = FindAnyObjectByType<TaskManager>();
         OnKrakenDeath.AddListener(OnDeathAnim);
 
+        // Put Kraken underwater instantly upon load
+        transform.position = new Vector3(transform.position.x, submergeDepth, transform.position.z);
+
+        // Begin emergence logic before starting attacks
+        StartCoroutine(EmergeAtStart());
+    }
+
+    IEnumerator EmergeAtStart()
+    {
+        // Emerge duration perfectly matches the "rising" half of the regular SubmergeKraken behavior
+        float emergeDuration = timeSubmerged / 2f;
+        float elapsed = 0f;
+        Vector3 initialPosition = transform.position;
+
+        while (elapsed < emergeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = elapsed / emergeDuration; // Maps 0 to 1
+
+            // Maps 0.5 to 1.0 of the sine wave (Phase from max submerge coming up to regular depth)
+            float sinWave = Mathf.Sin((0.5f + (progress * 0.5f)) * Mathf.PI);
+            float currentY = Mathf.Lerp(regularDepth, submergeDepth, sinWave);
+
+            transform.position = new Vector3(initialPosition.x, currentY, initialPosition.z);
+
+            yield return null;
+        }
+
+        transform.position = new Vector3(initialPosition.x, regularDepth, initialPosition.z);
+
+        // Once at full height, start the regular attacks and state machine
         StartCoroutine(StateControl());
     }
 
