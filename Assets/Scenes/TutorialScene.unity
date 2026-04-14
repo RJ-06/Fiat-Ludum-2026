@@ -2094,7 +2094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: hungerDecreaseRate
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4448700440316112614, guid: 2e981eab940812d46875132a3659c2fe, type: 3}
       propertyPath: sceneList.Array.size

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918c232ca4d5c6d4aa765e8db1de46c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireBehavior
-  burnRate: 2
+  burnRate: 4
   damageDealt: 2
   index: 0
 --- !u!114 &2374248851327763705
