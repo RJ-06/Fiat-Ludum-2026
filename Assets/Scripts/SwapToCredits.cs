@@ -8,34 +8,36 @@ public class SwapToCredits : MonoBehaviour
     [SerializeField] private float startY = -800f;
     [SerializeField] private float endY = 800f;
 
+    [SerializeField] private Animator animator;
+
     private void StartCredits()
     {
+        animator.enabled = false;
         StartCoroutine(ScrollCredits());
     }
 
     IEnumerator ScrollCredits()
     {
-        // Start position (off-screen bottom)
+        Debug.Log("Credits started");
+
         creditsImage.anchoredPosition = new Vector2(
             creditsImage.anchoredPosition.x,
             startY
         );
 
-        // Scroll upward
         while (creditsImage.anchoredPosition.y < endY)
         {
             creditsImage.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
             yield return null;
         }
 
-        OnCreditsFinished();
-    }
+        creditsImage.anchoredPosition = new Vector2(
+            creditsImage.anchoredPosition.x,
+            endY
+        );
 
-    void OnCreditsFinished()
-    {
-        Debug.Log("Credits finished");
+        Debug.Log("Credits finished - coroutine ended");
 
-        // Optional: load scene or return to menu
-        // SceneManager.LoadScene("MainMenu");
+        yield break;
     }
 }

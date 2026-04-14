@@ -791,6 +791,7 @@ MonoBehaviour:
   scrollSpeed: 50
   startY: -800
   endY: 800
+  animator: {fileID: 1108316721}
 --- !u!1 &1646760732
 GameObject:
   m_ObjectHideFlags: 0
