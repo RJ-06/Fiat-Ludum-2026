@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource walkSound;
 
     public Renderer playerRend;
+    private ParticleSystem ps;
 
     // Animation Hashes
     private readonly int isWalkingHash = Animator.StringToHash("isWalking");
@@ -62,12 +63,14 @@ public class PlayerMovement : MonoBehaviour
     {
         instance = this;
         playerRend = GetComponentInChildren<Renderer>();
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        ps.Stop();
     }
 
     // Update is called once per frame
@@ -81,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool(isWalkingHash, isWalking);
         }
 
-        if (!walkSound.isPlaying && isWalking) walkSound.Play();
-        else if (walkSound.isPlaying && !isWalking) walkSound.Stop();
+        if (!walkSound.isPlaying && isWalking) { walkSound.Play(); ps.Play(); }
+        else if (walkSound.isPlaying && !isWalking) { walkSound.Stop(); ps.Stop(); }
     }
 
     private void FixedUpdate()
