@@ -3014,6 +3014,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6087268805507746109}
     m_Modifications:
+    - target: {fileID: 4919574720722173190, guid: da578deaea4b94f4fa89a55cd1a460ea, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6704018180343107067, guid: da578deaea4b94f4fa89a55cd1a460ea, type: 3}
       propertyPath: m_Name
       value: GrabbableBucket

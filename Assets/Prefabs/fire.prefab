@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547da755dccbc494c9190518726c9d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdverseEvent
-  fixTime: 10
+  fixTime: 8
   textFadePrefab: {fileID: 8439504630194844672}
   timerBar: {fileID: 4160037393706312001}
   fixBar: {fileID: 8197081797512550852}
