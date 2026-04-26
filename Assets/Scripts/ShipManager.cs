@@ -103,6 +103,7 @@ public class ShipManager : MonoBehaviour
             shipHealth = 0f;
             // Handle ship destruction or game over logic here
             Debug.Log("Ship destroyed! Game Over.");
+            ResetStats();
             UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScene");
         }
     }
@@ -110,5 +111,23 @@ public class ShipManager : MonoBehaviour
     public void AddCrew()
     {
         numCrew++;
+    }
+
+    public void ResetStats() 
+    {
+        crewHunger = 100f;
+        shipHealth = 100f;
+        vitaminCLevel = 20f;
+        speedMultiplier = 1f;
+        repairEfficiencyMultiplier = 1f;
+        hungerDecreaseMultiplier = 1f;
+        vitaminCDecreaseMultiplier = 1f;
+        actingSpeedMultiplier = 1f;
+        actingEfficiencyMultiplier = 1f;
+        actingHungerDecreaseMultiplier = 1f;
+        cookingLevel = 0;
+        fishingLevel = 0;
+        numCrew = 0;
+
     }
 }
