@@ -45,7 +45,7 @@ public class TaskManager : MonoBehaviour
 
     void Start()
     {
-        if(!isBoss)StartCoroutine(CreateTask());
+        if(!isBoss) StartCoroutine(CreateTask());
         if (spawnFire)
         {
             text.text = "Grab buckets (E) and take it to the spigot (back of ship) to fill. (Q) to drop buckets on fires.";
@@ -130,6 +130,7 @@ public class TaskManager : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Spawning task: {selectedTask.name} at location {selectedTask.location}");
         AdverseEvent obj = Instantiate(selectedTask.adverseEvent, selectedTask.location, Quaternion.identity);
         obj.setFields(selectedTask.activeTimer, selectedTask.fixRate, selectedTask.fixTime);
         obj.thisTask = selectedTask;
