@@ -33,7 +33,5 @@ public class TextFade : MonoBehaviour
             text.color = new Color(c.r, c.g, c.b, t);
             yield return null;
         }
-
-        Destroy(gameObject);
     }
 }

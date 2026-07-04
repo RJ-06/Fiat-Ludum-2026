@@ -15,6 +15,7 @@ public class PlayerInteraction : MonoBehaviour
     private void OnInteractPress(InputValue value)
     {
         if ((nearFoodLoot || nearMoneyLoot) && !lootableObject.GetComponent<LootBasket>().GetLooted()) startedLooting = true;
+        Debug.Log("GetLooted: " + lootableObject.GetComponent<LootBasket>().GetLooted());
     }
 
     private void OnInteractRelease(InputValue value)
@@ -26,7 +27,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 FindAnyObjectByType<TextFade>().Show("Gained 20 food!");
 
-                ShipManager.shipManager.crewHunger = Mathf.Min(100f, ShipManager.shipManager.crewHunger + 20f);
+                if (ShipManager.shipManager != null) ShipManager.shipManager.crewHunger = Mathf.Min(100f, ShipManager.shipManager.crewHunger + 20f);
                 foodLooted += 20;
             }
             else if (nearMoneyLoot)
@@ -36,12 +37,15 @@ public class PlayerInteraction : MonoBehaviour
                 int adjustedMoney = (int)Mathf.Round(Mathf.Pow(1.02604f, rawMoneyAmount) + 29f);
                 FindAnyObjectByType<TextFade>().Show("Gained " + adjustedMoney + " gold!");
 
-                ShipManager.shipManager.gold += adjustedMoney;
+                if (ShipManager.shipManager != null) ShipManager.shipManager.gold += adjustedMoney;
                 goldLooted += adjustedMoney;
             }
 
             // Make sure basket can't be looted more than once
-            if (lootableObject != null) lootableObject.GetComponent<LootBasket>().SetLooted(true);
+            if (lootableObject != null) {
+                Debug.Log("Setting loot crate looted");
+                lootableObject.GetComponent<LootBasket>().SetLooted(true);
+            }
         }
     }
 
